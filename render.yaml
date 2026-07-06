@@ -36,6 +36,15 @@ services:
       - key: ENCRYPTION_KEY
         generateValue: true
 
+  - type: static
+    name: corelix-frontend
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_STRAPI_API_URL
+        value: https://corelix-cms.onrender.com
+
 databases:
   - name: corelix-db
     plan: free
