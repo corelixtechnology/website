@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inquiries",
+  "info": {
+    "singularName": "inquiry",
+    "pluralName": "inquiries",
+    "displayName": "Inquiry",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "projectType": {
+      "type": "string"
+    },
+    "budget": {
+      "type": "integer"
+    },
+    "message": {
+      "type": "text"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "isRead": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
