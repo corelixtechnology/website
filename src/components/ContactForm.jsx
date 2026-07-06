@@ -116,6 +116,7 @@ export default function ContactForm() {
                         onChange={handleInputChange}
                         placeholder="e.g. Alex Rivera"
                         className={`input-field ${errors.name ? 'error' : ''}`}
+                        style={{ paddingLeft: '2.8rem' }}
                       />
                     </div>
                     {errors.name && <span className="validation-error">{errors.name}</span>}
@@ -132,6 +133,7 @@ export default function ContactForm() {
                         onChange={handleInputChange}
                         placeholder="e.g. alex@company.com"
                         className={`input-field ${errors.email ? 'error' : ''}`}
+                        style={{ paddingLeft: '2.8rem' }}
                       />
                     </div>
                     {errors.email && <span className="validation-error">{errors.email}</span>}
@@ -148,7 +150,7 @@ export default function ContactForm() {
                         value={formData.projectType}
                         onChange={handleInputChange}
                         className="input-field select-field"
-                        style={{ color: 'white', background: 'rgba(10, 12, 26, 0.95)' }}
+                        style={{ color: 'white', background: 'rgba(10, 12, 26, 0.95)', paddingLeft: '2.8rem' }}
                       >
                         {services.map(s => (
                           <option key={s.id} value={s.id}>
@@ -170,6 +172,7 @@ export default function ContactForm() {
                         onChange={handleInputChange}
                         placeholder="e.g. 5000 (Optional)"
                         className="input-field"
+                        style={{ paddingLeft: '2.8rem' }}
                       />
                     </div>
                   </div>
@@ -186,7 +189,7 @@ export default function ContactForm() {
                       onChange={handleInputChange}
                       placeholder="Describe your goals, desired features, timeline constraints, etc..."
                       className={`input-field textarea-field ${errors.message ? 'error' : ''}`}
-                      style={{ resize: 'vertical' }}
+                      style={{ resize: 'vertical', paddingLeft: '2.8rem' }}
                     ></textarea>
                   </div>
                   {errors.message && <span className="validation-error">{errors.message}</span>}
