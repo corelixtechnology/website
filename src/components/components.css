@@ -34,6 +34,12 @@
   user-select: none;
 }
 
+.navbar-logo-img {
+  height: 3rem;
+  width: auto;
+  object-fit: contain;
+}
+
 .logo-icon {
   color: var(--secondary);
   animation: float 3s infinite ease-in-out;
@@ -382,8 +388,8 @@
   letter-spacing: -0.02em;
 }
 
-.new-hero-main-title .text-red-highlight {
-  color: #dc2626;
+.new-hero-main-title .text-violet-highlight {
+  color: var(--accent);
   position: relative;
 }
 
@@ -416,27 +422,27 @@
   text-transform: uppercase;
 }
 
-.new-btn-red-solid {
-  background-color: #dc2626;
+.new-btn-violet-solid {
+  background-color: var(--accent);
   color: #ffffff;
   border: none;
-  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.2);
+  box-shadow: 0 4px 14px rgba(192, 132, 252, 0.2);
 }
 
-.new-btn-red-solid:hover {
-  background-color: #b91c1c;
+.new-btn-violet-solid:hover {
+  background-color: #a855f7;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.35);
+  box-shadow: 0 6px 20px rgba(192, 132, 252, 0.35);
 }
 
-.new-btn-red-outline {
+.new-btn-violet-outline {
   background-color: transparent;
-  color: #dc2626;
-  border: 2px solid #dc2626;
+  color: var(--accent);
+  border: 2px solid var(--accent);
 }
 
-.new-btn-red-outline:hover {
-  background-color: rgba(220, 38, 38, 0.05);
+.new-btn-violet-outline:hover {
+  background-color: rgba(192, 132, 252, 0.05);
   transform: translateY(-2px);
 }
 
@@ -488,20 +494,37 @@
 }
 
 /* Red Experience Badge */
-.badge-experience-red-card {
-  background-color: #dc2626;
+.badge-experience-violet-card {
+  background-color: var(--accent);
   color: #ffffff;
   border-radius: 16px;
   padding: 1.2rem;
   display: flex;
   align-items: center;
   gap: 1.2rem;
-  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.25);
+  box-shadow: 0 8px 24px rgba(192, 132, 252, 0.25);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.badge-experience-red-card:hover {
+.badge-experience-violet-card:hover {
   transform: translateY(-5px);
+}
+
+.badge-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+}
+
+.badge-icon {
+  color: #ffffff;
 }
 
 .laurel-wreath-outer {
@@ -760,7 +783,7 @@
   .woman-portrait-card {
     height: 250px;
   }
-  .badge-experience-red-card {
+  .badge-experience-violet-card {
     padding: 0.8rem;
     gap: 0.8rem;
   }
@@ -1663,6 +1686,14 @@
   }
 }
 
+.footer-logo-img {
+  height: 6.5rem;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  display: block;
+}
+
 .footer-brand h3 {
   font-size: 1.6rem;
   margin-bottom: 1rem;
@@ -1849,8 +1880,8 @@
 }
 
 .brand-logo-item:hover .brand-logo-icon-wrapper {
-  color: #dc2626; /* Glow brand red accent on hover! */
-  filter: drop-shadow(0 0 6px rgba(220, 38, 38, 0.6));
+  color: var(--accent); /* Glow brand violet accent on hover! */
+  filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.6));
 }
 
 .brand-logo-name {

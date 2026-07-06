@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, Phone, MessageCircle, Cpu, Settings } from 'lucide-react';
+import { Menu, X, ChevronDown, Phone, MessageCircle, Settings } from 'lucide-react';
 import { db } from '../utils/db';
+import logo from '../assets/Corelix Technology - Logo.png';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,8 +94,7 @@ export default function Navbar() {
             }}
             title="Corelix Technology"
           >
-            <Cpu className="logo-icon" />
-            <span className="logo-text">Core<span className="logo-highlight">lix</span></span>
+            <img src={logo} alt="Corelix Technology Logo" className="navbar-logo-img" />
           </Link>
 
           {/* Desktop Menu */}

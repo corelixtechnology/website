@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as Lucide from 'lucide-react';
 import { db } from '../utils/db';
+import SEO from '../components/SEO';
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -268,6 +269,15 @@ export default function AdminDashboard() {
     }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const newVal = type === 'checkbox' ? checked : value;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: newVal
+    }));
+  };
+
   // Helper Reset Forms
   const resetForms = () => {
     setEditingItem(null);
@@ -295,6 +305,7 @@ export default function AdminDashboard() {
   if (!isAuthenticated) {
     return (
       <div className="admin-login-wrapper">
+        <SEO title="Admin Login" robots="noindex, nofollow" />
         <div className="ambient-glow-1" style={{ top: '15%', left: '20%', opacity: 0.2 }}></div>
         <div className="ambient-glow-2" style={{ bottom: '15%', right: '20%', opacity: 0.2 }}></div>
         
@@ -427,6 +438,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="admin-dashboard-container" style={{ paddingTop: '5rem', minHeight: '100vh' }}>
+      <SEO title="Admin Dashboard" robots="noindex, nofollow" />
       {/* Sidebar Panel */}
       <aside className="admin-sidebar glass-panel">
         <div className="admin-profile">

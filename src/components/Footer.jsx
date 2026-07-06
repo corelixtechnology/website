@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, Heart, Mail } from 'lucide-react';
 import { db } from '../utils/db';
+import footerLogo from '../assets/Corelix Technology - Logo 1.png';
 
 export default function Footer() {
   const [settings, setSettings] = useState(() => db.getSettings());
@@ -22,7 +23,9 @@ export default function Footer() {
         <div className="footer-grid">
           {/* Brand Info */}
           <div className="footer-brand">
-            <h3>Core<span style={{ color: 'var(--primary)' }}>lix</span></h3>
+            <Link to="/">
+              <img src={footerLogo} alt="Corelix Technology Logo" className="footer-logo-img" />
+            </Link>
             <p>
               An unconventional digital agency creating state-of-the-art web systems, branding packages, and high-impact designs that perform.
             </p>
@@ -104,7 +107,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Hours of Work</h4>
             <ul className="footer-links" style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-              <li>Mon - Fri: 9:00 AM - 6:00 PM EST</li>
+              <li>Mon - Fri: 9:00 AM - 6:00 PM IST</li>
               <li>Saturday: Closed</li>
               <li>Sunday: Closed</li>
             </ul>

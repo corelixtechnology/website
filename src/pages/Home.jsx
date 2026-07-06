@@ -1,4 +1,5 @@
 import React from 'react';
+import SEO from '../components/SEO';
 import Hero from '../components/Hero';
 import TrustBrands from '../components/TrustBrands';
 import ServicesIntro from '../components/ServicesIntro';
@@ -15,6 +16,11 @@ export default function Home() {
 
   return (
     <div>
+      <SEO 
+        title="Creative IT Solutions & Digital Agency"
+        description="Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale."
+        keywords="digital agency, software engineering, branding, web development, SEO, Corelix"
+      />
       <Hero onStartCalculator={handleScrollToContact} />
       <TrustBrands />
       <ServicesIntro />

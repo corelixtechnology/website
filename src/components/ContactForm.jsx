@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, Mail, MessageSquare, Send, CheckCircle2, DollarSign, Cpu } from 'lucide-react';
+import { User, Mail, MessageSquare, Send, CheckCircle2, IndianRupee, Cpu } from 'lucide-react';
 import { db } from '../utils/db';
 
 export default function ContactForm() {
@@ -162,9 +162,9 @@ export default function ContactForm() {
                   </div>
 
                   <div className="input-group">
-                    <label className="form-label">Project Budget (USD)</label>
+                    <label className="form-label">Project Budget (INR)</label>
                     <div className="input-with-icon">
-                      <DollarSign size={16} className="input-icon" />
+                      <IndianRupee size={16} className="input-icon" />
                       <input
                         type="number"
                         name="budget"
