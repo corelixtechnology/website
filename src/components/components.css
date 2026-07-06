@@ -22,6 +22,10 @@
   border-left: none !important;
   border-right: none !important;
   border-top: none !important;
+  background: rgba(8, 10, 22, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
 .navbar-logo {
@@ -326,10 +330,10 @@
 .new-hero-bg-accent {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 50%;
+  left: 0;
+  width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 75% 35%, rgba(139, 92, 246, 0.12) 0%, rgba(6, 182, 212, 0.05) 50%, transparent 70%);
+  background: radial-gradient(circle at 50% 30%, rgba(139, 92, 246, 0.15) 0%, rgba(6, 182, 212, 0.08) 50%, transparent 70%);
   z-index: 1;
   pointer-events: none;
 }
@@ -700,7 +704,7 @@
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .new-hero-section {
-    padding-top: 8rem;
+    padding-top: 10.5rem;
   }
   .new-hero-grid-layout {
     grid-template-columns: 1fr;
@@ -731,7 +735,7 @@
 
 @media (max-width: 640px) {
   .new-hero-section {
-    padding-top: 7rem;
+    padding-top: 11.5rem;
     padding-bottom: 4rem;
   }
   .new-hero-main-title {
@@ -1912,9 +1916,12 @@
 
 .tech-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
-  padding: 1.2rem 1.4rem;
+  justify-content: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
   border-radius: 12px;
   background-color: var(--bg-card);
   border: 1px solid var(--border-glass);
@@ -1950,7 +1957,8 @@
 .tech-info-box {
   display: flex;
   flex-direction: column;
-  text-align: left;
+  align-items: center;
+  text-align: center;
   line-height: 1.3;
 }
 
