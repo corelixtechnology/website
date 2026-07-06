@@ -22,9 +22,7 @@
   border-left: none !important;
   border-right: none !important;
   border-top: none !important;
-  background: rgba(8, 10, 22, 0.75) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  background: #080a16 !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -226,9 +224,7 @@
   border-left: none !important;
   border-right: none !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
-  background: rgba(8, 10, 22, 0.8) !important;
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
+  background: #080a16 !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
