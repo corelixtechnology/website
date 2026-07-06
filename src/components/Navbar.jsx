@@ -56,7 +56,7 @@ export default function Navbar() {
       href: '/about',
       dropdown: [
         { label: 'Company Profile', href: '/about', state: { tab: 'profile' } },
-        { label: 'Founders Profile', href: '/about', state: { tab: 'founders' } },
+        { label: 'Founder Profile', href: '/about', state: { tab: 'founders' } },
       ],
     },
     { name: 'Blog', href: '/blog' },
