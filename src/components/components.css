@@ -2728,6 +2728,7 @@ select.input-field {
 .admin-dashboard-container {
   background: var(--bg-darker);
   width: 100%;
+  display: flex;
 }
 .admin-sidebar {
   width: 260px;
@@ -2768,6 +2769,15 @@ select.input-field {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  height: 100%;
+}
+.admin-nav-logout-wrapper {
+  margin-top: auto;
+  border-top: 1px solid var(--border-glass);
+  padding-top: 1.25rem;
+}
+.admin-logout-btn {
+  color: var(--accent) !important;
 }
 .admin-nav-item {
   display: flex;
@@ -3009,7 +3019,33 @@ select.input-field {
     top: 0;
     border-right: none;
     border-bottom: 1px solid var(--border-glass);
-    padding: 1.5rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .admin-profile {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-glass);
+  }
+  .admin-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    height: auto;
+    width: 100%;
+  }
+  .admin-nav-item {
+    width: calc(50% - 0.25rem);
+    justify-content: flex-start;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+  .admin-nav-logout-wrapper {
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
+    width: calc(50% - 0.25rem);
   }
   .admin-content-pane {
     max-width: 100%;

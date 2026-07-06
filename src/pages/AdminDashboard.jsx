@@ -426,7 +426,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="admin-dashboard-container" style={{ paddingTop: '5rem', minHeight: '100vh', display: 'flex' }}>
+    <div className="admin-dashboard-container" style={{ paddingTop: '5rem', minHeight: '100vh' }}>
       {/* Sidebar Panel */}
       <aside className="admin-sidebar glass-panel">
         <div className="admin-profile">
@@ -439,7 +439,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        <nav className="admin-nav" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <nav className="admin-nav">
           <button
             onClick={() => { setActiveTab('overview'); resetForms(); }}
             className={`admin-nav-item ${activeTab === 'overview' ? 'active' : ''}`}
@@ -481,13 +481,12 @@ export default function AdminDashboard() {
           </button>
 
           {/* Sign Out Button placed at the bottom of the sidebar list */}
-          <div style={{ marginTop: 'auto', borderTop: '1px solid var(--border-glass)', paddingTop: '1.25rem' }}>
+          <div className="admin-nav-logout-wrapper">
             <button
               onClick={handleLogout}
-              className="admin-nav-item"
-              style={{ color: 'var(--accent)' }}
+              className="admin-nav-item admin-logout-btn"
             >
-              {renderIcon('LogOut', 16, 'var(--accent)')} <span style={{ color: 'var(--accent)' }}>Sign Out</span>
+              {renderIcon('LogOut', 16, 'var(--accent)')} <span>Sign Out</span>
             </button>
           </div>
         </nav>
