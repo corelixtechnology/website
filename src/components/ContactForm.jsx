@@ -178,7 +178,7 @@ export default function ContactForm() {
                 <div className="input-group">
                   <label className="form-label">Project Details & Requirements</label>
                   <div className="input-with-icon" style={{ alignItems: 'flex-start' }}>
-                    <MessageSquare size={16} className="input-icon" style={{ marginTop: '0.8rem' }} />
+                    <MessageSquare size={16} className="input-icon" style={{ top: '1.1rem', transform: 'none' }} />
                     <textarea
                       name="message"
                       rows="5"
@@ -186,7 +186,7 @@ export default function ContactForm() {
                       onChange={handleInputChange}
                       placeholder="Describe your goals, desired features, timeline constraints, etc..."
                       className={`input-field textarea-field ${errors.message ? 'error' : ''}`}
-                      style={{ paddingLeft: '2.5rem', resize: 'vertical' }}
+                      style={{ resize: 'vertical' }}
                     ></textarea>
                   </div>
                   {errors.message && <span className="validation-error">{errors.message}</span>}

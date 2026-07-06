@@ -2653,9 +2653,13 @@
 .input-icon {
   position: absolute;
   left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--text-muted);
   pointer-events: none;
   transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 .input-field {
   width: 100%;
@@ -2684,6 +2688,9 @@
 .select-field {
   cursor: pointer;
   appearance: none;
+}
+select.input-field {
+  padding-left: 2.8rem !important;
 }
 .textarea-field {
   padding-left: 2.8rem;
