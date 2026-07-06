@@ -36,7 +36,7 @@ services:
       - key: ENCRYPTION_KEY
         generateValue: true
 
-  - type: static
+  - type: web
     name: corelix-frontend
     runtime: static
     buildCommand: npm install && npm run build
