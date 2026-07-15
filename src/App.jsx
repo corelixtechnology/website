@@ -12,16 +12,38 @@ import ContactPage from './pages/ContactPage';
 import AdminDashboard from './pages/AdminDashboard';
 import SitemapPage from './pages/SitemapPage';
 import Footer from './components/Footer';
-
+import useScrollReveal from './utils/useScrollReveal';
 
 export default function App() {
   const [mouseTrail, setMouseTrail] = useState([]);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const location = useLocation();
+
+  // Initialize Scroll-driven entrance animations
+  useScrollReveal();
 
   // Scroll to top on page navigation
   useEffect(() => {
     window.scrollTo(0, 0);
+    setScrollProgress(0); // Reset scroll progress bar
   }, [location.pathname]);
+
+  // Track page scroll progress
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        const progress = (window.scrollY / totalScroll) * 100;
+        setScrollProgress(progress);
+      } else {
+        setScrollProgress(0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   // Mouse trail particles emitter
   useEffect(() => {
@@ -52,6 +74,11 @@ export default function App() {
 
   return (
     <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* Scroll Progress Indicator */}
+      <div className="scroll-progress-container">
+        <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }} />
+      </div>
+
       {/* Custom Particle Cursor Trail */}
       <div className="cursor-trail">
         {mouseTrail.map((dot) => (

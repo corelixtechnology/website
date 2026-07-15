@@ -166,21 +166,23 @@ export default function Contact() {
                   </div>
                   <div className="channel-details">
                     <h3>Visit Our Head Office</h3>
-                    <p className="channel-value">Karur, Tamil Nadu, India</p>
-                    <p className="channel-subtext">📍 Head Office, Karur</p>
+                    <p className="channel-value">Corelix technology
+15, Thainganagar, Sri Poonkuyil Nagar, Vengamedu, Karur, Tamil Nadu 639006</p>
+                    <p className="channel-subtext">📍 Serving Chennai, Coimbatore, Karur, Trichy, and all regions near you across Tamil Nadu.</p>
                   </div>
                 </div>
                 
                 {/* Embed Map MapBox Mockup */}
                 <div className="map-embed-wrapper">
-                  <iframe
+                   <iframe
                     title="Corelix Technology Location Map"
-                    src="https://maps.google.com/maps?q=Karur,%20Tamil%20Nadu,%20India&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.7882554739663!2d78.0668583700455!3d10.979349131535121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2f059d687bef%3A0xf0fade9bdb76b0f8!2sCorelix%20technology!5e0!3m2!1sen!2sin!4v1784094136429!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     allowFullScreen=""
                     loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
                   ></iframe>
                 </div>
               </div>

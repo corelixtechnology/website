@@ -83,9 +83,9 @@ export default function TrustBrands() {
   return (
     <section className="trust-brands-section">
       <div className="container">
-        <h2 className="trust-brands-title">Trusted by Leading Brands & Startups</h2>
+        <h2 className="trust-brands-title reveal reveal-slide-up">Trusted by Leading Brands & Startups</h2>
         
-        <div className="marquee-fade-container">
+        <div className="marquee-fade-container reveal reveal-fade-in" data-delay="0.2s">
           <div className="marquee-track-horizontal">
             {marqueeItems.map((brand, idx) => (
               <div key={idx} className="brand-logo-item">

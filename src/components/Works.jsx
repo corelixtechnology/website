@@ -128,13 +128,13 @@ export default function Works({ defaultFilter }) {
     <section id="works" className="section" style={{ backgroundColor: 'var(--bg-darker)' }}>
       <div className="ambient-glow-2"></div>
       <div className="container">
-        <h2 className="section-title">Our Works</h2>
-        <p className="section-subtitle">
+        <h2 className="section-title reveal reveal-slide-up">Our Works</h2>
+        <p className="section-subtitle reveal reveal-slide-up" data-delay="0.1s">
           Take a look at the code and designs we have pushed. Each project is crafted with pixel perfection and a pinch of humor.
         </p>
 
         {/* Filter Buttons */}
-        <div className="portfolio-filters">
+        <div className="portfolio-filters reveal reveal-fade-in" data-delay="0.2s">
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -148,11 +148,11 @@ export default function Works({ defaultFilter }) {
         </div>
 
         {/* Portfolio Cards Grid */}
-        <div className="portfolio-grid">
+        <div className="portfolio-grid reveal-stagger">
           {filteredProjects.map((project) => (
             <div 
               key={project.id} 
-              className="portfolio-card glass-panel"
+              className="portfolio-card glass-panel reveal-item reveal-slide-up"
               onClick={() => setActiveModal(project)}
             >
               <div className="portfolio-img-container">

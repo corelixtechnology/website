@@ -96,18 +96,18 @@ export default function Careers() {
     <section id="careers" className="section" style={{ backgroundColor: 'var(--bg-darker)' }}>
       <div className="ambient-glow-2"></div>
       <div className="container">
-        <h2 className="section-title">Join The Team</h2>
-        <p className="section-subtitle">
+        <h2 className="section-title reveal reveal-slide-up">Join The Team</h2>
+        <p className="section-subtitle reveal reveal-slide-up" data-delay="0.1s">
           We are always looking for smart minds to join us. Check out our job openings and apply below to start your journey.
         </p>
 
         <div className="careers-pane">
           {/* Accordion Jobs */}
-          <div className="job-accordion">
+          <div className="job-accordion reveal-stagger">
             {jobOpenings.map((job, idx) => (
               <div 
                 key={idx} 
-                className={`job-item glass-panel ${openJob === idx ? 'open' : ''}`}
+                className={`job-item glass-panel reveal-item reveal-slide-up ${openJob === idx ? 'open' : ''}`}
               >
                 <div className="job-header" onClick={() => toggleJob(idx)}>
                   <div className="job-header-info">
@@ -153,7 +153,7 @@ export default function Careers() {
           </div>
 
           {/* Form Box */}
-          <div id="apply-form-box" className="careers-apply-form glass-panel">
+          <div id="apply-form-box" className="careers-apply-form glass-panel reveal reveal-scale-up" data-delay="0.2s">
             {!isSubmitted ? (
               <form onSubmit={handleFormSubmit}>
                 <h3 className="form-title text-gradient-purple-cyan">Join Our Creative Team</h3>
@@ -260,7 +260,7 @@ export default function Careers() {
                 </div>
               </form>
             ) : (
-              <div className="form-success-box">
+              <div className="form-success-box reveal reveal-scale-up" data-delay="0.1s">
                 <CheckCircle2 className="success-icon-bounce" size={64} />
                 <h3>Application Received!</h3>
                 <p>

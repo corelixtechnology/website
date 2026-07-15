@@ -34,7 +34,7 @@ export default function ServicesIntro() {
     <section id="services" className="services-intro-section">
       <div className="container services-intro-container">
         
-        <div className="services-intro-header">
+        <div className="services-intro-header reveal reveal-slide-up">
           <span className="services-intro-tag">Our Expertise</span>
           <h2 className="services-intro-title text-gradient">Services We Offer</h2>
           <p className="services-intro-subtitle">
@@ -42,11 +42,11 @@ export default function ServicesIntro() {
           </p>
         </div>
 
-        <div className="services-intro-grid">
+        <div className="services-intro-grid reveal-stagger">
           {services.map((service) => (
             <div 
               key={service.id} 
-              className={`service-intro-card ${service.themeClass || 'theme-violet'}`}
+              className={`service-intro-card reveal-item reveal-slide-up ${service.themeClass || 'theme-violet'}`}
               onClick={() => handleCardClick(service.id)}
               style={{ cursor: 'pointer' }}
             >
@@ -79,7 +79,7 @@ export default function ServicesIntro() {
           ))}
         </div>
 
-        <div className="service-intro-cta-wrapper">
+        <div className="service-intro-cta-wrapper reveal reveal-fade-in" data-delay="0.2s">
           <button 
             onClick={() => navigate('/services')}
             className="service-intro-cta-btn"

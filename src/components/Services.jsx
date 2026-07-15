@@ -30,17 +30,17 @@ export default function Services() {
     <section id="services" className="section">
       <div className="ambient-glow-1"></div>
       <div className="container">
-        <h2 className="section-title">What We Do</h2>
-        <p className="section-subtitle">
+        <h2 className="section-title reveal reveal-slide-up">What We Do</h2>
+        <p className="section-subtitle reveal reveal-slide-up" data-delay="0.1s">
           We offer top-tier digital services to scale your business and maximize your returns. We partner with startups and enterprises to deliver exceptional results.
         </p>
 
-        <div className="grid-2 services-grid">
+        <div className="grid-2 services-grid reveal-stagger">
           {services.map((service) => (
             <div 
               key={service.id} 
               id={service.id}
-              className={`service-card glass-panel ${service.themeClass || 'theme-violet'}`}
+              className={`service-card glass-panel reveal-item reveal-slide-up ${service.themeClass || 'theme-violet'}`}
               onClick={() => navigate(`/services/${service.id}`)}
               style={{ cursor: 'pointer' }}
             >

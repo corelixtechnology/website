@@ -95,7 +95,7 @@ export default function ContactForm({ preselectedServiceId }) {
     <section id="contact" className="section contact-section" style={{ position: 'relative' }}>
       <div className="ambient-glow-1" style={{ top: '30%', right: '10%', opacity: 0.15 }}></div>
       <div className="container">
-        <div className="contact-header" style={{ textAlign: 'center', marginBottom: '3rem' }}>
+        <div className="contact-header reveal reveal-slide-up" style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <span className="services-intro-tag">Start Your Project</span>
           <h2 className="section-title">Let's Create Something Great</h2>
           <p className="section-subtitle">
@@ -105,7 +105,7 @@ export default function ContactForm({ preselectedServiceId }) {
 
         <div className="contact-pane-wrapper">
           {!isSubmitted ? (
-            <div className="contact-form-box glass-panel">
+            <div className="contact-form-box glass-panel reveal reveal-scale-up" data-delay="0.15s">
               <form onSubmit={handleSubmit} className="contact-form">
                 <div className="form-grid">
                   <div className="input-group">
@@ -207,7 +207,7 @@ export default function ContactForm({ preselectedServiceId }) {
               </form>
             </div>
           ) : (
-            <div className="contact-success-box glass-panel text-center" style={{ padding: '4rem 2rem' }}>
+            <div className="contact-success-box glass-panel text-center reveal reveal-scale-up" data-delay="0.15s" style={{ padding: '4rem 2rem' }}>
               <div className="success-icon-wrapper" style={{ margin: '0 auto 1.5rem auto' }}>
                 <CheckCircle2 className="success-icon-bounce" size={64} style={{ color: 'var(--secondary)' }} />
               </div>

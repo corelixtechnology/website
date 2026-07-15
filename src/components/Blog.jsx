@@ -26,14 +26,14 @@ export default function Blog() {
     <section id="blog" className="section">
       <div className="ambient-glow-1"></div>
       <div className="container">
-        <h2 className="section-title">Corelix Technology Blog</h2>
-        <p className="section-subtitle">
+        <h2 className="section-title reveal reveal-slide-up">Corelix Technology Blog</h2>
+        <p className="section-subtitle reveal reveal-slide-up" data-delay="0.1s">
           Insightful articles on software engineering, digital branding, and product design from our team.
         </p>
 
-        <div className="grid-3">
+        <div className="grid-3 reveal-stagger">
           {blogs.map((blog) => (
-            <article key={blog.id} className="blog-card glass-panel">
+            <article key={blog.id} className="blog-card glass-panel reveal-item reveal-slide-up">
               <div className="blog-img-box">
                 {iconMap[blog.iconName] || <HelpCircle size={36} />}
                 <span className="tag" style={{ position: 'absolute', top: '10px', left: '10px' }}>

@@ -1,257 +1,233 @@
 import React from 'react';
 
+const GitHubIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '100%', height: '100%', fill: 'white' }}>
+    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+  </svg>
+);
+
+const WixIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '100%', height: '100%', fill: 'white' }}>
+    <path d="M12.923 8.35L14.73 14.5l1.808-6.15h1.942l-2.732 8.352h-2.036L12 10.598l-1.71 6.104H8.253L5.522 8.35h1.942L9.27 14.5l1.808-6.15h1.845zM22.05 8.35h1.95L21 16.702h-1.95l3-8.352zm-18.15 0h1.95L2.85 16.702H.9L3.9 8.352z"/>
+  </svg>
+);
+
+const FlutterFlowIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" style={{ width: '100%', height: '100%' }}>
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2v-3.5H9V11h2V9h2v2h2v2h-2v3.5z" fill="#06b6d4"/>
+    <path d="M12.5 12.5h3.5v-2h-3.5v-3.5h-2v3.5H7v2h3.5v3.5h2v-3.5z" fill="#4b39ef" style={{ opacity: 0.8 }} />
+  </svg>
+);
+
+const AWSIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" style={{ width: '100%', height: '100%' }}>
+    <path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <path d="M6 15s3 2 6 0 6 0 6 0" stroke="#ff9900" strokeWidth="2" strokeLinecap="round" />
+    <path d="M18 15l1.5.5v-1.5" stroke="#ff9900" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const RocketIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%', stroke: 'var(--secondary)' }}>
+    <path d="M4.5 16.5c-1.5 1.5-2.5 3.5-2.5 5.5h6c0-2-1-4-2.5-5.5z"/>
+    <path d="M12 2C7 6 6 12 6 16c4 0 10-1 14-6-4-1-8-3-12-8z"/>
+    <path d="M9 15l3-3"/>
+  </svg>
+);
+
 const techData = [
   {
     name: 'HTML5',
     category: 'Core Web',
     glowClass: 'glow-html',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M20.5 2h-17l1.5 17 7 3 7-3 1.5-17z"/>
-        <path d="M12 5.5v11.5l4-1.5.5-5.5H12"/>
-        <path d="M12 5.5H8.5l.5 3h3"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg'
   },
   {
     name: 'CSS3',
     category: 'Core Web',
     glowClass: 'glow-css',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M20.5 2h-17l1.5 17 7 3 7-3 1.5-17z"/>
-        <path d="M12 5.5v11.5l4-1.5.5-5.5H12"/>
-        <path d="M8 8.5h4v3H8"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg'
   },
   {
     name: 'JavaScript',
     category: 'Core Web',
     glowClass: 'glow-js',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="3" y="3" width="18" height="18" rx="2"/>
-        <path d="M12 15h2.5c.8 0 1.5-.7 1.5-1.5V12c0-.8-.7-1.5-1.5-1.5H12M8.5 11h2c.8 0 1.5.7 1.5 1.5v1c0 .8-.7 1.5-1.5 1.5h-2"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg'
   },
   {
     name: 'React JS',
     category: 'Frameworks',
     glowClass: 'glow-react',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(30 12 12)"/>
-        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(90 12 12)"/>
-        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(150 12 12)"/>
-        <circle cx="12" cy="12" r="1.5"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg'
   },
   {
     name: 'Node JS',
     category: 'Frameworks',
     glowClass: 'glow-node',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/>
-        <path d="M12 6.5l6 3.5v4l-6 3.5-6-3.5v-4z"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg'
   },
   {
     name: 'PHP',
     category: 'Core Web',
     glowClass: 'glow-php',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <ellipse cx="12" cy="12" rx="10" ry="6"/>
-        <path d="M7 15V9h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 3H7zm8 0V9h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 3h-2z"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg'
   },
   {
     name: 'Angular',
     category: 'Frameworks',
     glowClass: 'glow-angular',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2L2 5.5l1.5 12.5 8.5 4 8.5-4 1.5-12.5L12 2z"/>
-        <path d="M12 6l4.5 9h-9L12 6z"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg'
   },
   {
     name: 'MongoDB',
     category: 'Databases',
     glowClass: 'glow-mongo',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2C8 6 8 13 12 22c4-9 4-16 0-20z"/>
-        <path d="M9.5 12c1 2 2.5 3 2.5 3s1.5-1 2.5-3"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg'
   },
   {
     name: 'Git',
     category: 'Tools',
     glowClass: 'glow-git',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <circle cx="18" cy="18" r="3"/>
-        <circle cx="6" cy="6" r="3"/>
-        <circle cx="6" cy="18" r="3"/>
-        <path d="M6 9v6M6 12c3 0 6 3 6 3l3 3"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg'
   },
   {
     name: 'Figma',
     category: 'Tools',
     glowClass: 'glow-figma',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/>
-        <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/>
-        <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 0 1-7 0z"/>
-        <path d="M12 2h3.5a3.5 3.5 0 0 1 0 7H12V2z"/>
-        <path d="M12 9h3.5a3.5 3.5 0 0 1 3.5 3.5v0a3.5 3.5 0 0 1-3.5 3.5H12V9z"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg'
   },
   {
     name: 'Wix',
     category: 'Tools',
     glowClass: 'glow-wix',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M2 7l3 10 3-10h2l-4 12H3L1 7zM10 7h2v10h-2zM15 7l2 4 2-4h2l-3 5 3 5h-2l-2-4-2 4h-2l3-5-3-5z"/>
-      </svg>
-    )
+    isWix: true
   },
   {
     name: 'GitHub',
     category: 'Tools',
     glowClass: 'glow-github',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-      </svg>
-    )
+    isGithub: true
   },
   {
     name: 'AWS',
     category: 'Cloud',
     glowClass: 'glow-aws',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M3 13a9 9 0 0 0 18 0M6 9h1M11 9h1M16 9h1"/>
-        <path d="M3 15s4 4 9 4 9-4 9-4"/>
-      </svg>
-    )
+    isAws: true
   },
   {
     name: 'MySQL',
     category: 'Databases',
     glowClass: 'glow-mysql',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M2 12c0-5 4-9 10-9s10 4 10 9-4 9-10 9S2 17 2 12z"/>
-        <path d="M12 7c-2 1-3 3-3 5s1 4 3 5 3-3 3-5-1-4-3-5z"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg'
   },
   {
     name: 'Azure',
     category: 'Cloud',
     glowClass: 'glow-azure',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M2 19h14L10 9zM6 19l6-14 10 14H18z"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg'
   },
   {
     name: 'Google Cloud',
     category: 'Cloud',
     glowClass: 'glow-gcp',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-        <circle cx="12" cy="12" r="2"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg'
   },
   {
     name: 'Flutter',
     category: 'Mobile & Apps',
     glowClass: 'glow-flutter',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M19 2L10 11l9 9M13 2l-9 9 9 9" />
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg'
   },
   {
     name: 'FlutterFlow',
     category: 'Mobile & Apps',
     glowClass: 'glow-flutterflow',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="5" y="2" width="14" height="20" rx="2"/>
-        <path d="M12 18h.01"/>
-        <path d="M8 6h8M8 10h8M8 14h5"/>
-      </svg>
-    )
+    isFlutterFlow: true
   },
   {
     name: 'Laravel',
     category: 'Frameworks',
     glowClass: 'glow-laravel',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/>
-        <path d="M12 22V12m10-5l-10 5M2 7l10 5"/>
-        <path d="M7 9.5v5l5 2.5"/>
-      </svg>
-    )
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg'
   },
   {
-    name: 'MVPs & Prototyping',
+    name: 'MVPs & Launch',
     category: 'Process & Launch',
     glowClass: 'glow-mvp',
-    icon: (
-      <svg className="tech-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4.5 16.5c-1.5 1.5-2.5 3.5-2.5 5.5h6c0-2-1-4-2.5-5.5z"/>
-        <path d="M12 2C7 6 6 12 6 16c4 0 10-1 14-6-4-1-8-3-12-8z"/>
-        <path d="M9 15l3-3"/>
-      </svg>
-    )
+    isCustomSvg: true
   }
 ];
 
 export default function TechStack() {
+  const row1 = techData.slice(0, 10);
+  const row2 = techData.slice(10);
+
+  const marqueeRow1 = [...row1, ...row1, ...row1];
+  const marqueeRow2 = [...row2, ...row2, ...row2];
+
+  const renderIcon = (tech) => {
+    if (tech.isCustomSvg) return <RocketIcon />;
+    if (tech.isGithub) return <GitHubIcon />;
+    if (tech.isWix) return <WixIcon />;
+    if (tech.isAws) return <AWSIcon />;
+    if (tech.isFlutterFlow) return <FlutterFlowIcon />;
+    
+    return (
+      <img 
+        src={tech.iconUrl} 
+        alt={tech.name} 
+        loading="lazy"
+        onError={(e) => {
+          e.target.style.display = 'none';
+        }} 
+      />
+    );
+  };
+
   return (
     <section className="tech-stack-section">
       <div className="container">
-        <h2 className="tech-stack-title text-gradient">Technologies We Leverage</h2>
-        <p className="tech-stack-subtitle">
+        <h2 className="tech-stack-title text-gradient reveal reveal-slide-up">Technologies We Leverage</h2>
+        <p className="tech-stack-subtitle reveal reveal-slide-up" data-delay="0.1s">
           We use state-of-the-art technologies, robust languages, and leading cloud networks to build high-performance products.
         </p>
 
-        <div className="tech-grid">
-          {techData.map((tech, index) => (
-            <div key={index} className={`tech-card ${tech.glowClass}`}>
-              <div className="tech-icon-box">
-                {tech.icon}
-              </div>
-              <div className="tech-info-box">
-                <span className="tech-name-label">{tech.name}</span>
-                <span className="tech-category-label">{tech.category}</span>
-              </div>
+        <div className="tech-marquee-wrapper reveal reveal-fade-in" data-delay="0.2s">
+          
+          {/* Row 1: Sliding Left */}
+          <div className="tech-marquee-container mask-gradient">
+            <div className="tech-marquee-track scroll-left">
+              {marqueeRow1.map((tech, index) => (
+                <div key={`row1-${index}`} className={`tech-card-slider ${tech.glowClass}`}>
+                  <div className="tech-slider-icon-box">
+                    {renderIcon(tech)}
+                  </div>
+                  <div className="tech-slider-info">
+                    <span className="tech-slider-name">{tech.name}</span>
+                    <span className="tech-slider-category">{tech.category}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Row 2: Sliding Right */}
+          <div className="tech-marquee-container mask-gradient" style={{ marginTop: '1rem' }}>
+            <div className="tech-marquee-track scroll-right">
+              {marqueeRow2.map((tech, index) => (
+                <div key={`row2-${index}`} className={`tech-card-slider ${tech.glowClass}`}>
+                  <div className="tech-slider-icon-box">
+                    {renderIcon(tech)}
+                  </div>
+                  <div className="tech-slider-info">
+                    <span className="tech-slider-name">{tech.name}</span>
+                    <span className="tech-slider-category">{tech.category}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
