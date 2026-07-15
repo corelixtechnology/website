@@ -3,12 +3,16 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
+import ServiceDetailPage from './pages/ServiceDetailPage';
 import WorksPage from './pages/WorksPage';
 import AboutPage from './pages/AboutPage';
 import BlogPage from './pages/BlogPage';
 import CareersPage from './pages/CareersPage';
+import ContactPage from './pages/ContactPage';
 import AdminDashboard from './pages/AdminDashboard';
+import SitemapPage from './pages/SitemapPage';
 import Footer from './components/Footer';
+
 
 export default function App() {
   const [mouseTrail, setMouseTrail] = useState([]);
@@ -70,11 +74,14 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/:id" element={<ServiceDetailPage />} />
           <Route path="/works" element={<WorksPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/careers" element={<CareersPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/sitemap" element={<SitemapPage />} />
         </Routes>
       </main>
 

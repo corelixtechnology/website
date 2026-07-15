@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { db } from '../utils/db';
 
 export default function SEO({ title, description, keywords, canonical, robots }) {
   const location = useLocation();
@@ -13,7 +14,11 @@ export default function SEO({ title, description, keywords, canonical, robots })
 
     // Helper to query and update/create meta tags
     const updateMetaTag = (attributeName, attributeValue, content) => {
-      if (!content) return;
+      if (!content) {
+        const tag = document.querySelector(`meta[${attributeName}="${attributeValue}"]`);
+        if (tag) tag.remove();
+        return;
+      }
       let tag = document.querySelector(`meta[${attributeName}="${attributeValue}"]`);
       if (!tag) {
         tag = document.createElement('meta');
@@ -27,6 +32,10 @@ export default function SEO({ title, description, keywords, canonical, robots })
     updateMetaTag('name', 'description', description || 'Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale.');
     updateMetaTag('name', 'keywords', keywords || 'digital agency, web development, custom software, web design, branding, digital marketing, SEO, React developer, Corelix Technology');
     updateMetaTag('name', 'robots', robots || 'index, follow');
+
+    const activeSettings = db.getSettings();
+    const verificationCode = (activeSettings && activeSettings.googleSiteVerification) || import.meta.env.VITE_GOOGLE_SITE_VERIFICATION;
+    updateMetaTag('name', 'google-site-verification', verificationCode);
 
     // 3. Canonical Link
     const finalCanonical = canonical || window.location.href;

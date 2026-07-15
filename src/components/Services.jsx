@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Code, Palette, ShoppingCart, Image, CheckCircle, Search, TrendingUp, Megaphone, Smartphone, HelpCircle } from 'lucide-react';
 import { db } from '../utils/db';
 
@@ -15,6 +16,7 @@ const iconMap = {
 
 export default function Services() {
   const [services, setServices] = useState(() => db.getServices().filter(s => s.isActive));
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleUpdate = () => {
@@ -39,6 +41,8 @@ export default function Services() {
               key={service.id} 
               id={service.id}
               className={`service-card glass-panel ${service.themeClass || 'theme-violet'}`}
+              onClick={() => navigate(`/services/${service.id}`)}
+              style={{ cursor: 'pointer' }}
             >
               <div className="service-icon-box">
                 {iconMap[service.iconName] || <HelpCircle size={28} />}

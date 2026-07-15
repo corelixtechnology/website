@@ -27,7 +27,7 @@ export default function ServicesIntro() {
   }, []);
 
   const handleCardClick = (id) => {
-    navigate('/services', { state: { section: id } });
+    navigate(`/services/${id}`);
   };
 
   return (

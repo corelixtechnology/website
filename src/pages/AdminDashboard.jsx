@@ -19,6 +19,7 @@ export default function AdminDashboard() {
   const [blogs, setBlogs] = useState([]);
   const [works, setWorks] = useState([]);
   const [settings, setSettings] = useState({});
+  const [deleteConfirmId, setDeleteConfirmId] = useState(null);
 
   // CRUD Editing States
   const [editingItem, setEditingItem] = useState(null); // holds item being edited
@@ -77,10 +78,17 @@ export default function AdminDashboard() {
   };
 
   const handleDeleteInquiry = (id) => {
-    if (confirm('Are you sure you want to delete this client inquiry?')) {
+    const key = `inquiry_${id}`;
+    if (deleteConfirmId === key) {
       const updated = inquiries.filter(inq => inq.id !== id);
       db.saveInquiries(updated);
       setInquiries(updated);
+      setDeleteConfirmId(null);
+    } else {
+      setDeleteConfirmId(key);
+      setTimeout(() => {
+        setDeleteConfirmId(current => current === key ? null : current);
+      }, 4000); // reset after 4 seconds
     }
   };
 
@@ -149,10 +157,17 @@ export default function AdminDashboard() {
   };
 
   const handleDeleteService = (id) => {
-    if (confirm('Are you sure you want to delete this service?')) {
+    const key = `service_${id}`;
+    if (deleteConfirmId === key) {
       const updated = services.filter(s => s.id !== id);
       db.saveServices(updated);
       setServices(updated);
+      setDeleteConfirmId(null);
+    } else {
+      setDeleteConfirmId(key);
+      setTimeout(() => {
+        setDeleteConfirmId(current => current === key ? null : current);
+      }, 4000);
     }
   };
 
@@ -204,10 +219,17 @@ export default function AdminDashboard() {
   };
 
   const handleDeleteBlog = (id) => {
-    if (confirm('Are you sure you want to delete this article?')) {
+    const key = `blog_${id}`;
+    if (deleteConfirmId === key) {
       const updated = blogs.filter(b => b.id !== id);
       db.saveBlogs(updated);
       setBlogs(updated);
+      setDeleteConfirmId(null);
+    } else {
+      setDeleteConfirmId(key);
+      setTimeout(() => {
+        setDeleteConfirmId(current => current === key ? null : current);
+      }, 4000);
     }
   };
 
@@ -262,10 +284,17 @@ export default function AdminDashboard() {
   };
 
   const handleDeleteWork = (id) => {
-    if (confirm('Are you sure you want to delete this project?')) {
+    const key = `work_${id}`;
+    if (deleteConfirmId === key) {
       const updated = works.filter(w => w.id !== id);
       db.saveWorks(updated);
       setWorks(updated);
+      setDeleteConfirmId(null);
+    } else {
+      setDeleteConfirmId(key);
+      setTimeout(() => {
+        setDeleteConfirmId(current => current === key ? null : current);
+      }, 4000);
     }
   };
 
@@ -628,14 +657,19 @@ export default function AdminDashboard() {
                     <div className="inquiry-header">
                       <div className="inquiry-sender">
                         <h4>{inq.name}</h4>
-                        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                          {inq.email} • {new Date(inq.date).toLocaleString()}
+                        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '2px' }}>
+                          {inq.email} {inq.phone ? `• Phone: ${inq.phone}` : ''}
+                        </span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                          Submitted: {new Date(inq.date).toLocaleString()}
                         </span>
                       </div>
                       <div className="inquiry-meta-tags">
-                        <span className="inquiry-tag service-tag">
-                          {services.find(s => s.id === inq.projectType)?.title || inq.projectType}
-                        </span>
+                        {inq.projectType && (
+                          <span className="inquiry-tag service-tag">
+                            {services.find(s => s.id === inq.projectType)?.title || inq.projectType}
+                          </span>
+                        )}
                         {inq.budget > 0 && (
                           <span className="inquiry-tag budget-tag">
                             Budget: ${inq.budget.toLocaleString()}
@@ -652,8 +686,20 @@ export default function AdminDashboard() {
                           {renderIcon('CheckSquare', 12)} Mark as Read
                         </button>
                       )}
-                      <button onClick={() => handleDeleteInquiry(inq.id)} className="btn btn-sm btn-delete" style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                        {renderIcon('Trash2', 12)} Delete
+                      <button 
+                        onClick={() => handleDeleteInquiry(inq.id)} 
+                        className={`btn btn-sm ${deleteConfirmId === `inquiry_${inq.id}` ? 'btn-danger' : 'btn-delete'}`} 
+                        style={{ 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          gap: '0.2rem',
+                          backgroundColor: deleteConfirmId === `inquiry_${inq.id}` ? 'var(--accent)' : '',
+                          borderColor: deleteConfirmId === `inquiry_${inq.id}` ? 'var(--accent)' : '',
+                          color: deleteConfirmId === `inquiry_${inq.id}` ? '#ffffff' : ''
+                        }}
+                      >
+                        {renderIcon(deleteConfirmId === `inquiry_${inq.id}` ? 'AlertTriangle' : 'Trash2', 12)} 
+                        {deleteConfirmId === `inquiry_${inq.id}` ? 'Confirm?' : 'Delete'}
                       </button>
                     </div>
                   </div>
@@ -853,8 +899,21 @@ export default function AdminDashboard() {
                           <button onClick={() => handleEditService(s)} className="btn btn-secondary btn-sm" title="Edit Service">
                             {renderIcon('Edit2', 12)} Edit
                           </button>
-                          <button onClick={() => handleDeleteService(s.id)} className="btn btn-delete btn-sm" title="Delete Service">
-                            {renderIcon('Trash2', 12)}
+                          <button 
+                            onClick={() => handleDeleteService(s.id)} 
+                            className={`btn btn-sm ${deleteConfirmId === `service_${s.id}` ? 'btn-danger' : 'btn-delete'}`} 
+                            style={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              gap: '0.2rem',
+                              backgroundColor: deleteConfirmId === `service_${s.id}` ? 'var(--accent)' : '',
+                              borderColor: deleteConfirmId === `service_${s.id}` ? 'var(--accent)' : '',
+                              color: deleteConfirmId === `service_${s.id}` ? '#ffffff' : ''
+                            }}
+                            title="Delete Service"
+                          >
+                            {renderIcon(deleteConfirmId === `service_${s.id}` ? 'AlertTriangle' : 'Trash2', 12)}
+                            {deleteConfirmId === `service_${s.id}` ? 'Confirm?' : ''}
                           </button>
                         </div>
                       </td>
@@ -1011,8 +1070,21 @@ export default function AdminDashboard() {
                           <button onClick={() => handleEditBlog(b)} className="btn btn-secondary btn-sm">
                             {renderIcon('Edit2', 12)} Edit
                           </button>
-                          <button onClick={() => handleDeleteBlog(b.id)} className="btn btn-delete btn-sm">
-                            {renderIcon('Trash2', 12)}
+                          <button 
+                            onClick={() => handleDeleteBlog(b.id)} 
+                            className={`btn btn-sm ${deleteConfirmId === `blog_${b.id}` ? 'btn-danger' : 'btn-delete'}`}
+                            style={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              gap: '0.2rem',
+                              backgroundColor: deleteConfirmId === `blog_${b.id}` ? 'var(--accent)' : '',
+                              borderColor: deleteConfirmId === `blog_${b.id}` ? 'var(--accent)' : '',
+                              color: deleteConfirmId === `blog_${b.id}` ? '#ffffff' : ''
+                            }}
+                            title="Delete Blog"
+                          >
+                            {renderIcon(deleteConfirmId === `blog_${b.id}` ? 'AlertTriangle' : 'Trash2', 12)}
+                            {deleteConfirmId === `blog_${b.id}` ? 'Confirm?' : ''}
                           </button>
                         </div>
                       </td>
@@ -1183,8 +1255,21 @@ export default function AdminDashboard() {
                           <button onClick={() => handleEditWork(w)} className="btn btn-secondary btn-sm">
                             {renderIcon('Edit2', 12)} Edit
                           </button>
-                          <button onClick={() => handleDeleteWork(w.id)} className="btn btn-delete btn-sm">
-                            {renderIcon('Trash2', 12)}
+                          <button 
+                            onClick={() => handleDeleteWork(w.id)} 
+                            className={`btn btn-sm ${deleteConfirmId === `work_${w.id}` ? 'btn-danger' : 'btn-delete'}`}
+                            style={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              gap: '0.2rem',
+                              backgroundColor: deleteConfirmId === `work_${w.id}` ? 'var(--accent)' : '',
+                              borderColor: deleteConfirmId === `work_${w.id}` ? 'var(--accent)' : '',
+                              color: deleteConfirmId === `work_${w.id}` ? '#ffffff' : ''
+                            }}
+                            title="Delete Work"
+                          >
+                            {renderIcon(deleteConfirmId === `work_${w.id}` ? 'AlertTriangle' : 'Trash2', 12)}
+                            {deleteConfirmId === `work_${w.id}` ? 'Confirm?' : ''}
                           </button>
                         </div>
                       </td>
@@ -1280,6 +1365,21 @@ export default function AdminDashboard() {
                   onChange={handleSettingsChange}
                   className="input-field"
                 />
+              </div>
+
+              <div className="input-group" style={{ marginBottom: '1.5rem' }}>
+                <label>Google Site Verification Code</label>
+                <input
+                  type="text"
+                  name="googleSiteVerification"
+                  value={settings.googleSiteVerification || ''}
+                  onChange={handleSettingsChange}
+                  className="input-field"
+                  placeholder="e.g. google1234567890abcdef"
+                />
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.25rem', display: 'block' }}>
+                  Used to verify domain ownership in Google Search Console.
+                </span>
               </div>
 
               <div style={{ marginTop: '2rem', marginBottom: '1.5rem', borderTop: '1px solid var(--border-glass)', paddingTop: '1.5rem' }}>

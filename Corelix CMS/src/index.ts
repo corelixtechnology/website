@@ -238,26 +238,7 @@ const DEFAULT_SETTINGS = {
   adminPassword: 'corelix@2026'
 };
 
-const DEFAULT_INQUIRIES = [
-  {
-    name: 'Alice Johnson',
-    email: 'alice@nexuscorp.com',
-    projectType: 'web-dev',
-    budget: 2240,
-    message: 'We are looking to develop a dashboard client portal for Nexus Corp. We need a clean dashboard in React matching your EduTrack sample.',
-    date: '2026-07-03T14:45:00.000Z',
-    isRead: true
-  },
-  {
-    name: 'Robert Davis',
-    email: 'robert@organicjuice.io',
-    projectType: 'seo',
-    budget: 950,
-    message: 'Hello, our online juice shop needs high rank SEO on Google. Do you manage technical setup and keywords mappings?',
-    date: '2026-07-04T09:15:00.000Z',
-    isRead: false
-  }
-];
+
 
 export default {
   register() {},
@@ -357,28 +338,52 @@ export default {
       console.error('Failed to seed settings:', err);
     }
 
-    // 5. Seed Inquiries
+    // 5. Seed Inquiries (Disabled to prevent re-seeding default mock inquiries)
+
+    // 6. Bootstrap Public API Permissions
     try {
-      const inquiryService = strapi.documents('api::inquiry.inquiry');
-      const existingInquiries = await inquiryService.findMany({ limit: 1 });
-      if (existingInquiries.length === 0) {
-        for (const inquiry of DEFAULT_INQUIRIES) {
-          await inquiryService.create({
-            data: {
-              name: inquiry.name,
-              email: inquiry.email,
-              projectType: inquiry.projectType,
-              budget: inquiry.budget,
-              message: inquiry.message,
-              date: inquiry.date,
-              isRead: inquiry.isRead
-            }
+      const publicRole = await strapi.query('plugin::users-permissions.role').findOne({
+        where: { type: 'public' },
+      });
+      if (publicRole) {
+        const publicPermissions = [
+          'api::service.service.find',
+          'api::service.service.findOne',
+          'api::service.service.create',
+          'api::service.service.update',
+          'api::service.service.destroy',
+          'api::blog.blog.find',
+          'api::blog.blog.findOne',
+          'api::blog.blog.create',
+          'api::blog.blog.update',
+          'api::blog.blog.destroy',
+          'api::work.work.find',
+          'api::work.work.findOne',
+          'api::work.work.create',
+          'api::work.work.update',
+          'api::work.work.destroy',
+          'api::setting.setting.find',
+          'api::inquiry.inquiry.create',
+          'api::inquiry.inquiry.find',
+          'api::inquiry.inquiry.findOne',
+          'api::inquiry.inquiry.destroy',
+          'api::inquiry.inquiry.update',
+        ];
+        
+        for (const action of publicPermissions) {
+          const exists = await strapi.query('plugin::users-permissions.permission').findOne({
+            where: { action, role: publicRole.id }
           });
+          if (!exists) {
+            await strapi.query('plugin::users-permissions.permission').create({
+              data: { action, role: publicRole.id }
+            });
+          }
         }
-        console.log('Seeded inquiries successfully.');
+        console.log('Public permissions verified successfully.');
       }
     } catch (err) {
-      console.error('Failed to seed inquiries:', err);
+      console.error('Failed to configure public permissions:', err);
     }
   }
 };

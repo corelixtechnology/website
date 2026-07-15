@@ -245,31 +245,11 @@ const DEFAULT_SETTINGS = {
   email: 'corelixtechonology@gmail.com',
   seasonalDiscount: 20,
   adminUsername: 'corelix',
-  adminPassword: 'corelix@2026'
+  adminPassword: 'corelix@2026',
+  googleSiteVerification: ''
 };
 
-const DEFAULT_INQUIRIES = [
-  {
-    id: 'inq_1',
-    name: 'Alice Johnson',
-    email: 'alice@nexuscorp.com',
-    projectType: 'web-dev',
-    budget: 2240,
-    message: 'We are looking to develop a dashboard client portal for Nexus Corp. We need a clean dashboard in React matching your EduTrack sample.',
-    date: '2026-07-03T14:45:00.000Z',
-    isRead: true
-  },
-  {
-    id: 'inq_2',
-    name: 'Robert Davis',
-    email: 'robert@organicjuice.io',
-    projectType: 'seo',
-    budget: 950,
-    message: 'Hello, our online juice shop needs high rank SEO on Google. Do you manage technical setup and keywords mappings?',
-    date: '2026-07-04T09:15:00.000Z',
-    isRead: false
-  }
-];
+const DEFAULT_INQUIRIES = [];
 
 // Helper to load cache safely
 const getCached = (key, fallback) => {
@@ -394,6 +374,7 @@ const fetchSettings = async () => {
         seasonalDiscount: data.seasonalDiscount,
         adminUsername: data.adminUsername,
         adminPassword: data.adminPassword,
+        googleSiteVerification: data.googleSiteVerification || '',
         documentId: data.documentId
       };
       saveCached(CACHE_KEYS.SETTINGS, cache.settings);
@@ -414,6 +395,7 @@ const fetchInquiries = async () => {
         id: item.documentId,
         name: item.name,
         email: item.email,
+        phone: item.phone || '',
         projectType: item.projectType,
         budget: item.budget,
         message: item.message,
@@ -602,6 +584,7 @@ const syncInquiries = async (updated) => {
           data: {
             name: inq.name,
             email: inq.email,
+            phone: inq.phone || '',
             projectType: inq.projectType,
             budget: inq.budget,
             message: inq.message,
@@ -681,7 +664,8 @@ export const db = {
       id: tempId,
       name: inquiry.name,
       email: inquiry.email,
-      projectType: inquiry.projectType,
+      phone: inquiry.phone || '',
+      projectType: inquiry.projectType || '',
       budget: inquiry.budget ? parseInt(inquiry.budget) : 0,
       message: inquiry.message,
       date: new Date().toISOString(),
@@ -697,7 +681,8 @@ export const db = {
         data: {
           name: newInq.name,
           email: newInq.email,
-          projectType: newInq.projectType,
+          phone: newInq.phone || '',
+          projectType: newInq.projectType || '',
           budget: newInq.budget,
           message: newInq.message,
           date: newInq.date,

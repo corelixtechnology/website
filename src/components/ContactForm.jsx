@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { User, Mail, MessageSquare, Send, CheckCircle2, IndianRupee, Cpu } from 'lucide-react';
 import { db } from '../utils/db';
 
-export default function ContactForm() {
+export default function ContactForm({ preselectedServiceId }) {
   const [services, setServices] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    projectType: 'web-dev',
+    projectType: preselectedServiceId || 'web-dev',
     budget: '',
     message: ''
   });
@@ -18,7 +18,10 @@ export default function ContactForm() {
     // Load active services for dropdown
     const activeServices = db.getServices().filter(s => s.isActive);
     setServices(activeServices);
-    if (activeServices.length > 0) {
+    
+    if (preselectedServiceId) {
+      setFormData(prev => ({ ...prev, projectType: preselectedServiceId }));
+    } else if (activeServices.length > 0) {
       setFormData(prev => ({ ...prev, projectType: activeServices[0].id }));
     }
 
@@ -46,7 +49,7 @@ export default function ContactForm() {
     checkPendingEstimate();
     window.addEventListener('wm_estimate_applied', checkPendingEstimate);
     return () => window.removeEventListener('wm_estimate_applied', checkPendingEstimate);
-  }, []);
+  }, [preselectedServiceId]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

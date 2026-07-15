@@ -19,6 +19,9 @@
       "type": "string",
       "required": true
     },
+    "phone": {
+      "type": "string"
+    },
     "projectType": {
       "type": "string"
     },

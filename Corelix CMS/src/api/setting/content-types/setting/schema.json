@@ -40,6 +40,9 @@
     },
     "adminPassword": {
       "type": "string"
+    },
+    "googleSiteVerification": {
+      "type": "string"
     }
   }
 }

@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, Phone, MessageCircle, Settings } from 'lucide-react';
+import { 
+  Menu, X, ChevronDown, Phone, MessageCircle, Settings,
+  Code, Palette, ShoppingCart, Image as ImageIcon, Search, TrendingUp, Megaphone, Smartphone, HelpCircle
+} from 'lucide-react';
 import { db } from '../utils/db';
 import logo from '../assets/Corelix Technology - Logo.png';
+
+const serviceIconMap = {
+  Code: <Code size={18} />,
+  Palette: <Palette size={18} />,
+  ShoppingCart: <ShoppingCart size={18} />,
+  Image: <ImageIcon size={18} />,
+  Search: <Search size={18} />,
+  TrendingUp: <TrendingUp size={18} />,
+  Megaphone: <Megaphone size={18} />,
+  Smartphone: <Smartphone size={18} />,
+  HelpCircle: <HelpCircle size={18} />
+};
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,9 +53,10 @@ export default function Navbar() {
       name: 'Services',
       href: '/services',
       dropdown: activeServices.map(s => ({
-        label: s.title.length > 20 ? s.title.substring(0, 18) + '...' : s.title,
-        href: '/services',
-        state: { section: s.id }
+        label: s.title,
+        desc: s.desc,
+        iconName: s.iconName,
+        href: `/services/${s.id}`
       })),
     },
     {
@@ -61,7 +77,8 @@ export default function Navbar() {
       ],
     },
     { name: 'Blog', href: '/blog' },
-    { name: 'Careers', href: '/careers' }
+    { name: 'Careers', href: '/careers' },
+    { name: 'Contact Us', href: '/contact' }
   ];
 
   const handleSubItemClick = (href, state) => {
@@ -84,9 +101,9 @@ export default function Navbar() {
       <nav className="navbar-container" style={{ position: 'relative', top: 'auto' }}>
         <div className="navbar-inner glass-panel">
           {/* Logo */}
-          <Link 
-            to="/" 
-            className="navbar-logo" 
+          <Link
+            to="/"
+            className="navbar-logo"
             onClick={() => setIsOpen(false)}
             onDoubleClick={(e) => {
               e.preventDefault();
@@ -102,27 +119,39 @@ export default function Navbar() {
             {navItems.map((item) => {
               if (item.dropdown && item.dropdown.length > 0) {
                 return (
-                  <div 
-                    key={item.name} 
+                  <div
+                    key={item.name}
                     className="nav-dropdown-wrapper"
                     onMouseEnter={() => setActiveDropdown(item.name)}
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
-                    <NavLink 
-                      to={item.href} 
+                    <NavLink
+                      to={item.href}
                       className={({ isActive }) => `nav-link dropdown-trigger ${isActive ? 'active' : ''}`}
                     >
                       {item.name} <ChevronDown className="dropdown-arrow" />
                     </NavLink>
-                    <div className={`dropdown-menu glass-panel ${activeDropdown === item.name ? 'show' : ''}`}>
+                    <div className={`dropdown-menu glass-panel ${activeDropdown === item.name ? 'show' : ''} ${item.name === 'Services' ? 'dropdown-menu-rich' : ''}`}>
                       {item.dropdown.map((sub) => (
                         <button
                           key={sub.label}
                           onClick={() => handleSubItemClick(sub.href, sub.state)}
-                          className="dropdown-item"
-                          style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer' }}
+                          className={`dropdown-item ${item.name === 'Services' ? 'dropdown-item-rich' : ''}`}
+                          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
                         >
-                          {sub.label}
+                          {item.name === 'Services' && sub.iconName && (
+                            <div className={`dropdown-icon-box ${activeServices.find(s => s.title === sub.label)?.themeClass || 'theme-violet'}`}>
+                              {serviceIconMap[sub.iconName] || <HelpCircle size={18} />}
+                            </div>
+                          )}
+                          <div className="dropdown-item-text">
+                            <span className="dropdown-item-title">{sub.label}</span>
+                            {item.name === 'Services' && sub.desc && (
+                              <span className="dropdown-item-desc">
+                                {sub.desc.length > 55 ? sub.desc.substring(0, 52) + '...' : sub.desc}
+                              </span>
+                            )}
+                          </div>
                         </button>
                       ))}
                     </div>
@@ -178,8 +207,8 @@ export default function Navbar() {
               if (item.dropdown && item.dropdown.length > 0) {
                 return (
                   <div key={item.name} className="mobile-dropdown-wrapper">
-                    <button 
-                      onClick={() => toggleDropdown(item.name)} 
+                    <button
+                      onClick={() => toggleDropdown(item.name)}
                       className="mobile-nav-link mobile-dropdown-trigger"
                     >
                       {item.name} <ChevronDown className={`dropdown-arrow ${activeDropdown === item.name ? 'rotate' : ''}`} />
@@ -190,9 +219,14 @@ export default function Navbar() {
                           key={sub.label}
                           onClick={() => handleSubItemClick(sub.href, sub.state)}
                           className="mobile-dropdown-item"
-                          style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', display: 'block', cursor: 'pointer' }}
+                          style={{ background: 'none', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.75rem' }}
                         >
-                          {sub.label}
+                          {item.name === 'Services' && sub.iconName && (
+                            <span className="mobile-dropdown-icon" style={{ opacity: 0.8, display: 'flex', alignItems: 'center' }}>
+                              {serviceIconMap[sub.iconName] || <HelpCircle size={16} />}
+                            </span>
+                          )}
+                          <span>{sub.label}</span>
                         </button>
                       ))}
                     </div>
