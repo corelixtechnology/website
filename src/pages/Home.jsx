@@ -3,6 +3,7 @@ import SEO from '../components/SEO';
 import Hero from '../components/Hero';
 import TrustBrands from '../components/TrustBrands';
 import ServicesIntro from '../components/ServicesIntro';
+import HowWeWork from '../components/HowWeWork';
 import TechStack from '../components/TechStack';
 import ContactForm from '../components/ContactForm';
 
@@ -24,6 +25,7 @@ export default function Home() {
       <Hero onStartCalculator={handleScrollToContact} />
       <TrustBrands />
       <ServicesIntro />
+      <HowWeWork />
       <TechStack />
       <ContactForm />
     </div>

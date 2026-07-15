@@ -74,7 +74,7 @@ export default function ServicesIntro() {
   return (
     <section id="services" className="services-intro-section">
       <div className="container services-intro-container">
-        
+
         <div className="services-intro-header reveal reveal-slide-up">
           <span className="services-intro-tag">Our Expertise</span>
           <h2 className="services-intro-title text-gradient">Services We Offer</h2>
@@ -85,19 +85,21 @@ export default function ServicesIntro() {
 
         <div className="services-intro-grid reveal-stagger">
           {services.map((service) => (
-            <div 
-              key={service.id} 
+            <div
+              key={service.id}
               className={`service-intro-card reveal-item reveal-slide-up ${service.themeClass || 'theme-violet'}`}
               onClick={() => handleCardClick(service.id)}
               style={{ cursor: 'pointer' }}
             >
-              {/* Service background image & gradient overlay */}
-              <img src={getServiceImage(service)} alt={service.title} className="service-intro-card-bg" />
-              <div className="service-intro-card-overlay"></div>
+              {/* Service background image & gradient overlay wrapper */}
+              <div className="service-intro-card-bg-wrapper">
+                <img src={getServiceImage(service)} alt={service.title} className="service-intro-card-bg" />
+                <div className="service-intro-card-overlay"></div>
+              </div>
 
               {/* Radial Blur Glow Background */}
               <div className="service-intro-card-glow"></div>
-              
+
               <div className="service-intro-card-top">
                 <div className="service-intro-icon-box">
                   {iconMap[service.iconName] || <HelpCircle size={26} />}
@@ -118,7 +120,7 @@ export default function ServicesIntro() {
         </div>
 
         <div className="service-intro-cta-wrapper reveal reveal-fade-in" data-delay="0.2s">
-          <button 
+          <button
             onClick={() => navigate('/services')}
             className="service-intro-cta-btn"
           >
