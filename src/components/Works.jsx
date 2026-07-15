@@ -156,7 +156,11 @@ export default function Works({ defaultFilter }) {
               onClick={() => setActiveModal(project)}
             >
               <div className="portfolio-img-container">
-                {renderMockup(project.svgType)}
+                {project.image ? (
+                  <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  renderMockup(project.svgType)
+                )}
               </div>
 
               <div className="portfolio-card-overlay">
@@ -183,7 +187,11 @@ export default function Works({ defaultFilter }) {
 
             <div className="modal-grid grid-2">
               <div className="modal-mockup">
-                {renderMockup(activeModal.svgType)}
+                {activeModal.image ? (
+                  <img src={activeModal.image} alt={activeModal.title} style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '12px' }} />
+                ) : (
+                  renderMockup(activeModal.svgType)
+                )}
               </div>
 
               <div className="modal-details">
@@ -208,15 +216,6 @@ export default function Works({ defaultFilter }) {
                     <strong style={{ fontSize: '0.85rem' }}>Client Review:</strong>
                   </div>
                   <p style={{ fontSize: '0.85rem', fontStyle: 'italic' }}>{activeModal.rating}</p>
-                </div>
-
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                  <a href="#contact" onClick={() => { setActiveModal(null); document.querySelector('#footer').scrollIntoView({ behavior: 'smooth' }); }} className="btn btn-primary" style={{ padding: '0.6rem 1.2rem', fontSize: '0.85rem' }}>
-                    Request Similar Project
-                  </a>
-                  <button onClick={() => alert("This mockup is so premium, opening the live link would melt your screen!")} className="btn btn-secondary" style={{ padding: '0.6rem 1.2rem', fontSize: '0.85rem' }}>
-                    <ExternalLink size={14} /> Live Link
-                  </button>
                 </div>
               </div>
             </div>

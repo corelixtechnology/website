@@ -49,7 +49,8 @@ export default function Services() {
               </div>
               
               <h3>{service.title}</h3>
-              <p>{service.desc}</p>
+              <button className="explore-btn" onClick={() => navigate(`/services/${service.id}`)}>Explore</button>
+              <p className="service-desc">{service.desc}</p>
               
               <ul className="service-bullets">
                 {service.bullets && service.bullets.map((bullet, idx) => (

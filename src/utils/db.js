@@ -346,6 +346,7 @@ const fetchWorks = async () => {
         tags: item.tags || [],
         rating: item.rating,
         svgType: item.svgType,
+        image: item.image || '',
         isActive: item.isActive ?? true,
         documentId: item.documentId
       }));
@@ -538,6 +539,7 @@ const syncWorks = async (updated) => {
           tags: work.tags,
           rating: work.rating,
           svgType: work.svgType,
+          image: work.image || '',
           isActive: work.isActive
         }
       };

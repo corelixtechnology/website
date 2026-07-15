@@ -234,6 +234,20 @@ export default function AdminDashboard() {
   };
 
   // Portfolio Works Handlers
+  const handleWorkImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({
+          ...prev,
+          image: reader.result
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleEditWork = (work) => {
     setEditingItem(work);
     setIsAdding(false);
@@ -244,7 +258,8 @@ export default function AdminDashboard() {
       desc: work.desc,
       category: work.category,
       svgType: work.svgType,
-      rating: work.rating
+      rating: work.rating,
+      image: work.image || ''
     });
     setFormTags(work.tags ? work.tags.join(', ') : '');
   };
@@ -259,7 +274,8 @@ export default function AdminDashboard() {
       desc: '',
       category: 'web-works',
       svgType: 'web-dashboard',
-      rating: '⭐⭐⭐⭐⭐'
+      rating: '⭐⭐⭐⭐⭐',
+      image: ''
     });
     setFormTags('');
   };
@@ -1202,6 +1218,49 @@ export default function AdminDashboard() {
                         placeholder='⭐⭐⭐⭐⭐ ("Excellent speed!")'
                       />
                     </div>
+                  </div>
+
+                  <div className="input-group" style={{ marginBottom: '1.5rem' }}>
+                    <label>Project Cover Image (Upload Photo)</label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleWorkImageUpload}
+                      className="input-field"
+                      style={{ padding: '0.5rem', background: 'var(--bg-darker)', color: 'var(--text-muted)' }}
+                    />
+                    {formData.image && (
+                      <div style={{ marginTop: '1rem', position: 'relative', display: 'inline-block' }}>
+                        <img
+                          src={formData.image}
+                          alt="Project Preview"
+                          style={{ width: '120px', height: '90px', objectFit: 'cover', borderRadius: '8px', border: '1px solid var(--border-glass)' }}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setFormData(prev => ({ ...prev, image: '' }))}
+                          style={{
+                            position: 'absolute',
+                            top: '-5px',
+                            right: '-5px',
+                            background: 'var(--accent)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '50%',
+                            width: '20px',
+                            height: '20px',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '10px'
+                          }}
+                          title="Remove Image"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    )}
                   </div>
 
                   <div className="input-group">
