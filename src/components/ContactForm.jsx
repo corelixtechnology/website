@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { User, Mail, MessageSquare, Send, CheckCircle2, IndianRupee, Cpu } from 'lucide-react';
 import { db } from '../utils/db';
+import BackgroundParticles from './BackgroundParticles';
 
 export default function ContactForm({ preselectedServiceId }) {
   const [services, setServices] = useState([]);
@@ -92,9 +93,10 @@ export default function ContactForm({ preselectedServiceId }) {
   };
 
   return (
-    <section id="contact" className="section contact-section" style={{ position: 'relative' }}>
+    <section id="contact" className="section contact-section has-animative-bg" style={{ position: 'relative' }}>
       <div className="ambient-glow-1" style={{ top: '30%', right: '10%', opacity: 0.15 }}></div>
-      <div className="container">
+      <BackgroundParticles />
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="contact-header reveal reveal-slide-up" style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <span className="services-intro-tag">Start Your Project</span>
           <h2 className="section-title">Let's Create Something Great</h2>

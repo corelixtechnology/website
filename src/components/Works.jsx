@@ -147,12 +147,11 @@ export default function Works({ defaultFilter }) {
           ))}
         </div>
 
-        {/* Portfolio Cards Grid */}
         <div className="portfolio-grid reveal-stagger">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, index) => (
             <div 
               key={project.id} 
-              className="portfolio-card glass-panel reveal-item reveal-slide-up"
+              className={`portfolio-card glass-panel reveal-item ${index % 2 === 0 ? 'reveal-slide-right' : 'reveal-slide-left'}`}
               onClick={() => setActiveModal(project)}
             >
               <div className="portfolio-img-container">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Code, Palette, ShoppingCart, Image, ArrowRight, Search, TrendingUp, Megaphone, Smartphone, HelpCircle } from 'lucide-react';
 import { db } from '../utils/db';
+import BackgroundParticles from './BackgroundParticles';
 
 const iconMap = {
   Code: <Code size={26} />,
@@ -72,8 +73,9 @@ export default function ServicesIntro() {
   };
 
   return (
-    <section id="services" className="services-intro-section">
-      <div className="container services-intro-container">
+    <section id="services" className="services-intro-section has-animative-bg">
+      <BackgroundParticles />
+      <div className="container services-intro-container" style={{ position: 'relative', zIndex: 1 }}>
 
         <div className="services-intro-header reveal reveal-slide-up">
           <span className="services-intro-tag">Our Expertise</span>
@@ -84,10 +86,10 @@ export default function ServicesIntro() {
         </div>
 
         <div className="services-intro-grid reveal-stagger">
-          {services.map((service) => (
+          {services.map((service, index) => (
             <div
               key={service.id}
-              className={`service-intro-card reveal-item reveal-slide-up ${service.themeClass || 'theme-violet'}`}
+              className={`service-intro-card reveal-item ${index % 2 === 0 ? 'reveal-slide-right' : 'reveal-slide-left'} ${service.themeClass || 'theme-violet'}`}
               onClick={() => handleCardClick(service.id)}
               style={{ cursor: 'pointer' }}
             >

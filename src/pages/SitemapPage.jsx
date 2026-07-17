@@ -95,7 +95,7 @@ export default function SitemapPage() {
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         {/* Page Header */}
-        <header style={{ textAlign: 'center', marginBottom: '4.5rem' }}>
+        <header style={{ textAlign: 'center', marginBottom: '4.5rem' }} className="reveal reveal-slide-up">
           <div className="sitemap-badge" style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -122,9 +122,9 @@ export default function SitemapPage() {
         </header>
 
         {/* Sitemap Grid */}
-        <div className="grid-2" style={{ gap: '2.5rem' }}>
+        <div className="grid-2 reveal-stagger" style={{ gap: '2.5rem' }}>
           {/* Column 1: Core Navigation */}
-          <div className="sitemap-card glass-panel" style={{ padding: '2.5rem' }}>
+          <div className="sitemap-card glass-panel reveal-item reveal-slide-up" style={{ padding: '2.5rem' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '1.4rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-glass)', paddingBottom: '0.75rem' }}>
               <span style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center' }}><Compass size={22} /></span>
               Main Pages
@@ -172,7 +172,7 @@ export default function SitemapPage() {
           </div>
 
           {/* Column 2: Our Services */}
-          <div className="sitemap-card glass-panel" style={{ padding: '2.5rem' }}>
+          <div className="sitemap-card glass-panel reveal-item reveal-slide-up" style={{ padding: '2.5rem' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '1.4rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-glass)', paddingBottom: '0.75rem' }}>
               <span style={{ color: 'var(--secondary)', display: 'flex', alignItems: 'center' }}><Code size={22} /></span>
               Services Directory
@@ -220,7 +220,7 @@ export default function SitemapPage() {
           </div>
 
           {/* Column 3: Work Categories */}
-          <div className="sitemap-card glass-panel" style={{ padding: '2.5rem' }}>
+          <div className="sitemap-card glass-panel reveal-item reveal-slide-up" style={{ padding: '2.5rem' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '1.4rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-glass)', paddingBottom: '0.75rem' }}>
               <span style={{ color: 'var(--success)', display: 'flex', alignItems: 'center' }}><Folder size={22} /></span>
               Works & Projects
@@ -269,7 +269,7 @@ export default function SitemapPage() {
           </div>
 
           {/* Column 4: Quick Connections */}
-          <div className="sitemap-card glass-panel" style={{ padding: '2.5rem' }}>
+          <div className="sitemap-card glass-panel reveal-item reveal-slide-up" style={{ padding: '2.5rem' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '1.4rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-glass)', paddingBottom: '0.75rem' }}>
               <span style={{ color: 'var(--warning)', display: 'flex', alignItems: 'center' }}><Globe size={22} /></span>
               Contact & Social Channels

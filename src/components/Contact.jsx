@@ -3,6 +3,7 @@ import {
   Phone, Mail, MessageCircle, MapPin, Send, CheckCircle2, User, MessageSquare
 } from 'lucide-react';
 import { db } from '../utils/db';
+import BackgroundParticles from './BackgroundParticles';
 
 export default function Contact() {
   const [settings, setSettings] = useState(() => db.getSettings());
@@ -83,14 +84,15 @@ export default function Contact() {
   };
 
   return (
-    <section className="contact-page-section" style={{ position: 'relative', overflow: 'hidden' }}>
+    <section className="contact-page-section has-animative-bg" style={{ position: 'relative', overflow: 'hidden' }}>
       {/* Decorative ambient elements */}
       <div className="ambient-glow-1" style={{ top: '15%', left: '-5%', opacity: 0.15 }}></div>
       <div className="ambient-glow-2" style={{ bottom: '25%', right: '-5%', opacity: 0.15 }}></div>
+      <BackgroundParticles />
 
       <div className="container">
         {/* Header */}
-        <div className="contact-page-header text-center">
+        <div className="contact-page-header text-center reveal reveal-slide-up">
           <span className="services-intro-tag">Get in Touch</span>
           <h1 className="section-title text-gradient">Let's Connect & Build</h1>
           <p className="section-subtitle">
@@ -101,7 +103,7 @@ export default function Contact() {
         {/* 2-Column Grid */}
         <div className="contact-page-grid">
           {/* Left Column: Contact Channels */}
-          <div className="contact-info-column">
+          <div className="contact-info-column reveal reveal-slide-left">
             <h2 className="column-title">Contact Information</h2>
             <p className="column-desc">
               Reach out to us directly through any of our channels. We are always available for consultation and support.
@@ -223,7 +225,7 @@ export default function Contact() {
           </div>
 
           {/* Right Column: Inquiry Form */}
-          <div className="contact-form-column">
+          <div className="contact-form-column reveal reveal-slide-right" data-delay="0.15s">
             <h2 className="column-title">Send a Message</h2>
             <p className="column-desc">
               Have any questions or inquiry? Fill out the form below and we will get back to you as soon as possible.

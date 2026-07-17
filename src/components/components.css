@@ -433,6 +433,32 @@
   font-weight: 600;
   font-size: 0.85rem;
   transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.contact-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.contact-btn:hover::after {
+  left: 150%;
 }
 
 .whatsapp-btn {
@@ -4420,13 +4446,28 @@ select.input-field {
   box-shadow: 0 0 20px rgba(255, 45, 32, 0.4);
 }
 
+.tech-card-slider.glow-meta:hover {
+  border-color: #1877f2;
+  box-shadow: 0 0 20px rgba(24, 119, 242, 0.4);
+}
+
+.tech-card-slider.glow-google-ads:hover {
+  border-color: #4285f4;
+  box-shadow: 0 0 20px rgba(66, 133, 244, 0.4);
+}
+
+.tech-card-slider.glow-ad-posting:hover {
+  border-color: #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
 .tech-card-slider.glow-mvp:hover {
   border-color: #06b6d4;
   box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
 }
 
 /* ======================================================== */
-/* "How We Works" Process Section Styles */
+/* "How We Work" Process Section Styles */
 /* ======================================================== */
 .process-section {
   padding: 8rem 0;
@@ -4469,7 +4510,6 @@ select.input-field {
   display: inline-block;
 }
 
-/* Green underline just like the screenshot, but with a sleek neon shadow! */
 .process-title .underline-highlight::after {
   content: '';
   position: absolute;
@@ -4477,10 +4517,22 @@ select.input-field {
   bottom: 2px;
   width: 100%;
   height: 6px;
-  background-color: #10b981; /* Neon green underline */
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--success) 100%);
   border-radius: 2px;
   z-index: -1;
-  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 2px 12px rgba(6, 182, 212, 0.5);
+  animation: pulse-underline 3s ease-in-out infinite;
+}
+
+@keyframes pulse-underline {
+  0%, 100% {
+    opacity: 0.8;
+    filter: brightness(1) drop-shadow(0 0 2px var(--secondary));
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.2) drop-shadow(0 0 6px var(--success));
+  }
 }
 
 .process-subtitle {
@@ -4491,12 +4543,15 @@ select.input-field {
   line-height: 1.6;
 }
 
-.process-grid {
+.process-grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2.5rem;
+  grid-template-columns: repeat(7, 1fr);
+  grid-column-gap: 2rem;
+  grid-row-gap: 4rem;
   position: relative;
   z-index: 1;
+  align-items: stretch;
+  padding: 2rem 0;
 }
 
 .process-step {
@@ -4505,112 +4560,224 @@ select.input-field {
   align-items: center;
   text-align: center;
   position: relative;
+  width: 100%;
 }
 
-/* Large Icon Circle styling */
-.process-icon-circle {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+.process-card {
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 1.8rem;
+  padding: 2rem 1rem;
+  border-radius: 16px;
+  background: rgba(13, 17, 36, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: var(--transition-smooth);
   position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* Add a premium glowing indicator at the top of the card */
+.process-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--success) 100%);
+  opacity: 0.4;
   transition: var(--transition-smooth);
 }
 
-/* Outlined circles (Cyan) */
-.process-icon-circle.outline-circle {
-  background: rgba(255, 255, 255, 0.03);
-  border: 2px solid rgba(6, 182, 212, 0.4);
-  color: var(--secondary);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+.process-card:hover {
+  transform: translateY(-8px);
+  background: rgba(22, 28, 59, 0.55);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 15px 35px rgba(6, 182, 212, 0.15), 0 15px 35px rgba(16, 185, 129, 0.1);
 }
 
-.process-icon-circle.outline-circle::before {
-  content: '';
+.process-card:hover::before {
+  opacity: 1;
+  box-shadow: 0 0 10px var(--secondary);
+}
+
+/* Orbit & Circle Wrapper */
+.process-circle-wrapper {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.process-circle-orbit {
   position: absolute;
   inset: -6px;
+  border: 1.5px dashed rgba(6, 182, 212, 0.3);
   border-radius: 50%;
-  border: 1px dashed rgba(6, 182, 212, 0.15);
   pointer-events: none;
   transition: var(--transition-smooth);
 }
 
-/* Filled circles (Green) */
+.process-card:hover .process-circle-orbit {
+  border-color: var(--success);
+  transform: rotate(180deg);
+  inset: -10px;
+}
+
+/* Icon Circle Styling (Centered Inside Card) */
+.process-icon-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
 .process-icon-circle.filled-circle {
-  background: #10b981; /* Green circle base */
-  color: #04050b; /* Dark icon */
-  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
-  border: 2px solid #10b981;
-}
-
-/* Icon Hovers */
-.process-step:hover .process-icon-circle {
-  transform: translateY(-5px) scale(1.05);
-}
-
-.process-step:hover .process-icon-circle.outline-circle {
-  background: var(--bg-glass-hover);
-  border-color: var(--secondary);
-  box-shadow: var(--shadow-glow-secondary);
-}
-
-.process-step:hover .process-icon-circle.outline-circle::before {
-  transform: rotate(30deg);
-  border-color: var(--secondary);
-}
-
-.process-step:hover .process-icon-circle.filled-circle {
-  background: #059669; /* Darker emerald on hover */
-  border-color: #059669;
-  box-shadow: 0 12px 30px rgba(5, 150, 105, 0.5);
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--success) 100%);
   color: #ffffff;
+  box-shadow: 0 8px 20px rgba(6, 182, 212, 0.3), 0 8px 20px rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.process-card:hover .process-icon-circle.filled-circle {
+  background: linear-gradient(135deg, var(--success) 0%, var(--secondary) 100%);
+  box-shadow: 0 12px 25px rgba(6, 182, 212, 0.5), 0 12px 25px rgba(16, 185, 129, 0.5);
+  transform: scale(1.05);
 }
 
 /* Typography for Process Cards */
-.process-step h3 {
+.process-card h3 {
   font-family: var(--font-title);
-  font-size: 1.3rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin-top: 0.5rem;
   color: var(--text-main);
+  transition: var(--transition-smooth);
+  line-height: 1.35;
 }
 
-.process-step p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  padding: 0 0.5rem;
+.process-card:hover h3 {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--success) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Connector Lines (SVGs absolute positioned between steps) */
 .process-connector {
   position: absolute;
-  top: 40px; /* Aligns vertically with the center of the circles */
-  left: calc(50% + 50px); /* Starts right after the circle */
-  width: calc(100% - 100px); /* Fills space between this step and the next */
-  z-index: -1;
+  top: 50px; /* aligns vertically with the center of the orbit wrapper inside the card */
+  left: calc(100% - 15px); /* starts inside the current card */
+  width: calc(2rem + 30px); /* spans across the gap, overlapping both cards */
+  height: 20px;
+  z-index: 1; /* sit on top of the card borders but below the interactive content if needed */
   pointer-events: none;
+}
+
+/* Keyframes for flowing dashed paths */
+@keyframes flow-right {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes flow-down {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 24;
+  }
+}
+
+.flow-path {
+  animation: flow-right 2s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(6, 182, 212, 0.5));
+}
+
+/* Ambient glow blobs in section background */
+.process-section::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.process-section::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, transparent 70%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Responsive Overrides */
 @media (max-width: 992px) {
-  .process-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4rem 2rem;
+  .process-grid-container {
+    grid-template-columns: 1fr;
+    gap: 0;
+    justify-items: center;
   }
+  
+  .process-step {
+    margin-bottom: 2rem;
+    max-width: 320px; /* constraint width on mobile for readability */
+  }
+  
   .process-connector {
-    display: none; /* Hide connector arrows on grid wrapping */
+    display: none; /* Hide horizontal connectors on mobile */
+  }
+  
+  .mobile-connector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+    margin-bottom: -1rem;
+  }
+  
+  .flow-path-vertical {
+    animation: flow-down 2s linear infinite;
+    filter: drop-shadow(0 0 3px rgba(16, 185, 129, 0.5));
+  }
+}
+
+@media (min-width: 993px) {
+  .mobile-connector {
+    display: none; /* Hide vertical connectors on desktop */
   }
 }
 
 @media (max-width: 640px) {
-  .process-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
   .process-title {
     font-size: 2.2rem;
   }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Code, Palette, ShoppingCart, Image, CheckCircle, Search, TrendingUp, Megaphone, Smartphone, HelpCircle } from 'lucide-react';
 import { db } from '../utils/db';
+import BackgroundParticles from './BackgroundParticles';
 
 const iconMap = {
   Code: <Code size={28} />,
@@ -27,20 +28,21 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="services" className="section">
+    <section id="services" className="section has-animative-bg">
       <div className="ambient-glow-1"></div>
-      <div className="container">
+      <BackgroundParticles />
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 className="section-title reveal reveal-slide-up">What We Do</h2>
         <p className="section-subtitle reveal reveal-slide-up" data-delay="0.1s">
           We offer top-tier digital services to scale your business and maximize your returns. We partner with startups and enterprises to deliver exceptional results.
         </p>
 
         <div className="grid-2 services-grid reveal-stagger">
-          {services.map((service) => (
+          {services.map((service, index) => (
             <div 
               key={service.id} 
               id={service.id}
-              className={`service-card glass-panel reveal-item reveal-slide-up ${service.themeClass || 'theme-violet'}`}
+              className={`service-card glass-panel reveal-item ${index % 2 === 0 ? 'reveal-slide-right' : 'reveal-slide-left'} ${service.themeClass || 'theme-violet'}`}
               onClick={() => navigate(`/services/${service.id}`)}
               style={{ cursor: 'pointer' }}
             >

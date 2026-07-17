@@ -8,6 +8,7 @@ import {
 import { db } from '../utils/db';
 import SEO from '../components/SEO';
 import ContactForm from '../components/ContactForm';
+import BackgroundParticles from '../components/BackgroundParticles';
 
 const iconMap = {
   Code: <Code size={36} />,
@@ -188,9 +189,10 @@ export default function ServiceDetailPage() {
       />
 
       {/* Service Hero Section */}
-      <section className={`service-detail-hero section ${service.themeClass || 'theme-violet'}`} style={{ position: 'relative', overflow: 'hidden' }}>
+      <section className={`service-detail-hero section has-animative-bg ${service.themeClass || 'theme-violet'}`} style={{ position: 'relative', overflow: 'hidden' }}>
         <div className="ambient-glow-1" style={{ top: '20%', left: '10%' }}></div>
         <div className="ambient-glow-2" style={{ bottom: '10%', right: '10%' }}></div>
+        <BackgroundParticles />
         
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <Link to="/services" className="back-services-link">
@@ -198,15 +200,15 @@ export default function ServiceDetailPage() {
             <span>All Services</span>
           </Link>
 
-          <div className="service-detail-hero-content">
+          <div className="service-detail-hero-content reveal reveal-fade-in">
             <div className="service-detail-icon-large">
               {iconMap[service.iconName] || <HelpCircle size={36} />}
             </div>
             
-            <h1 className="service-detail-title text-gradient">{service.title}</h1>
-            <p className="service-detail-desc">{service.desc}</p>
+            <h1 className="service-detail-title text-gradient reveal reveal-slide-up" data-delay="0.1s">{service.title}</h1>
+            <p className="service-detail-desc reveal reveal-slide-up" data-delay="0.2s">{service.desc}</p>
             
-            <div className="service-detail-ctas">
+            <div className="service-detail-ctas reveal reveal-slide-up" data-delay="0.3s">
               <button onClick={handleInquireClick} className="cta-btn-primary">
                 <span>Start Your {service.title} Project</span>
                 <ArrowRight size={18} />
@@ -220,13 +222,13 @@ export default function ServiceDetailPage() {
       <section className="section" style={{ backgroundColor: 'var(--bg-darker)' }}>
         <div className="container">
           <div className="grid-2" style={{ alignItems: 'center', gap: '4rem' }}>
-            <div className="service-detail-features-text">
+            <div className="service-detail-features-text reveal reveal-slide-left">
               <span className="services-intro-tag">Core Value Offerings</span>
               <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>What We Bring to the Table</h2>
               <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', fontSize: '1.05rem' }}>
                 We don't do cookie-cutter solutions. Our methodology centers around bespoke engineering and high-end aesthetics crafted specifically to fit your brand identity and business metrics.
               </p>
-
+ 
               <div className="tech-pills-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '2rem' }}>
                 {service.pills && service.pills.map((pill, i) => (
                   <span key={i} className="service-intro-pill" style={{ fontSize: '0.85rem', padding: '0.4rem 0.9rem' }}>
@@ -235,8 +237,8 @@ export default function ServiceDetailPage() {
                 ))}
               </div>
             </div>
-
-            <div className="service-features-grid glass-panel" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', borderRadius: '16px' }}>
+ 
+            <div className="service-features-grid glass-panel reveal reveal-slide-right" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', borderRadius: '16px' }}>
               {service.bullets && service.bullets.map((bullet, idx) => (
                 <div key={idx} className="service-detail-bullet-item" style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
                   <div className={`service-bullet-icon-box ${service.themeClass || 'theme-violet'}`} style={{ color: 'var(--secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '0.15rem' }}>
@@ -256,7 +258,7 @@ export default function ServiceDetailPage() {
       {/* Category Portfolio Section */}
       <section className="section" style={{ position: 'relative' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }} className="reveal reveal-slide-up">
             <span className="services-intro-tag">Related Portfolio</span>
             <h2 className="section-title">Projects We've Built</h2>
             <p className="section-subtitle">
@@ -265,11 +267,11 @@ export default function ServiceDetailPage() {
           </div>
 
           {relatedProjects.length > 0 ? (
-            <div className="portfolio-grid">
+            <div className="portfolio-grid reveal-stagger">
               {relatedProjects.map((project) => (
                 <div 
                   key={project.id} 
-                  className="portfolio-card glass-panel"
+                  className="portfolio-card glass-panel reveal-item reveal-slide-up"
                   onClick={() => setActiveModal(project)}
                   style={{ cursor: 'pointer' }}
                 >

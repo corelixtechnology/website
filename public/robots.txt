@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://corelixtechnology.com/sitemap.xml
+Sitemap: https://corelixtechnogy.in/sitemap.xml

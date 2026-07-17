@@ -67,7 +67,7 @@ export default function About({ defaultTab }) {
             </div>
 
             <div className="grid-3 values-grid reveal-stagger" style={{ marginBottom: '2.5rem' }}>
-              <div className="value-card reveal-item reveal-slide-up">
+              <div className="value-card reveal-item reveal-slide-right">
                 <Target className="bullet-check" style={{ width: '28px', height: '28px', marginBottom: '0.75rem', color: 'var(--secondary)' }} />
                 <h4>Our Mission</h4>
                 <p>To deliver highly optimized web architectures, intuitive user interfaces, and seamless transaction flows.</p>
@@ -77,7 +77,7 @@ export default function About({ defaultTab }) {
                 <h4>Our Vision</h4>
                 <p>To create clean, premium, and conversion-driven digital platforms that empower startups and enterprises globally.</p>
               </div>
-              <div className="value-card reveal-item reveal-slide-up">
+              <div className="value-card reveal-item reveal-slide-left">
                 <Award className="bullet-check" style={{ width: '28px', height: '28px', marginBottom: '0.75rem', color: 'var(--accent)' }} />
                 <h4>Our Quality</h4>
                 <p>We architect custom-engineered systems tailored to business objectives. No bloated templates, just clean, high-performance builds.</p>
@@ -86,15 +86,15 @@ export default function About({ defaultTab }) {
 
             {/* Stats Grid */}
             <div className="about-stats-grid reveal-stagger" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginTop: '3rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '2.5rem' }}>
-              <div className="about-stat-card reveal-item reveal-scale-up" style={{ textAlign: 'center' }}>
+              <div className="about-stat-card reveal-item reveal-slide-right" style={{ textAlign: 'center' }}>
                 <span className="text-gradient-purple-cyan" style={{ fontSize: '2.5rem', fontWeight: '800', display: 'block' }}>1</span>
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600' }}>Visionary Founder</span>
               </div>
-              <div className="about-stat-card reveal-item reveal-scale-up" style={{ textAlign: 'center' }}>
+              <div className="about-stat-card reveal-item reveal-slide-up" style={{ textAlign: 'center' }}>
                 <span className="text-gradient-purple-cyan" style={{ fontSize: '2.5rem', fontWeight: '800', display: 'block' }}>10+</span>
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600' }}>Dedicated Employees</span>
               </div>
-              <div className="about-stat-card reveal-item reveal-scale-up" style={{ textAlign: 'center' }}>
+              <div className="about-stat-card reveal-item reveal-slide-left" style={{ textAlign: 'center' }}>
                 <span className="text-gradient-purple-cyan" style={{ fontSize: '2.5rem', fontWeight: '800', display: 'block' }}>100%</span>
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600' }}>Client Satisfaction</span>
               </div>

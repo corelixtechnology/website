@@ -5,166 +5,166 @@
 
   <!-- Core Pages -->
   <url>
-    <loc>https://corelixtechnology.com/</loc>
+    <loc>https://corelixtechnogy.in/</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/" />
     <image:image>
-      <image:loc>https://corelixtechnology.com/logo.png</image:loc>
+      <image:loc>https://corelixtechnogy.in/logo.png</image:loc>
       <image:title>Corelix Technology Logo</image:title>
       <image:caption>Corelix Technology - Premium Creative IT Solutions &amp; Digital Agency</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://corelixtechnology.com/hero-man.png</image:loc>
+      <image:loc>https://corelixtechnogy.in/hero-man.png</image:loc>
       <image:title>Corelix IT Strategy and Business Consultant</image:title>
       <image:caption>Scaling business operations with robust cloud architectures</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://corelixtechnology.com/hero-woman.png</image:loc>
+      <image:loc>https://corelixtechnogy.in/hero-woman.png</image:loc>
       <image:title>Corelix Software Engineer at Work</image:title>
       <image:caption>Writing clean, highly optimized React and Laravel codebases</image:caption>
     </image:image>
   </url>
 
   <url>
-    <loc>https://corelixtechnology.com/services</loc>
+    <loc>https://corelixtechnogy.in/services</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/services" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/services" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/services" />
     <image:image>
-      <image:loc>https://corelixtechnology.com/logo.png</image:loc>
+      <image:loc>https://corelixtechnogy.in/logo.png</image:loc>
       <image:title>Corelix Technology Digital Services Catalog</image:title>
       <image:caption>Overview of custom engineering, branding, and marketing solutions</image:caption>
     </image:image>
   </url>
 
   <url>
-    <loc>https://corelixtechnology.com/works</loc>
+    <loc>https://corelixtechnogy.in/works</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/works" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/works" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/works" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/works" />
   </url>
 
   <url>
-    <loc>https://corelixtechnology.com/about</loc>
+    <loc>https://corelixtechnogy.in/about</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/about" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/about" />
     <image:image>
-      <image:loc>https://corelixtechnology.com/founder.png</image:loc>
+      <image:loc>https://corelixtechnogy.in/founder.png</image:loc>
       <image:title>Keerthivasan V - Founder &amp; CEO of Corelix Technology</image:title>
       <image:caption>Leading digital transformation and bespoke software engineering teams</image:caption>
     </image:image>
   </url>
 
   <url>
-    <loc>https://corelixtechnology.com/blog</loc>
+    <loc>https://corelixtechnogy.in/blog</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/blog" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/blog" />
   </url>
 
   <url>
-    <loc>https://corelixtechnology.com/careers</loc>
+    <loc>https://corelixtechnogy.in/careers</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/careers" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/careers" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/careers" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/careers" />
   </url>
 
   <url>
-    <loc>https://corelixtechnology.com/contact</loc>
+    <loc>https://corelixtechnogy.in/contact</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/contact" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/contact" />
   </url>
 
   <url>
-    <loc>https://corelixtechnology.com/sitemap</loc>
+    <loc>https://corelixtechnogy.in/sitemap</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/sitemap" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/sitemap" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/sitemap" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/sitemap" />
   </url>
 
   <!-- Service Subpages -->
   <url>
-    <loc>https://corelixtechnology.com/services/web-dev</loc>
+    <loc>https://corelixtechnogy.in/services/web-dev</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/services/web-dev" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/services/web-dev" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/services/web-dev" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/services/web-dev" />
   </url>
   <url>
-    <loc>https://corelixtechnology.com/services/app-dev</loc>
+    <loc>https://corelixtechnogy.in/services/app-dev</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/services/app-dev" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/services/app-dev" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/services/app-dev" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/services/app-dev" />
   </url>
   <url>
-    <loc>https://corelixtechnology.com/services/branding</loc>
+    <loc>https://corelixtechnogy.in/services/branding</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/services/branding" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/services/branding" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/services/branding" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/services/branding" />
   </url>
   <url>
-    <loc>https://corelixtechnology.com/services/ecommerce</loc>
+    <loc>https://corelixtechnogy.in/services/ecommerce</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/services/ecommerce" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/services/ecommerce" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/services/ecommerce" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/services/ecommerce" />
   </url>
   <url>
-    <loc>https://corelixtechnology.com/services/posters</loc>
+    <loc>https://corelixtechnogy.in/services/posters</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/services/posters" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/services/posters" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/services/posters" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/services/posters" />
   </url>
   <url>
-    <loc>https://corelixtechnology.com/services/seo</loc>
+    <loc>https://corelixtechnogy.in/services/seo</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/services/seo" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/services/seo" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/services/seo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/services/seo" />
   </url>
   <url>
-    <loc>https://corelixtechnology.com/services/meta-ads</loc>
+    <loc>https://corelixtechnogy.in/services/meta-ads</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/services/meta-ads" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/services/meta-ads" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/services/meta-ads" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/services/meta-ads" />
   </url>
   <url>
-    <loc>https://corelixtechnology.com/services/digital-marketing</loc>
+    <loc>https://corelixtechnogy.in/services/digital-marketing</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnology.com/services/digital-marketing" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnology.com/services/digital-marketing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://corelixtechnogy.in/services/digital-marketing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://corelixtechnogy.in/services/digital-marketing" />
   </url>
 
 </urlset>

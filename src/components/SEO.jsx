@@ -38,7 +38,7 @@ export default function SEO({ title, description, keywords, canonical, robots })
     updateMetaTag('name', 'google-site-verification', verificationCode);
 
     // 3. Canonical Link
-    const finalCanonical = canonical || window.location.href;
+    const finalCanonical = canonical || `https://corelixtechnogy.in${location.pathname}`;
     let linkCanonical = document.querySelector('link[rel="canonical"]');
     if (!linkCanonical) {
       linkCanonical = document.createElement('link');
@@ -50,13 +50,13 @@ export default function SEO({ title, description, keywords, canonical, robots })
     // 4. Open Graph Metadata
     updateMetaTag('property', 'og:title', formattedTitle);
     updateMetaTag('property', 'og:description', description || 'Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale.');
-    updateMetaTag('property', 'og:url', window.location.href);
-    updateMetaTag('property', 'og:image', `${window.location.origin}/og-image.png`);
+    updateMetaTag('property', 'og:url', `https://corelixtechnogy.in${location.pathname}`);
+    updateMetaTag('property', 'og:image', 'https://corelixtechnogy.in/og-image.png');
 
     // 5. Twitter Card Metadata
     updateMetaTag('name', 'twitter:title', formattedTitle);
     updateMetaTag('name', 'twitter:description', description || 'Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale.');
-    updateMetaTag('name', 'twitter:image', `${window.location.origin}/og-image.png`);
+    updateMetaTag('name', 'twitter:image', 'https://corelixtechnogy.in/og-image.png');
 
     // 6. Schema.org JSON-LD Structured Data
     let schemaScript = document.querySelector('script[type="application/ld+json"]');
@@ -73,9 +73,9 @@ export default function SEO({ title, description, keywords, canonical, robots })
           "name": "Corelix Technology",
           "alternateName": "Corelix",
           "description": "Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale.",
-          "image": `${window.location.origin}/logo.png`,
-          "@id": `${window.location.origin}/#organization`,
-          "url": window.location.origin,
+          "image": "https://corelixtechnogy.in/logo.png",
+          "@id": "https://corelixtechnogy.in/#organization",
+          "url": "https://corelixtechnogy.in",
           "telephone": "+919360410038",
           "priceRange": "$$",
           "address": {
@@ -227,7 +227,7 @@ export default function SEO({ title, description, keywords, canonical, robots })
         },
         {
           "@type": "FAQPage",
-          "@id": `${window.location.origin}/#faq`,
+          "@id": "https://corelixtechnogy.in/#faq",
           "mainEntity": [
             {
               "@type": "Question",

@@ -22,16 +22,16 @@ export default function Hero({ onStartCalculator }) {
           
           {/* Left Column: Proper Business Content */}
           <div className="new-hero-text-content">
-            <h1 className="new-hero-main-title reveal reveal-slide-up">
+            <h1 className="new-hero-main-title reveal reveal-slide-right">
               Engineering <span className="text-violet-highlight">Digital Solutions</span> <br />
               that Scale Your <span className="text-violet-highlight">Business</span>
             </h1>
             
-            <p className="new-hero-description-paragraph reveal reveal-slide-up" data-delay="0.15s">
+            <p className="new-hero-description-paragraph reveal reveal-slide-right" data-delay="0.15s">
               Empowering forward-thinking brands with premium web ecosystems, conversion-focused design systems, and high-impact digital strategies designed to drive real growth.
             </p>
             
-            <div className="new-hero-button-actions reveal reveal-slide-up" data-delay="0.3s">
+            <div className="new-hero-button-actions reveal reveal-slide-right" data-delay="0.3s">
               <button 
                 id="btn-hero-explore"
                 onClick={handleExploreServices} 
@@ -50,7 +50,7 @@ export default function Hero({ onStartCalculator }) {
           </div>
 
           {/* Right Column: Premium Business Graphics & Badges */}
-          <div className="new-hero-visual-graphics">
+          <div className="new-hero-visual-graphics reveal reveal-slide-left" data-delay="0.2s">
             
             <div className="visuals-collage-grid">
               
