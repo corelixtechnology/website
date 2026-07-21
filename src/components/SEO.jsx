@@ -7,9 +7,10 @@ export default function SEO({ title, description, keywords, canonical, robots })
 
   useEffect(() => {
     // 1. Update Title
+    // 1. Update Title
     const formattedTitle = title 
-      ? `${title} | Corelix Technology` 
-      : 'Corelix Technology | Creative IT Solutions & Digital Agency';
+      ? `${title} | #1 Best Software & Branding Company in Tamil Nadu` 
+      : 'Corelix Technology | #1 Best Software Company in Tamil Nadu | Best Branding & Web Agency';
     document.title = formattedTitle;
 
     // Helper to query and update/create meta tags
@@ -28,10 +29,14 @@ export default function SEO({ title, description, keywords, canonical, robots })
       tag.setAttribute('content', content);
     };
 
-    // 2. Meta description, keywords & robots
-    updateMetaTag('name', 'description', description || 'Corelix Technology is recognized as the best software company in Tamil Nadu & best branding company in Tamil Nadu. We engineer custom web systems, mobile apps, corporate brand identities, and local SEO services near Karur, Chennai, Coimbatore, and Trichy.');
-    updateMetaTag('name', 'keywords', keywords || 'best software company in Tamil Nadu, best branding company in Tamil Nadu, top software development Tamil Nadu, best IT company in Karur, best startup in Tamil Nadu, best branding agency Chennai, best web design agency Coimbatore, digital agency near me, web development near me, custom software, SEO services Karur, IT solutions Coimbatore, web design Trichy, Corelix Technology');
-    updateMetaTag('name', 'robots', robots || 'index, follow');
+    // 2. Meta description, keywords, geo-location & robots
+    updateMetaTag('name', 'description', description || 'Corelix Technology is recognized as the #1 Best Software Company in Tamil Nadu & Best Branding Company in Tamil Nadu. We specialize in custom web design (React, Next.js), mobile apps (Flutter), corporate branding, and high-impact local SEO in Karur, Chennai, Coimbatore, and Trichy.');
+    updateMetaTag('name', 'keywords', keywords || 'best software company in Tamil Nadu, best branding company in Tamil Nadu, top software development company Tamil Nadu, best IT company in Karur, best startup in Tamil Nadu, best branding agency Chennai, best web design agency Coimbatore, digital agency near me, web development near me, custom software, SEO services Karur, IT solutions Coimbatore, web design Trichy, Corelix Technology');
+    updateMetaTag('name', 'robots', robots || 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    updateMetaTag('name', 'geo.region', 'IN-TN');
+    updateMetaTag('name', 'geo.placename', 'Karur, Tamil Nadu, India');
+    updateMetaTag('name', 'geo.position', '10.979349;78.066858');
+    updateMetaTag('name', 'ICBM', '10.979349, 78.066858');
 
     const activeSettings = db.getSettings();
     const verificationCode = (activeSettings && activeSettings.googleSiteVerification) || import.meta.env.VITE_GOOGLE_SITE_VERIFICATION;
@@ -49,13 +54,13 @@ export default function SEO({ title, description, keywords, canonical, robots })
 
     // 4. Open Graph Metadata
     updateMetaTag('property', 'og:title', formattedTitle);
-    updateMetaTag('property', 'og:description', description || 'Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale.');
+    updateMetaTag('property', 'og:description', description || 'Corelix Technology is recognized as the #1 Best Software Company in Tamil Nadu & Best Branding Company in Tamil Nadu.');
     updateMetaTag('property', 'og:url', `https://corelixtechnology.in.net${location.pathname}`);
     updateMetaTag('property', 'og:image', 'https://corelixtechnology.in.net/og-image.png');
 
     // 5. Twitter Card Metadata
     updateMetaTag('name', 'twitter:title', formattedTitle);
-    updateMetaTag('name', 'twitter:description', description || 'Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale.');
+    updateMetaTag('name', 'twitter:description', description || 'Corelix Technology is recognized as the #1 Best Software Company in Tamil Nadu & Best Branding Company in Tamil Nadu.');
     updateMetaTag('name', 'twitter:image', 'https://corelixtechnology.in.net/og-image.png');
 
     // 6. Schema.org JSON-LD Structured Data
@@ -69,15 +74,24 @@ export default function SEO({ title, description, keywords, canonical, robots })
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "ProfessionalService",
+          "@type": ["SoftwareCompany", "LocalBusiness", "ProfessionalService"],
           "name": "Corelix Technology",
-          "alternateName": "Corelix",
-          "description": "Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale.",
+          "alternateName": "Corelix Technology - Best Software Development Company in Karur",
+          "description": "Corelix Technology is recognized as the #1 Best Software Development Company in Karur & Best Branding Agency in Tamil Nadu.",
           "image": "https://corelixtechnology.in.net/logo.png",
           "@id": "https://corelixtechnology.in.net/#organization",
           "url": "https://corelixtechnology.in.net",
           "telephone": "+919360410038",
+          "hasMap": "https://maps.google.com/?q=10.979349,78.066858",
           "priceRange": "$$",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "bestRating": "5.0",
+            "worstRating": "1.0",
+            "ratingCount": "128",
+            "reviewCount": "128"
+          },
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "15, Thainganagar, Sri Poonkuyil Nagar, Vengamedu",
@@ -270,11 +284,55 @@ export default function SEO({ title, description, keywords, canonical, robots })
               }
             }
           ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://corelixtechnology.in.net/#website",
+          "url": "https://corelixtechnology.in.net",
+          "name": "Corelix Technology",
+          "description": "Best Software Company in Tamil Nadu and Best Branding Agency",
+          "publisher": {
+            "@id": "https://corelixtechnology.in.net/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://corelixtechnology.in.net/services?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://corelixtechnology.in.net/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://corelixtechnology.in.net/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Services",
+              "item": "https://corelixtechnology.in.net/services"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Works",
+              "item": "https://corelixtechnology.in.net/works"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Contact",
+              "item": "https://corelixtechnology.in.net/contact"
+            }
+          ]
         }
       ]
     };
-    schemaScript.textContent = JSON.stringify(schemaData);
-
+    schemaScript.textContent = JSON.stringify(schemaData, null, 2);
   }, [title, description, keywords, canonical, robots, location.pathname]);
 
   return null;
