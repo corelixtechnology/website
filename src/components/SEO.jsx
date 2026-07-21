@@ -29,8 +29,8 @@ export default function SEO({ title, description, keywords, canonical, robots })
     };
 
     // 2. Meta description, keywords & robots
-    updateMetaTag('name', 'description', description || 'Corelix Technology is recognized as the best IT company and branding startup in Tamil Nadu. We engineer custom web systems, mobile apps, branding, and local SEO services near Karur, Chennai, Coimbatore, and Trichy.');
-    updateMetaTag('name', 'keywords', keywords || 'best IT company in Karur, best startup in Tamil Nadu, best branding company Chennai, best web design agency Coimbatore, digital agency near me, web development near me, custom software, SEO services Karur, IT solutions Coimbatore, web design Trichy, Corelix Technology');
+    updateMetaTag('name', 'description', description || 'Corelix Technology is recognized as the best software company in Tamil Nadu & best branding company in Tamil Nadu. We engineer custom web systems, mobile apps, corporate brand identities, and local SEO services near Karur, Chennai, Coimbatore, and Trichy.');
+    updateMetaTag('name', 'keywords', keywords || 'best software company in Tamil Nadu, best branding company in Tamil Nadu, top software development Tamil Nadu, best IT company in Karur, best startup in Tamil Nadu, best branding agency Chennai, best web design agency Coimbatore, digital agency near me, web development near me, custom software, SEO services Karur, IT solutions Coimbatore, web design Trichy, Corelix Technology');
     updateMetaTag('name', 'robots', robots || 'index, follow');
 
     const activeSettings = db.getSettings();
@@ -38,7 +38,7 @@ export default function SEO({ title, description, keywords, canonical, robots })
     updateMetaTag('name', 'google-site-verification', verificationCode);
 
     // 3. Canonical Link
-    const finalCanonical = canonical || `https://corelixtechnogy.in${location.pathname}`;
+    const finalCanonical = canonical || `https://corelixtechnology.in.net${location.pathname}`;
     let linkCanonical = document.querySelector('link[rel="canonical"]');
     if (!linkCanonical) {
       linkCanonical = document.createElement('link');
@@ -50,13 +50,13 @@ export default function SEO({ title, description, keywords, canonical, robots })
     // 4. Open Graph Metadata
     updateMetaTag('property', 'og:title', formattedTitle);
     updateMetaTag('property', 'og:description', description || 'Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale.');
-    updateMetaTag('property', 'og:url', `https://corelixtechnogy.in${location.pathname}`);
-    updateMetaTag('property', 'og:image', 'https://corelixtechnogy.in/og-image.png');
+    updateMetaTag('property', 'og:url', `https://corelixtechnology.in.net${location.pathname}`);
+    updateMetaTag('property', 'og:image', 'https://corelixtechnology.in.net/og-image.png');
 
     // 5. Twitter Card Metadata
     updateMetaTag('name', 'twitter:title', formattedTitle);
     updateMetaTag('name', 'twitter:description', description || 'Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale.');
-    updateMetaTag('name', 'twitter:image', 'https://corelixtechnogy.in/og-image.png');
+    updateMetaTag('name', 'twitter:image', 'https://corelixtechnology.in.net/og-image.png');
 
     // 6. Schema.org JSON-LD Structured Data
     let schemaScript = document.querySelector('script[type="application/ld+json"]');
@@ -73,9 +73,9 @@ export default function SEO({ title, description, keywords, canonical, robots })
           "name": "Corelix Technology",
           "alternateName": "Corelix",
           "description": "Corelix Technology is an elite digital agency engineering high-performance web systems, custom software, branding packages, and high-impact digital experiences that scale.",
-          "image": "https://corelixtechnogy.in/logo.png",
-          "@id": "https://corelixtechnogy.in/#organization",
-          "url": "https://corelixtechnogy.in",
+          "image": "https://corelixtechnology.in.net/logo.png",
+          "@id": "https://corelixtechnology.in.net/#organization",
+          "url": "https://corelixtechnology.in.net",
           "telephone": "+919360410038",
           "priceRange": "$$",
           "address": {
@@ -227,7 +227,7 @@ export default function SEO({ title, description, keywords, canonical, robots })
         },
         {
           "@type": "FAQPage",
-          "@id": "https://corelixtechnogy.in/#faq",
+          "@id": "https://corelixtechnology.in.net/#faq",
           "mainEntity": [
             {
               "@type": "Question",

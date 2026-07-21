@@ -482,7 +482,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="admin-dashboard-container" style={{ paddingTop: '5rem', minHeight: '100vh' }}>
+    <div className="admin-dashboard-container" style={{ paddingTop: '7.2rem', minHeight: '100vh' }}>
       <SEO title="Admin Dashboard" robots="noindex, nofollow" />
       {/* Sidebar Panel */}
       <aside className="admin-sidebar glass-panel">
