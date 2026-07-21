@@ -123,7 +123,7 @@ export default function Footer() {
           <div className="footer-col footer-map-col">
             <h4>Head Office Map</h4>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.6rem', lineHeight: '1.4' }}>
-              📍 Vengamedu, Karur, Tamil Nadu 639006
+              📍 15, Thainganagar, Sri Poonkuyil Nagar, Vengamedu, Karur, Tamil Nadu 639006
             </p>
             <div className="footer-map-container">
               <iframe

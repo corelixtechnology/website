@@ -76,7 +76,13 @@ export default function SEO({ title, description, keywords, canonical, robots })
         {
           "@type": ["SoftwareCompany", "LocalBusiness", "ProfessionalService"],
           "name": "Corelix Technology",
-          "alternateName": "Corelix Technology - Best Software Development Company in Karur",
+          "alternateName": ["Corelix Technology Karur", "Corelix", "Corelix Tech Karur", "Corelix Technology - Best Software Development Company in Karur"],
+          "brand": {
+            "@type": "Brand",
+            "name": "Corelix Technology",
+            "alternateName": "Corelix Technology Karur",
+            "logo": "https://corelixtechnology.in.net/logo.png"
+          },
           "description": "Corelix Technology is recognized as the #1 Best Software Development Company in Karur & Best Branding Agency in Tamil Nadu.",
           "image": "https://corelixtechnology.in.net/logo.png",
           "@id": "https://corelixtechnology.in.net/#organization",
@@ -94,7 +100,7 @@ export default function SEO({ title, description, keywords, canonical, robots })
           },
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "15, Thainganagar, Sri Poonkuyil Nagar, Vengamedu",
+            "streetAddress": "15, Thainganagar, Sri Poonkuyil Nagar, Vengamedu, Karur",
             "addressLocality": "Karur",
             "addressRegion": "Tamil Nadu",
             "postalCode": "639006",
