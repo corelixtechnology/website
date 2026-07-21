@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Layers, Monitor, Heart, Info, X } from 'lucide-react';
 import { db } from '../utils/db';
+import SectionVideoBackground from './SectionVideoBackground';
 
 export default function Works({ defaultFilter }) {
   const [filter, setFilter] = useState(defaultFilter || 'all');
@@ -125,9 +126,15 @@ export default function Works({ defaultFilter }) {
   };
 
   return (
-    <section id="works" className="section" style={{ backgroundColor: 'var(--bg-darker)' }}>
+    <section id="works" className="section" style={{ backgroundColor: 'var(--bg-darker)', position: 'relative', overflow: 'hidden' }}>
+      <SectionVideoBackground 
+        videoUrl="https://cdn.coverr.co/videos/coverr-abstract-blue-lines-4554/1080p.mp4" 
+        posterUrl="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920&q=80"
+        opacity={0.32}
+        overlayGradient="radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.72) 0%, rgba(5, 7, 15, 0.94) 100%)"
+      />
       <div className="ambient-glow-2"></div>
-      <div className="container">
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <h2 className="section-title reveal reveal-slide-up">Our Works</h2>
         <p className="section-subtitle reveal reveal-slide-up" data-delay="0.1s">
           Take a look at the code and designs we have pushed. Each project is crafted with pixel perfection and a pinch of humor.

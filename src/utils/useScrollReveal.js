@@ -11,15 +11,14 @@ export default function useScrollReveal() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '0px 0px -50px 0px', // trigger 50px before entering viewport
-      threshold: 0.05, // trigger when 5% is visible
+      rootMargin: '0px 0px 50px 0px', // start animating 50px before element hits screen
+      threshold: 0.01,
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-          // Once revealed, unobserve to optimize performance
           observer.unobserve(entry.target);
         }
       });
@@ -34,7 +33,6 @@ export default function useScrollReveal() {
           if (!item.classList.contains('reveal')) {
             item.classList.add('reveal');
           }
-          // Set transition delay only if not set already
           if (!item.style.transitionDelay) {
             item.style.transitionDelay = `${index * 0.08}s`;
           }
@@ -45,7 +43,7 @@ export default function useScrollReveal() {
 
     // Configure standalone reveal elements
     const setupSingleReveals = () => {
-      const singleReveals = document.querySelectorAll('.reveal:not(.reveal-item)');
+      const singleReveals = document.querySelectorAll('.reveal');
       singleReveals.forEach((el) => {
         observer.observe(el);
       });
@@ -56,19 +54,25 @@ export default function useScrollReveal() {
       const elements = document.querySelectorAll('.reveal');
       elements.forEach((el) => {
         const rect = el.getBoundingClientRect();
-        const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+        const isInViewport = rect.top < (window.innerHeight || document.documentElement.clientHeight) + 100 && rect.bottom > -100;
         if (isInViewport) {
           el.classList.add('active');
         }
       });
     };
 
+    // Safety fallback: reveal everything after 1.2s so content is never stuck hidden
+    const safetyTimer = setTimeout(() => {
+      const elements = document.querySelectorAll('.reveal:not(.active)');
+      elements.forEach((el) => el.classList.add('active'));
+    }, 1200);
+
     // Initialize reveal elements on route/page load
     setupStaggers();
     setupSingleReveals();
-    
-    // Run visible check with a tiny delay to allow browser layout calculation
-    const loadTimer = setTimeout(revealVisibleOnLoad, 50);
+    revealVisibleOnLoad();
+
+    const loadTimer = setTimeout(revealVisibleOnLoad, 60);
 
     // Setup MutationObserver to watch for dynamically loaded components / sections
     const mutationObserver = new MutationObserver(() => {
@@ -84,6 +88,7 @@ export default function useScrollReveal() {
 
     return () => {
       clearTimeout(loadTimer);
+      clearTimeout(safetyTimer);
       observer.disconnect();
       mutationObserver.disconnect();
     };

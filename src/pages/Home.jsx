@@ -6,6 +6,7 @@ import ServicesIntro from '../components/ServicesIntro';
 import HowWeWork from '../components/HowWeWork';
 import TechStack from '../components/TechStack';
 import ContactForm from '../components/ContactForm';
+import FloatingSectionDots from '../components/FloatingSectionDots';
 
 export default function Home() {
   const handleScrollToContact = () => {
@@ -16,18 +17,45 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <SEO 
         title="Creative IT Solutions &amp; Digital Agency"
         description="Corelix Technology is recognized as the best IT company and branding startup in Tamil Nadu. We specialize in custom React websites, Flutter mobile apps, branding, and local SEO services near Karur, Chennai, Coimbatore, and Trichy."
         keywords="best IT company in Karur, best startup in Tamil Nadu, best branding company Chennai, best web design agency Coimbatore, digital agency near me, software developer near me, web design company near me, SEO services Karur, IT solutions Coimbatore, web development Trichy, Corelix Technology"
       />
-      <Hero onStartCalculator={handleScrollToContact} />
-      <TrustBrands />
-      <ServicesIntro />
-      <HowWeWork />
-      <TechStack />
-      <ContactForm />
+
+      {/* Side Section Scroll Navigation Dots */}
+      <FloatingSectionDots />
+
+      {/* 1. Hero Section */}
+      <div id="home" className="home-scroll-section reveal">
+        <Hero onStartCalculator={handleScrollToContact} />
+      </div>
+
+      {/* 2. Trusted Brands Section */}
+      <div id="brands" className="home-scroll-section reveal">
+        <TrustBrands />
+      </div>
+
+      {/* 3. Services Showcase Section */}
+      <div id="services" className="home-scroll-section reveal">
+        <ServicesIntro />
+      </div>
+
+      {/* 4. How We Work Section */}
+      <div id="process" className="home-scroll-section reveal">
+        <HowWeWork />
+      </div>
+
+      {/* 5. Technologies Section */}
+      <div id="techstack" className="home-scroll-section reveal">
+        <TechStack />
+      </div>
+
+      {/* 6. Contact Form Section */}
+      <div id="contact" className="home-scroll-section reveal">
+        <ContactForm />
+      </div>
     </div>
   );
 }

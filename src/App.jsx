@@ -12,6 +12,8 @@ import ContactPage from './pages/ContactPage';
 import AdminDashboard from './pages/AdminDashboard';
 import SitemapPage from './pages/SitemapPage';
 import Footer from './components/Footer';
+import AnimatedBackgroundVideo from './components/AnimatedBackgroundVideo';
+import PagePreloader from './components/PagePreloader';
 import useScrollReveal from './utils/useScrollReveal';
 
 export default function App() {
@@ -45,16 +47,33 @@ export default function App() {
   }, []);
 
 
-  // Mouse trail particles emitter
+  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100, isHovered: false });
+
+  // Mouse cursor & trail handler
   useEffect(() => {
     const handleMouseMove = (e) => {
+      setCursorPos(prev => ({ ...prev, x: e.clientX, y: e.clientY }));
+
       const newDot = {
         id: Math.random().toString(36).substr(2, 9),
         x: e.clientX,
         y: e.clientY,
       };
       
-      setMouseTrail((prev) => [...prev.slice(-15), newDot]); // Keep last 15 particles
+      setMouseTrail((prev) => [...prev.slice(-12), newDot]);
+
+      // Check hover target
+      const target = e.target;
+      const isInteractive = target && (
+        target.tagName === 'BUTTON' ||
+        target.tagName === 'A' ||
+        target.closest('button') ||
+        target.closest('a') ||
+        target.classList.contains('service-card') ||
+        target.classList.contains('portfolio-card') ||
+        target.classList.contains('services-showcase-card')
+      );
+      setCursorPos(prev => ({ ...prev, isHovered: !!isInteractive }));
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -74,10 +93,32 @@ export default function App() {
 
   return (
     <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* Site Preloader Screen with Multi-Color Arc & Centered Brand Logo */}
+      <PagePreloader />
+
+      {/* Global Animated High-Tech Video Motion Background */}
+      <AnimatedBackgroundVideo />
+
       {/* Scroll Progress Indicator */}
       <div className="scroll-progress-container">
         <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }} />
       </div>
+
+      {/* Interactive Custom Glowing Circular Cursor Ring */}
+      <div 
+        className={`circle-cursor-ring ${cursorPos.isHovered ? 'cursor-expanded' : ''}`}
+        style={{
+          left: `${cursorPos.x}px`,
+          top: `${cursorPos.y}px`,
+        }}
+      />
+      <div 
+        className="circle-cursor-dot"
+        style={{
+          left: `${cursorPos.x}px`,
+          top: `${cursorPos.y}px`,
+        }}
+      />
 
       {/* Custom Particle Cursor Trail */}
       <div className="cursor-trail">

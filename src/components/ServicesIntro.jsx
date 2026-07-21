@@ -168,11 +168,11 @@ export default function ServicesIntro() {
               <div 
                 key={service.id} 
                 id={service.id}
-                className={`services-showcase-card reveal reveal-slide-up ${isReversed ? 'row-reversed' : ''}`}
+                className={`services-showcase-card ${isReversed ? 'row-reversed' : ''}`}
               >
                 
                 {/* Text Content Column */}
-                <div className="showcase-content-left">
+                <div className={`showcase-content-left reveal ${isReversed ? 'reveal-slide-right' : 'reveal-slide-left'}`}>
                   <div className="showcase-badge-tag">
                     <Sparkles size={16} />
                     <span>{service.pills ? service.pills[0] : 'Corelix Featured'}</span>
@@ -219,8 +219,10 @@ export default function ServicesIntro() {
                 </div>
 
                 {/* Device Visual Column (Laptop, Mobile Phone, Brand Board, or Analytics) */}
-                <div className="showcase-visual-right">
+                <div className={`showcase-visual-right reveal reveal-circle ${isReversed ? 'reveal-slide-left' : 'reveal-slide-right'}`}>
                   <div className="device-mockup-wrapper">
+                    {/* Rotating Dashed Circle Orbit Ring */}
+                    <div className="circle-orbit-ring" style={{ width: '480px', height: '480px' }}></div>
                     {/* Glowing Ambient Background Orb */}
                     <div 
                       className="device-ambient-glow" 

@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionVideoBackground from './SectionVideoBackground';
 
 const GitHubIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '100%', height: '100%', fill: 'white' }}>
@@ -229,8 +230,14 @@ export default function TechStack() {
   };
 
   return (
-    <section className="tech-stack-section">
-      <div className="container">
+    <section className="tech-stack-section" style={{ position: 'relative', overflow: 'hidden' }}>
+      <SectionVideoBackground 
+        videoUrl="https://cdn.coverr.co/videos/coverr-digital-code-and-data-stream-4318/1080p.mp4" 
+        posterUrl="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80"
+        opacity={0.3}
+        overlayGradient="radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.78) 0%, rgba(5, 7, 15, 0.95) 100%)"
+      />
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <h2 className="tech-stack-title text-gradient reveal reveal-slide-up">Technologies We Leverage</h2>
         <p className="tech-stack-subtitle reveal reveal-slide-up" data-delay="0.1s">
           We use state-of-the-art technologies, robust languages, and leading cloud networks to build high-performance products.
