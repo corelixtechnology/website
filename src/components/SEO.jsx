@@ -9,8 +9,8 @@ export default function SEO({ title, description, keywords, canonical, robots })
     // 1. Update Title
     // 1. Update Title
     const formattedTitle = title 
-      ? `${title} | #1 Best Software & Branding Company in Tamil Nadu` 
-      : 'Corelix Technology | #1 Best Software Company in Tamil Nadu | Best Branding & Web Agency';
+      ? `${title} | #1 Best Software Development Company in Karur` 
+      : 'Corelix Technology | #1 Best Company for Software Development in Karur & Tamil Nadu';
     document.title = formattedTitle;
 
     // Helper to query and update/create meta tags
@@ -30,8 +30,8 @@ export default function SEO({ title, description, keywords, canonical, robots })
     };
 
     // 2. Meta description, keywords, geo-location & robots
-    updateMetaTag('name', 'description', description || 'Corelix Technology is recognized as the #1 Best Software Company in Tamil Nadu & Best Branding Company in Tamil Nadu. We specialize in custom web design (React, Next.js), mobile apps (Flutter), corporate branding, and high-impact local SEO in Karur, Chennai, Coimbatore, and Trichy.');
-    updateMetaTag('name', 'keywords', keywords || 'best software company in Tamil Nadu, best branding company in Tamil Nadu, top software development company Tamil Nadu, best IT company in Karur, best startup in Tamil Nadu, best branding agency Chennai, best web design agency Coimbatore, digital agency near me, web development near me, custom software, SEO services Karur, IT solutions Coimbatore, web design Trichy, Corelix Technology');
+    updateMetaTag('name', 'description', description || 'Corelix Technology is recognized as the #1 Best Company for Software Development in Karur & Premier Branding Agency in Tamil Nadu. We specialize in custom web design (React, Next.js), mobile apps (Flutter), corporate branding, and local SEO services near Karur, Chennai, Coimbatore, and Trichy.');
+    updateMetaTag('name', 'keywords', keywords || 'company for software development in karur, best company for software development in karur, best software company in karur, top software development company karur, best software company in Tamil Nadu, best branding company in Tamil Nadu, best IT company in Karur, software developer near me, web design company near me, Corelix Technology');
     updateMetaTag('name', 'robots', robots || 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
     updateMetaTag('name', 'geo.region', 'IN-TN');
     updateMetaTag('name', 'geo.placename', 'Karur, Tamil Nadu, India');
