@@ -9,8 +9,8 @@ export default function SEO({ title, description, keywords, canonical, robots })
     // 1. Update Title
     // 1. Update Title
     const formattedTitle = title 
-      ? `${title} | #1 Best Software Development Company in Karur` 
-      : 'Corelix Technology | #1 Best Company for Software Development in Karur & Tamil Nadu';
+      ? `${title} | Corelix Technology` 
+      : 'Corelix Technology | Software Development Company in Coimbatore';
     document.title = formattedTitle;
 
     // Helper to query and update/create meta tags
@@ -30,8 +30,8 @@ export default function SEO({ title, description, keywords, canonical, robots })
     };
 
     // 2. Meta description, keywords, geo-location & robots
-    updateMetaTag('name', 'description', description || 'Corelix Technology is recognized as the #1 Best Company for Software Development in Karur & Premier Branding Agency in Tamil Nadu. We specialize in custom web design (React, Next.js), mobile apps (Flutter), corporate branding, and local SEO services near Karur, Chennai, Coimbatore, and Trichy.');
-    updateMetaTag('name', 'keywords', keywords || 'company for software development in karur, best company for software development in karur, best software company in karur, top software development company karur, best software company in Tamil Nadu, best branding company in Tamil Nadu, best IT company in Karur, software developer near me, web design company near me, Corelix Technology');
+    updateMetaTag('name', 'description', description || 'Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
+    updateMetaTag('name', 'keywords', keywords || 'software development company in coimbatore, best software company in coimbatore, web development coimbatore, mobile app development coimbatore, AI solutions, Corelix Technology, custom software development');
     updateMetaTag('name', 'robots', robots || 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
     updateMetaTag('name', 'geo.region', 'IN-TN');
     updateMetaTag('name', 'geo.placename', 'Karur, Tamil Nadu, India');
@@ -54,13 +54,13 @@ export default function SEO({ title, description, keywords, canonical, robots })
 
     // 4. Open Graph Metadata
     updateMetaTag('property', 'og:title', formattedTitle);
-    updateMetaTag('property', 'og:description', description || 'Corelix Technology is recognized as the #1 Best Software Company in Tamil Nadu & Best Branding Company in Tamil Nadu.');
+    updateMetaTag('property', 'og:description', description || 'Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
     updateMetaTag('property', 'og:url', `https://corelixtechnology.in.net${location.pathname}`);
     updateMetaTag('property', 'og:image', 'https://corelixtechnology.in.net/og-image.png');
 
     // 5. Twitter Card Metadata
     updateMetaTag('name', 'twitter:title', formattedTitle);
-    updateMetaTag('name', 'twitter:description', description || 'Corelix Technology is recognized as the #1 Best Software Company in Tamil Nadu & Best Branding Company in Tamil Nadu.');
+    updateMetaTag('name', 'twitter:description', description || 'Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
     updateMetaTag('name', 'twitter:image', 'https://corelixtechnology.in.net/og-image.png');
 
     // 6. Schema.org JSON-LD Structured Data
@@ -76,14 +76,14 @@ export default function SEO({ title, description, keywords, canonical, robots })
         {
           "@type": ["SoftwareCompany", "LocalBusiness", "ProfessionalService"],
           "name": "Corelix Technology",
-          "alternateName": ["Corelix Technology Karur", "Corelix", "Corelix Tech Karur", "Corelix Technology - Best Software Development Company in Karur"],
+          "alternateName": ["Corelix Technology Coimbatore", "Corelix Technology Karur", "Corelix", "Corelix Tech", "Corelix Technology - Software Development Company in Coimbatore"],
           "brand": {
             "@type": "Brand",
             "name": "Corelix Technology",
-            "alternateName": "Corelix Technology Karur",
+            "alternateName": "Corelix Technology Coimbatore",
             "logo": "https://corelixtechnology.in.net/logo.png"
           },
-          "description": "Corelix Technology is recognized as the #1 Best Software Development Company in Karur & Best Branding Agency in Tamil Nadu.",
+          "description": "Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.",
           "image": "https://corelixtechnology.in.net/logo.png",
           "@id": "https://corelixtechnology.in.net/#organization",
           "url": "https://corelixtechnology.in.net",

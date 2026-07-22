@@ -19,9 +19,8 @@ export default function Home() {
   return (
     <div style={{ position: 'relative' }}>
       <SEO 
-        title="Creative IT Solutions &amp; Digital Agency"
-        description="Corelix Technology is recognized as the best IT company and branding startup in Tamil Nadu. We specialize in custom React websites, Flutter mobile apps, branding, and local SEO services near Karur, Chennai, Coimbatore, and Trichy."
-        keywords="best IT company in Karur, best startup in Tamil Nadu, best branding company Chennai, best web design agency Coimbatore, digital agency near me, software developer near me, web design company near me, SEO services Karur, IT solutions Coimbatore, web development Trichy, Corelix Technology"
+        description="Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting."
+        keywords="software development company in coimbatore, best software company in coimbatore, web development coimbatore, mobile app development coimbatore, AI solutions, Corelix Technology, custom software development"
       />
 
       {/* Side Section Scroll Navigation Dots */}
