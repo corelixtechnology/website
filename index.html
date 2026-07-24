@@ -6,15 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ═══════════════════════════════════════════════════
-         CRITICAL RESOURCE PRELOADS
-         Tell browser to fetch LCP images IMMEDIATELY on HTML parse
-         — before JavaScript runs, before React renders
-         ═══════════════════════════════════════════════════ -->
-    <link rel="preload" as="image" href="/hero-man.webp"   type="image/webp" fetchpriority="high" />
-    <link rel="preload" as="image" href="/hero-woman.webp" type="image/webp" fetchpriority="high" />
-
-
-    <!-- ═══════════════════════════════════════════════════
          PRIMARY SEO META TAGS
          ═══════════════════════════════════════════════════ -->
     <title>Corelix Technology - Best IT Company &amp; Software Development in Tamil Nadu</title>
@@ -183,61 +174,21 @@
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     </noscript>
 
-    <!-- Critical path CSS: dark background immediately, no flash of white -->
+    <!-- Suspense spinner style (inline — zero render blocking) -->
     <style>
-      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-      html,body{background:#0a0a0f;color:#fff;font-family:Inter,Outfit,system-ui,sans-serif}
-      #root{min-height:100vh}
-      /* Inline skeleton navbar */
-      .shell-nav{
-        position:fixed;top:0;left:0;right:0;z-index:999;
-        display:flex;align-items:center;justify-content:space-between;
-        padding:0 2rem;height:68px;
-        background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);
-        border-bottom:1px solid rgba(139,92,246,0.12);
+      .page-suspense-spinner {
+        width: 36px;
+        height: 36px;
+        border: 3px solid rgba(139, 92, 246, 0.2);
+        border-top-color: #8b5cf6;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
       }
-      .shell-logo{width:120px;height:36px;border-radius:6px;background:rgba(139,92,246,0.1);}
-      .shell-hero{
-        min-height:100vh;display:flex;align-items:center;
-        padding:100px 2rem 2rem;
-        background:radial-gradient(ellipse at 30% 50%,rgba(139,92,246,0.08) 0%,transparent 60%);
-      }
-      .shell-text{max-width:560px}
-      .shell-h1{
-        width:100%;max-width:480px;height:56px;border-radius:8px;
-        background:rgba(139,92,246,0.12);margin-bottom:16px;
-        animation:shimmer 1.4s ease-in-out infinite alternate;
-      }
-      .shell-h1-2{width:70%;height:56px;border-radius:8px;background:rgba(139,92,246,0.08);margin-bottom:24px;animation:shimmer 1.4s ease-in-out 0.2s infinite alternate;}
-      .shell-p{width:90%;height:16px;border-radius:4px;background:rgba(255,255,255,0.06);margin-bottom:10px;animation:shimmer 1.4s ease-in-out 0.4s infinite alternate;}
-      .shell-p2{width:70%;height:16px;border-radius:4px;background:rgba(255,255,255,0.04);margin-bottom:28px;animation:shimmer 1.4s ease-in-out 0.5s infinite alternate;}
-      .shell-btns{display:flex;gap:12px}
-      .shell-btn{width:140px;height:44px;border-radius:8px;background:rgba(139,92,246,0.2);animation:shimmer 1.4s ease-in-out 0.6s infinite alternate;}
-      .shell-btn2{width:120px;height:44px;border-radius:8px;background:rgba(139,92,246,0.08);animation:shimmer 1.4s ease-in-out 0.7s infinite alternate;}
-      @keyframes shimmer{from{opacity:.5}to{opacity:1}}
+      @keyframes spin { to { transform: rotate(360deg); } }
     </style>
   </head>
   <body>
-    <!-- Inline skeleton: visible immediately on first byte of HTML —
-         React replaces this when it mounts (no layout shift) -->
-    <div id="root">
-      <nav class="shell-nav" aria-hidden="true">
-        <div class="shell-logo"></div>
-      </nav>
-      <section class="shell-hero" aria-hidden="true">
-        <div class="shell-text">
-          <div class="shell-h1"></div>
-          <div class="shell-h1-2"></div>
-          <div class="shell-p"></div>
-          <div class="shell-p2"></div>
-          <div class="shell-btns">
-            <div class="shell-btn"></div>
-            <div class="shell-btn2"></div>
-          </div>
-        </div>
-      </section>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-
