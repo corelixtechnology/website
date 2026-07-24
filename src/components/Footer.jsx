@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, MessageCircle, Heart, Mail } from 'lucide-react';
 import { db } from '../utils/db';
-import footerLogo from '../assets/Corelix Technology - Logo 1.png';
+import footerLogo from '../assets/corelix-logo-footer.webp';
 
 export default function Footer() {
   const [settings, setSettings] = useState(() => db.getSettings());

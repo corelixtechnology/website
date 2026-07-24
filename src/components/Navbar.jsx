@@ -5,7 +5,7 @@ import {
   Code, Palette, ShoppingCart, Image as ImageIcon, Search, TrendingUp, Megaphone, Smartphone, HelpCircle
 } from 'lucide-react';
 import { db } from '../utils/db';
-import logo from '../assets/Corelix Technology - Logo.png';
+import logo from '../assets/corelix-logo-navbar.webp';
 
 const serviceIconMap = {
   Code: <Code size={18} />,

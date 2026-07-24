@@ -1,20 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+
+// ── Eagerly loaded (needed on first paint) ─────────────────────────────────
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import ServicesPage from './pages/ServicesPage';
-import ServiceDetailPage from './pages/ServiceDetailPage';
-import WorksPage from './pages/WorksPage';
-import AboutPage from './pages/AboutPage';
-import BlogPage from './pages/BlogPage';
-import CareersPage from './pages/CareersPage';
-import ContactPage from './pages/ContactPage';
-import AdminDashboard from './pages/AdminDashboard';
-import SitemapPage from './pages/SitemapPage';
 import Footer from './components/Footer';
 import AnimatedBackgroundVideo from './components/AnimatedBackgroundVideo';
 import PagePreloader from './components/PagePreloader';
 import useScrollReveal from './utils/useScrollReveal';
+
+// ── Lazily loaded pages (only downloaded when the user visits them) ─────────
+const Home           = lazy(() => import('./pages/Home'));
+const ServicesPage   = lazy(() => import('./pages/ServicesPage'));
+const ServiceDetailPage = lazy(() => import('./pages/ServiceDetailPage'));
+const WorksPage      = lazy(() => import('./pages/WorksPage'));
+const AboutPage      = lazy(() => import('./pages/AboutPage'));
+const BlogPage       = lazy(() => import('./pages/BlogPage'));
+const CareersPage    = lazy(() => import('./pages/CareersPage'));
+const ContactPage    = lazy(() => import('./pages/ContactPage'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const SitemapPage    = lazy(() => import('./pages/SitemapPage'));
+
+// ── Minimal suspense fallback (invisible spinner, won't block LCP) ──────────
+function PageSuspense({ children }) {
+  return (
+    <Suspense fallback={
+      <div style={{
+        minHeight: '60vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <div className="page-suspense-spinner" />
+      </div>
+    }>
+      {children}
+    </Suspense>
+  );
+}
 
 export default function App() {
   const [mouseTrail, setMouseTrail] = useState([]);
@@ -42,10 +64,9 @@ export default function App() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
 
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100, isHovered: false });
 
@@ -76,7 +97,7 @@ export default function App() {
       setCursorPos(prev => ({ ...prev, isHovered: !!isInteractive }));
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
@@ -96,7 +117,7 @@ export default function App() {
       {/* Site Preloader Screen with Multi-Color Arc & Centered Brand Logo */}
       <PagePreloader />
 
-      {/* Global Animated High-Tech Video Motion Background */}
+      {/* Global Animated High-Tech Canvas Motion Background (video removed for performance) */}
       <AnimatedBackgroundVideo />
 
       {/* Scroll Progress Indicator */}
@@ -137,20 +158,22 @@ export default function App() {
       {/* Global Navbar */}
       <Navbar />
 
-      {/* Routed Main Content */}
+      {/* Routed Main Content — all pages are lazily loaded */}
       <main style={{ flexGrow: 1 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/services/:id" element={<ServiceDetailPage />} />
-          <Route path="/works" element={<WorksPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/careers" element={<CareersPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/sitemap" element={<SitemapPage />} />
-        </Routes>
+        <PageSuspense>
+          <Routes>
+            <Route path="/"           element={<Home />} />
+            <Route path="/services"   element={<ServicesPage />} />
+            <Route path="/services/:id" element={<ServiceDetailPage />} />
+            <Route path="/works"      element={<WorksPage />} />
+            <Route path="/about"      element={<AboutPage />} />
+            <Route path="/blog"       element={<BlogPage />} />
+            <Route path="/careers"    element={<CareersPage />} />
+            <Route path="/contact"    element={<ContactPage />} />
+            <Route path="/admin"      element={<AdminDashboard />} />
+            <Route path="/sitemap"    element={<SitemapPage />} />
+          </Routes>
+        </PageSuspense>
       </main>
 
       {/* Global Footer */}

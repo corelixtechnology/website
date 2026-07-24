@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import footerLogo from '../assets/Corelix Technology - Logo 1.png';
+import footerLogo from '../assets/corelix-logo-footer.webp';
 
 export default function PagePreloader() {
   const [loading, setLoading] = useState(true);

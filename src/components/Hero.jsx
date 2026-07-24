@@ -1,7 +1,7 @@
 import React from 'react';
 import { Award } from 'lucide-react';
-import heroMan from '../assets/hero-man.png';
-import heroWoman from '../assets/hero-woman.png';
+import heroMan from '../assets/hero-man.webp';
+import heroWoman from '../assets/hero-woman.webp';
 
 export default function Hero({ onStartCalculator }) {
   const handleExploreServices = () => {
@@ -60,7 +60,12 @@ export default function Hero({ onStartCalculator }) {
                   <img 
                     src={heroMan} 
                     alt="Corelix Technology Senior Consultant" 
-                    className="collage-photo man-photo" 
+                    className="collage-photo man-photo"
+                    fetchpriority="high"
+                    loading="eager"
+                    decoding="async"
+                    width="400"
+                    height="500"
                   />
                 </div>
               </div>
@@ -85,6 +90,11 @@ export default function Hero({ onStartCalculator }) {
                     src={heroWoman} 
                     alt="Corelix Technology Developer at Desk" 
                     className="collage-photo woman-photo" 
+                    fetchpriority="high"
+                    loading="eager"
+                    decoding="async"
+                    width="400"
+                    height="460"
                   />
                 </div>
 
