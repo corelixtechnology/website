@@ -7,19 +7,18 @@ export default function PagePreloader() {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Progress counter simulation
+    // Fast progress — completes in ~360ms, doesn't block LCP
+    let ticks = 0;
+    const maxTicks = 8;
     const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => setFadeOut(true), 150);
-          setTimeout(() => setLoading(false), 650);
-          return 100;
-        }
-        const increment = Math.floor(Math.random() * 15) + 10;
-        return Math.min(prev + increment, 100);
-      });
-    }, 90);
+      ticks++;
+      setProgress(Math.min(Math.round((ticks / maxTicks) * 100), 100));
+      if (ticks >= maxTicks) {
+        clearInterval(interval);
+        setTimeout(() => setFadeOut(true), 80);
+        setTimeout(() => setLoading(false), 380);
+      }
+    }, 45);
 
     return () => clearInterval(interval);
   }, []);

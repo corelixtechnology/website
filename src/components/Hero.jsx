@@ -1,7 +1,8 @@
 import React from 'react';
 import { Award } from 'lucide-react';
-import heroMan from '../assets/hero-man.webp';
-import heroWoman from '../assets/hero-woman.webp';
+// Hero images served from /public — preloaded in index.html for early browser discovery
+const heroMan   = '/hero-man.webp';
+const heroWoman = '/hero-woman.webp';
 
 export default function Hero({ onStartCalculator }) {
   const handleExploreServices = () => {
