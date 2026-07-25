@@ -168,7 +168,40 @@ const DEFAULT_BLOGS = [
 
 const DEFAULT_WORKS = [
   {
-    id: 1,
+    id: 'college-portal',
+    title: 'College Website & Syllabus Software',
+    category: 'web-works',
+    client: 'Educational Institute',
+    desc: 'Developed a comprehensive college web portal integrated with custom syllabus management software for course tracking, curriculum management, and student academic resources.',
+    tags: ['College Website', 'Syllabus Software', 'EdTech System', 'React & Node'],
+    rating: '⭐⭐⭐⭐⭐ ("Streamlined our entire academic workflow!")',
+    svgType: 'web-portal',
+    isActive: true
+  },
+  {
+    id: 'nova-nest',
+    title: 'Nova Nest Mobile App & Web Platform',
+    category: 'web-works',
+    client: 'Nova Nest',
+    desc: 'Designed and engineered a cross-platform mobile application for iOS & Android alongside a high-performance responsive web platform for Nova Nest.',
+    tags: ['Mobile App', 'Web Platform', 'Flutter', 'React'],
+    rating: '⭐⭐⭐⭐⭐ ("Flawless app experience on mobile & web.")',
+    svgType: 'saas-app',
+    isActive: true
+  },
+  {
+    id: 'lucknow-heritage-hospital',
+    title: 'Lucknow Heritage Hospital Web & CMS',
+    category: 'web-works',
+    client: 'Lucknow Heritage Hospital',
+    desc: 'Crafted an official healthcare portal with an integrated Content Management System (CMS) for managing doctor schedules, hospital services, and patient inquiry workflows.',
+    tags: ['Hospital Website', 'Custom CMS', 'Healthcare Portal', 'Doctor Directory'],
+    rating: '⭐⭐⭐⭐⭐ ("Outstanding patient portal and CMS!")',
+    svgType: 'website',
+    isActive: true
+  },
+  {
+    id: 'zenith-brochure',
     title: 'Zenith Organic Brochure',
     category: 'brochures',
     client: 'Zenith Farm Co.',
@@ -179,8 +212,8 @@ const DEFAULT_WORKS = [
     isActive: true
   },
   {
-    id: 2,
-    title: 'Aura Cosmetics Pack',
+    id: 'aura-cosmetics',
+    title: 'Aura Cosmetics Packaging',
     category: 'brochures',
     client: 'Aura Skin Care',
     desc: 'Luxury packaging design for a premium skincare line, incorporating gold-foil embossing and clean typography.',
@@ -190,29 +223,7 @@ const DEFAULT_WORKS = [
     isActive: true
   },
   {
-    id: 3,
-    title: 'CryptoSphere Dashboard',
-    category: 'web-works',
-    client: 'CryptoSphere Ltd.',
-    desc: 'A decentralized finance crypto portal featuring real-time interactive charts, dark mode widgets, and user wallets connect flows.',
-    tags: ['React', 'Web Dev', 'DeFi Portal'],
-    rating: '⭐⭐⭐⭐⭐ ("No bugs. Only gains.")',
-    svgType: 'web-dashboard',
-    isActive: true
-  },
-  {
-    id: 4,
-    title: 'EduTrack SaaS App',
-    category: 'web-works',
-    client: 'EduTrack Systems',
-    desc: 'Interactive university student metrics management system dashboard. Features dark/light themes, calendar schedules, and course progress.',
-    tags: ['Next.js', 'API Sync', 'EdTech'],
-    rating: '⭐⭐⭐⭐⭐ ("A+ grade dashboard design.")',
-    svgType: 'web-portal',
-    isActive: true
-  },
-  {
-    id: 5,
+    id: 'nebula-branding',
     title: 'Nebula Juice Branding',
     category: 'branding-ads',
     client: 'Nebula Beverages',
@@ -220,17 +231,6 @@ const DEFAULT_WORKS = [
     tags: ['Branding', 'Ad Campaign', 'Social Creatives'],
     rating: '⭐⭐⭐⭐⭐ ("The juice looks space-age!")',
     svgType: 'branding',
-    isActive: true
-  },
-  {
-    id: 6,
-    title: 'Apex Gym Ad Campaign',
-    category: 'branding-ads',
-    client: 'Apex Fitness Ltd.',
-    desc: 'Bold, high-contrast digital advertising posters featuring custom overlays, energetic typography, and banner distributions.',
-    tags: ['Advertisement', 'Poster Campaign', 'Ad Banner'],
-    rating: '⭐⭐⭐⭐⭐ ("Increased gym signups by 200%.")',
-    svgType: 'ad',
     isActive: true
   }
 ];
