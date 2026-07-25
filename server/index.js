@@ -34,20 +34,33 @@ app.use('/api', apiRouter);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', time: new Date().toISOString() });
+  const isConnected = mongoose.connection.readyState === 1;
+  res.json({
+    status: 'ok',
+    database: isConnected ? 'connected' : 'connecting',
+    time: new Date().toISOString()
+  });
 });
 
-// Database Connection & Server Start
-console.log('Connecting to MongoDB Atlas...');
-mongoose.connect(MONGODB_URI)
-  .then(async () => {
+// 1. Start HTTP Server immediately for Render Health Checks
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+// 2. Connect to MongoDB Atlas with background retry logic
+const connectDB = async () => {
+  try {
+    console.log('Connecting to MongoDB Atlas...');
+    await mongoose.connect(MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000
+    });
     console.log('Successfully connected to MongoDB Atlas');
     await autoSeedIfEmpty();
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error('MongoDB connection failure:', err);
-    process.exit(1);
-  });
+  } catch (err) {
+    console.error('MongoDB connection notice:', err.message);
+    console.log('Retrying MongoDB Atlas connection in 5 seconds...');
+    setTimeout(connectDB, 5000);
+  }
+};
+
+connectDB();
