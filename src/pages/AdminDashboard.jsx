@@ -101,6 +101,42 @@ export default function AdminDashboard() {
     setSettings(db.getSettings());
   };
 
+  const handleExportBackup = () => {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(db.exportData());
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", `corelix_website_backup_${new Date().toISOString().slice(0,10)}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  };
+
+  const handleImportBackup = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        try {
+          const parsed = JSON.parse(evt.target.result);
+          db.importData(parsed);
+          loadData();
+          alert('Website backup restored successfully!');
+        } catch (err) {
+          alert('Invalid backup file format. Please upload a valid JSON backup file.');
+        }
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  const handleResetDefaults = () => {
+    if (window.confirm('Are you sure you want to reset all website data to factory defaults? Any custom edits will be replaced by default settings.')) {
+      db.resetToDefaults();
+      loadData();
+      alert('Website data reset to factory defaults.');
+    }
+  };
+
   const renderIcon = (name, size = 18, color = 'currentColor', className = '') => {
     const IconComponent = Lucide[name] || Lucide.HelpCircle;
     return <IconComponent size={size} color={color} className={className} />;
@@ -274,11 +310,41 @@ export default function AdminDashboard() {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData(prev => ({
-          ...prev,
-          image: reader.result
-        }));
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX_WIDTH = 800;
+          const MAX_HEIGHT = 600;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Compress to JPEG at 70% quality (~40KB instead of 5MB+)
+          const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+
+          setFormData(prev => ({
+            ...prev,
+            image: compressedBase64
+          }));
+        };
+        img.src = event.target.result;
       };
       reader.readAsDataURL(file);
     }
@@ -1586,6 +1652,30 @@ export default function AdminDashboard() {
                 <label htmlFor="promo-enabled-check" style={{ cursor: 'pointer', fontSize: '0.9rem', color: 'var(--text-main)' }}>
                   Enable Sticky Launch Alert/Promo Banner at Top of Page
                 </label>
+              </div>
+
+              <div style={{ marginTop: '2rem', marginBottom: '1.5rem', borderTop: '1px solid var(--border-glass)', paddingTop: '1.5rem' }}>
+                <h4 style={{ margin: '0 0 0.5rem 0', color: '#10b981', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  {renderIcon('ShieldCheck', 18)} Data Safety & Backup Controls
+                </h4>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
+                  Safely export a complete backup of all website data to JSON, restore previous backups, or reset content to factory defaults.
+                </p>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+                  <button type="button" onClick={handleExportBackup} className="btn btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    {renderIcon('Download', 16)} Export Data Backup (.json)
+                  </button>
+
+                  <label className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer' }}>
+                    {renderIcon('Upload', 16)} Import Data Backup (.json)
+                    <input type="file" accept=".json" onChange={handleImportBackup} style={{ display: 'none' }} />
+                  </label>
+
+                  <button type="button" onClick={handleResetDefaults} className="btn btn-delete" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    {renderIcon('RefreshCw', 16)} Reset to Factory Defaults
+                  </button>
+                </div>
               </div>
 
               <div className="alert-box-info" style={{ marginTop: '2rem', padding: '1rem', border: '1px solid rgba(6,182,212,0.2)', borderRadius: '8px', background: 'rgba(6,182,212,0.05)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>

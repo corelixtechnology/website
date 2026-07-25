@@ -1,28 +1,4 @@
-const getApiUrl = () => {
-  const envUrl = import.meta.env.VITE_STRAPI_API_URL;
-  if (envUrl && !envUrl.includes('localhost')) {
-    return envUrl;
-  }
-  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-    return 'https://corelix-cms.onrender.com';
-  }
-  return envUrl || 'https://corelix-cms.onrender.com';
-};
-
-const API_URL = getApiUrl();
-
-const fetchWithRetry = async (url, options = {}, retries = 3, backoff = 3000) => {
-  for (let i = 0; i < retries; i++) {
-    try {
-      const res = await fetch(url, options);
-      if (res.ok) return res;
-    } catch (err) {
-      if (i === retries - 1) throw err;
-      await new Promise(r => setTimeout(r, backoff));
-    }
-  }
-  throw new Error(`Fetch failed: ${url}`);
-};
+// LocalStorage Database helper for Corelix Technology Admin Control Dashboard
 
 const CACHE_KEYS = {
   SERVICES: 'wm_services',
@@ -277,7 +253,7 @@ const DEFAULT_INQUIRIES = [];
 const getCached = (key, fallback) => {
   try {
     const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : fallback;
+    return data !== null ? JSON.parse(data) : fallback;
   } catch (e) {
     return fallback;
   }
@@ -288,7 +264,7 @@ const saveCached = (key, data) => {
   try {
     localStorage.setItem(key, JSON.stringify(data));
   } catch (e) {
-    console.error('Failed to write local cache:', e);
+    console.error('Failed to write local storage cache:', e);
   }
 };
 
@@ -301,410 +277,41 @@ let cache = {
   inquiries: getCached(CACHE_KEYS.INQUIRIES, DEFAULT_INQUIRIES)
 };
 
-// Async background fetchers
-const fetchServices = async () => {
-  try {
-    const res = await fetchWithRetry(`${API_URL}/api/services`);
-    const { data } = await res.json();
-    if (data) {
-      cache.services = data
-        .filter(item => item.isActive !== false)
-        .map(item => ({
-          id: item.serviceId,
-          title: item.title,
-          desc: item.desc,
-          bullets: item.bullets || [],
-          pills: item.pills || [],
-          themeClass: item.themeClass,
-          iconName: item.iconName,
-          isActive: item.isActive ?? true,
-          documentId: item.documentId
-        }));
-      saveCached(CACHE_KEYS.SERVICES, cache.services);
-      window.dispatchEvent(new Event('wm_services_updated'));
-    }
-  } catch (err) {
-    console.error('Strapi offline. Using cached services.', err);
-  }
-};
-
-const fetchBlogs = async () => {
-  try {
-    const res = await fetchWithRetry(`${API_URL}/api/blogs`);
-    const { data } = await res.json();
-    if (data) {
-      cache.blogs = data
-        .filter(item => item.isActive !== false)
-        .map(item => ({
-          id: Number(item.blogId),
-          title: item.title,
-          category: item.category,
-          date: item.date,
-          desc: item.excerpt,
-          content: item.content,
-          iconName: item.imageType,
-          readTime: item.readTime,
-          isActive: item.isActive ?? true,
-          documentId: item.documentId
-        }));
-      saveCached(CACHE_KEYS.BLOGS, cache.blogs);
-      window.dispatchEvent(new Event('wm_blogs_updated'));
-    }
-  } catch (err) {
-    console.error('Strapi offline. Using cached blogs.', err);
-  }
-};
-
-const fetchWorks = async () => {
-  try {
-    const res = await fetchWithRetry(`${API_URL}/api/works`);
-    const { data } = await res.json();
-    if (data) {
-      cache.works = data
-        .filter(item => item.isActive !== false)
-        .map(item => ({
-          id: item.workId,
-          title: item.title,
-          category: item.category,
-          client: item.client,
-          desc: item.desc,
-          tags: item.tags || [],
-          rating: item.rating,
-          svgType: item.svgType,
-          image: item.image || '',
-          isActive: item.isActive ?? true,
-          documentId: item.documentId
-        }));
-      saveCached(CACHE_KEYS.WORKS, cache.works);
-      window.dispatchEvent(new Event('wm_works_updated'));
-    }
-  } catch (err) {
-    console.error('Strapi offline. Using cached works.', err);
-  }
-};
-
-const fetchSettings = async () => {
-  try {
-    const res = await fetchWithRetry(`${API_URL}/api/setting`);
-    const { data } = await res.json();
-    if (data) {
-      cache.settings = {
-        heroTitle: data.heroTitle,
-        heroSubtitle: data.heroSubtitle,
-        activePromoText: data.activePromoText,
-        promoEnabled: data.promoEnabled,
-        whatsappUrl: data.whatsappUrl,
-        phoneNumber: data.phoneNumber,
-        email: data.email,
-        seasonalDiscount: data.seasonalDiscount,
-        adminUsername: data.adminUsername,
-        adminPassword: data.adminPassword,
-        googleSiteVerification: data.googleSiteVerification || '',
-        documentId: data.documentId
-      };
-      saveCached(CACHE_KEYS.SETTINGS, cache.settings);
-      window.dispatchEvent(new Event('wm_settings_updated'));
-    }
-  } catch (err) {
-    console.error('Strapi offline. Using cached settings.', err);
-  }
-};
-
-const fetchInquiries = async () => {
-  try {
-    const res = await fetchWithRetry(`${API_URL}/api/inquiries?sort=date:desc`);
-    const { data } = await res.json();
-    if (data) {
-      cache.inquiries = data.map(item => ({
-        id: item.documentId,
-        name: item.name,
-        email: item.email,
-        phone: item.phone || '',
-        projectType: item.projectType,
-        budget: item.budget,
-        message: item.message,
-        date: item.date,
-        isRead: item.isRead ?? false,
-        documentId: item.documentId
-      }));
-      saveCached(CACHE_KEYS.INQUIRIES, cache.inquiries);
-      window.dispatchEvent(new Event('wm_inquiries_updated'));
-    }
-  } catch (err) {
-    console.error('Strapi offline. Using cached inquiries.', err);
-  }
-};
-
-// Trigger background updates immediately
-fetchServices();
-fetchBlogs();
-fetchWorks();
-fetchSettings();
-fetchInquiries();
-
-// Diff & Sync engine functions
-const syncServices = async (updated) => {
-  try {
-    const res = await fetch(`${API_URL}/api/services`);
-    if (!res.ok) throw new Error('Failed to fetch current services');
-    const { data: dbServices } = await res.json();
-
-    for (const service of updated) {
-      const dbMatch = dbServices.find(item => item.serviceId === service.id);
-      const payload = {
-        data: {
-          serviceId: service.id,
-          title: service.title,
-          desc: service.desc,
-          bullets: service.bullets,
-          pills: service.pills,
-          themeClass: service.themeClass,
-          iconName: service.iconName,
-          isActive: service.isActive
-        }
-      };
-
-      if (dbMatch) {
-        await fetch(`${API_URL}/api/services/${dbMatch.documentId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      } else {
-        await fetch(`${API_URL}/api/services`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      }
-    }
-
-    for (const dbService of dbServices) {
-      const stillExists = updated.some(item => item.id === dbService.serviceId);
-      if (!stillExists) {
-        try {
-          await fetch(`${API_URL}/api/services/${dbService.documentId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ data: { isActive: false } })
-          });
-        } catch (e) {
-          console.warn('Soft delete service warning:', e);
-        }
-      }
-    }
-    await fetchServices();
-  } catch (err) {
-    console.error('Sync services error:', err);
-  }
-};
-
-const syncBlogs = async (updated) => {
-  try {
-    const res = await fetch(`${API_URL}/api/blogs`);
-    if (!res.ok) throw new Error('Failed to fetch current blogs');
-    const { data: dbBlogs } = await res.json();
-
-    for (const blog of updated) {
-      const dbMatch = dbBlogs.find(item => Number(item.blogId) === Number(blog.id));
-      const payload = {
-        data: {
-          blogId: String(blog.id),
-          title: blog.title,
-          excerpt: blog.desc,
-          content: blog.desc,
-          category: blog.category,
-          readTime: blog.readTime,
-          date: blog.date,
-          imageType: blog.iconName,
-          isActive: blog.isActive
-        }
-      };
-
-      if (dbMatch) {
-        await fetch(`${API_URL}/api/blogs/${dbMatch.documentId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      } else {
-        await fetch(`${API_URL}/api/blogs`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      }
-    }
-
-    for (const dbBlog of dbBlogs) {
-      const stillExists = updated.some(item => Number(item.id) === Number(dbBlog.blogId));
-      if (!stillExists) {
-        try {
-          await fetch(`${API_URL}/api/blogs/${dbBlog.documentId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ data: { isActive: false } })
-          });
-        } catch (e) {
-          console.warn('Soft delete blog warning:', e);
-        }
-      }
-    }
-    await fetchBlogs();
-  } catch (err) {
-    console.error('Sync blogs error:', err);
-  }
-};
-
-const syncWorks = async (updated) => {
-  try {
-    const res = await fetch(`${API_URL}/api/works`);
-    if (!res.ok) throw new Error('Failed to fetch current works');
-    const { data: dbWorks } = await res.json();
-
-    for (const work of updated) {
-      const dbMatch = dbWorks.find(item => Number(item.workId) === Number(work.id));
-      const payload = {
-        data: {
-          workId: Number(work.id),
-          title: work.title,
-          category: work.category,
-          client: work.client,
-          desc: work.desc,
-          tags: work.tags,
-          rating: work.rating,
-          svgType: work.svgType,
-          image: work.image || '',
-          isActive: work.isActive
-        }
-      };
-
-      if (dbMatch) {
-        await fetch(`${API_URL}/api/works/${dbMatch.documentId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      } else {
-        await fetch(`${API_URL}/api/works`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      }
-    }
-
-    for (const dbWork of dbWorks) {
-      const stillExists = updated.some(item => Number(item.id) === Number(dbWork.workId));
-      if (!stillExists) {
-        try {
-          await fetch(`${API_URL}/api/works/${dbWork.documentId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ data: { isActive: false } })
-          });
-        } catch (e) {
-          console.warn('Soft delete work warning:', e);
-        }
-      }
-    }
-    await fetchWorks();
-  } catch (err) {
-    console.error('Sync works error:', err);
-  }
-};
-
-const syncInquiries = async (updated) => {
-  try {
-    const res = await fetch(`${API_URL}/api/inquiries`);
-    if (!res.ok) throw new Error('Failed to fetch current inquiries');
-    const { data: dbInquiries } = await res.json();
-
-    for (const inq of updated) {
-      const dbMatch = dbInquiries.find(item => item.documentId === inq.id);
-      if (dbMatch) {
-        const payload = {
-          data: {
-            name: inq.name,
-            email: inq.email,
-            phone: inq.phone || '',
-            projectType: inq.projectType,
-            budget: inq.budget,
-            message: inq.message,
-            date: inq.date,
-            isRead: inq.isRead
-          }
-        };
-        await fetch(`${API_URL}/api/inquiries/${dbMatch.documentId}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-      }
-    }
-
-    for (const dbInq of dbInquiries) {
-      const stillExists = updated.some(item => item.id === dbInq.documentId);
-      if (!stillExists) {
-        await fetch(`${API_URL}/api/inquiries/${dbInq.documentId}`, {
-          method: 'DELETE'
-        });
-      }
-    }
-    await fetchInquiries();
-  } catch (err) {
-    console.error('Sync inquiries error:', err);
-  }
-};
-
 export const db = {
   // Services
-  getServices: () => {
-    return cache.services;
-  },
+  getServices: () => cache.services,
   saveServices: (services) => {
     cache.services = services;
     saveCached(CACHE_KEYS.SERVICES, services);
     window.dispatchEvent(new Event('wm_services_updated'));
-    syncServices(services);
   },
 
   // Blogs
-  getBlogs: () => {
-    return cache.blogs;
-  },
+  getBlogs: () => cache.blogs,
   saveBlogs: (blogs) => {
     cache.blogs = blogs;
     saveCached(CACHE_KEYS.BLOGS, blogs);
     window.dispatchEvent(new Event('wm_blogs_updated'));
-    syncBlogs(blogs);
   },
 
   // Works/Projects
-  getWorks: () => {
-    return cache.works;
-  },
+  getWorks: () => cache.works,
   saveWorks: (works) => {
     cache.works = works;
     saveCached(CACHE_KEYS.WORKS, works);
     window.dispatchEvent(new Event('wm_works_updated'));
-    syncWorks(works);
   },
 
   // Inquiries
-  getInquiries: () => {
-    return cache.inquiries;
-  },
+  getInquiries: () => cache.inquiries,
   saveInquiries: (inquiries) => {
     cache.inquiries = inquiries;
     saveCached(CACHE_KEYS.INQUIRIES, inquiries);
     window.dispatchEvent(new Event('wm_inquiries_updated'));
-    syncInquiries(inquiries);
   },
-  addInquiry: async (inquiry) => {
-    const tempId = 'inq_temp_' + Date.now();
+  addInquiry: (inquiry) => {
     const newInq = {
-      id: tempId,
+      id: 'inq_' + Date.now(),
       name: inquiry.name,
       email: inquiry.email,
       phone: inquiry.phone || '',
@@ -714,59 +321,60 @@ export const db = {
       date: new Date().toISOString(),
       isRead: false
     };
-
     cache.inquiries.unshift(newInq);
     saveCached(CACHE_KEYS.INQUIRIES, cache.inquiries);
     window.dispatchEvent(new Event('wm_inquiries_updated'));
-
-    try {
-      const payload = {
-        data: {
-          name: newInq.name,
-          email: newInq.email,
-          phone: newInq.phone || '',
-          projectType: newInq.projectType || '',
-          budget: newInq.budget,
-          message: newInq.message,
-          date: newInq.date,
-          isRead: false
-        }
-      };
-      const res = await fetch(`${API_URL}/api/inquiries`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (res.ok) {
-        await fetchInquiries();
-      }
-    } catch (err) {
-      console.error('Failed to post inquiry to Strapi:', err);
-    }
-
     return newInq;
   },
 
   // Settings
-  getSettings: () => {
-    return cache.settings;
-  },
+  getSettings: () => cache.settings,
   saveSettings: (settings) => {
     cache.settings = settings;
     saveCached(CACHE_KEYS.SETTINGS, settings);
     window.dispatchEvent(new Event('wm_settings_updated'));
+  },
 
-    (async () => {
-      try {
-        await fetch(`${API_URL}/api/setting`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ data: settings })
-        });
-        await fetchSettings();
-      } catch (err) {
-        console.error('Failed to save settings to Strapi:', err);
-      }
-    })();
+  // Safety & Data Backup Methods
+  exportData: () => {
+    return JSON.stringify({
+      version: '1.0',
+      timestamp: new Date().toISOString(),
+      services: cache.services,
+      blogs: cache.blogs,
+      works: cache.works,
+      settings: cache.settings,
+      inquiries: cache.inquiries
+    }, null, 2);
+  },
+  importData: (importedObj) => {
+    if (!importedObj || typeof importedObj !== 'object') throw new Error('Invalid backup file format');
+    if (importedObj.services) { cache.services = importedObj.services; saveCached(CACHE_KEYS.SERVICES, cache.services); }
+    if (importedObj.blogs) { cache.blogs = importedObj.blogs; saveCached(CACHE_KEYS.BLOGS, cache.blogs); }
+    if (importedObj.works) { cache.works = importedObj.works; saveCached(CACHE_KEYS.WORKS, cache.works); }
+    if (importedObj.settings) { cache.settings = importedObj.settings; saveCached(CACHE_KEYS.SETTINGS, cache.settings); }
+    if (importedObj.inquiries) { cache.inquiries = importedObj.inquiries; saveCached(CACHE_KEYS.INQUIRIES, cache.inquiries); }
+    window.dispatchEvent(new Event('wm_services_updated'));
+    window.dispatchEvent(new Event('wm_blogs_updated'));
+    window.dispatchEvent(new Event('wm_works_updated'));
+    window.dispatchEvent(new Event('wm_settings_updated'));
+    window.dispatchEvent(new Event('wm_inquiries_updated'));
+  },
+  resetToDefaults: () => {
+    cache.services = DEFAULT_SERVICES;
+    cache.blogs = DEFAULT_BLOGS;
+    cache.works = DEFAULT_WORKS;
+    cache.settings = DEFAULT_SETTINGS;
+    cache.inquiries = DEFAULT_INQUIRIES;
+    saveCached(CACHE_KEYS.SERVICES, DEFAULT_SERVICES);
+    saveCached(CACHE_KEYS.BLOGS, DEFAULT_BLOGS);
+    saveCached(CACHE_KEYS.WORKS, DEFAULT_WORKS);
+    saveCached(CACHE_KEYS.SETTINGS, DEFAULT_SETTINGS);
+    saveCached(CACHE_KEYS.INQUIRIES, DEFAULT_INQUIRIES);
+    window.dispatchEvent(new Event('wm_services_updated'));
+    window.dispatchEvent(new Event('wm_blogs_updated'));
+    window.dispatchEvent(new Event('wm_works_updated'));
+    window.dispatchEvent(new Event('wm_settings_updated'));
+    window.dispatchEvent(new Event('wm_inquiries_updated'));
   }
 };
