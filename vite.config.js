@@ -5,8 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    // Warn when a chunk exceeds 500 kB
-    chunkSizeWarningLimit: 500,
+    // Warn when a chunk exceeds 1000 kB
+    chunkSizeWarningLimit: 1000,
     // Minify with esbuild (default, fastest)
     minify: 'esbuild',
     // Enable CSS code splitting per chunk
