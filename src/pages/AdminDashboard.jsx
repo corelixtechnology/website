@@ -1529,6 +1529,7 @@ export default function AdminDashboard() {
                     className="input-field"
                   />
                 </div>
+
                 <div className="input-group">
                   <label>Promo Banner Discount Percentage</label>
                   <input
@@ -1574,6 +1575,7 @@ export default function AdminDashboard() {
                     className="input-field"
                   />
                 </div>
+
                 <div className="input-group">
                   <label>Call-Now Phone Number</label>
                   <input
@@ -1625,7 +1627,8 @@ export default function AdminDashboard() {
                       className="input-field"
                       placeholder="corelix"
                     />
-                  </div>
+                  </div>          
+
                   <div className="input-group">
                     <label>Portal Admin Password</label>
                     <input
