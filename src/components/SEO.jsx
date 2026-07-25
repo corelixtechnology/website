@@ -8,8 +8,8 @@ export default function SEO({ title, description, keywords, canonical, robots })
   useEffect(() => {
     // 1. Update Title
     // 1. Update Title
-    const formattedTitle = title 
-      ? `${title} | Corelix Technology` 
+    const formattedTitle = title
+      ? `${title} | Corelix Technology`
       : 'Corelix Technology | Software Development Company in Coimbatore';
     document.title = formattedTitle;
 
