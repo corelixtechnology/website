@@ -488,11 +488,8 @@ const syncServices = async (updated) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ data: { isActive: false } })
           });
-          await fetch(`${API_URL}/api/services/${dbService.documentId}`, {
-            method: 'DELETE'
-          });
         } catch (e) {
-          // Soft delete via PUT succeeded even if DELETE fails
+          console.warn('Soft delete service warning:', e);
         }
       }
     }
@@ -548,11 +545,8 @@ const syncBlogs = async (updated) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ data: { isActive: false } })
           });
-          await fetch(`${API_URL}/api/blogs/${dbBlog.documentId}`, {
-            method: 'DELETE'
-          });
         } catch (e) {
-          // Soft delete via PUT succeeded even if DELETE fails
+          console.warn('Soft delete blog warning:', e);
         }
       }
     }
@@ -609,11 +603,8 @@ const syncWorks = async (updated) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ data: { isActive: false } })
           });
-          await fetch(`${API_URL}/api/works/${dbWork.documentId}`, {
-            method: 'DELETE'
-          });
         } catch (e) {
-          // Soft delete via PUT succeeded even if DELETE fails
+          console.warn('Soft delete work warning:', e);
         }
       }
     }
