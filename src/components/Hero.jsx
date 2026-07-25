@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Award } from 'lucide-react';
+import { db } from '../utils/db';
+
 // Hero images served from /public — preloaded in index.html for early browser discovery
 const heroMan   = '/hero-man.webp';
 const heroWoman = '/hero-woman.webp';
 
 export default function Hero({ onStartCalculator }) {
+  const [settings, setSettings] = useState(() => db.getSettings());
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      setSettings(db.getSettings());
+    };
+    window.addEventListener('wm_settings_updated', handleUpdate);
+    return () => window.removeEventListener('wm_settings_updated', handleUpdate);
+  }, []);
+
   const handleExploreServices = () => {
     const servicesSection = document.querySelector('#services');
     if (servicesSection) {
       servicesSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  const heroTitle = settings.heroTitle || 'Engineering Digital Solutions that Scale Your Business';
+  const heroSubtitle = settings.heroSubtitle || 'Empowering forward-thinking brands with premium web ecosystems, conversion-focused design systems, and high-impact digital strategies designed to drive real growth.';
 
   return (
     <section id="home" className="new-hero-section">
@@ -24,12 +39,18 @@ export default function Hero({ onStartCalculator }) {
           {/* Left Column: Proper Business Content */}
           <div className="new-hero-text-content">
             <h1 className="new-hero-main-title reveal reveal-slide-right">
-              Engineering <span className="text-violet-highlight">Digital Solutions</span> <br />
-              that Scale Your <span className="text-violet-highlight">Business</span>
+              {heroTitle.includes('Engineering') ? (
+                <>
+                  Engineering <span className="text-violet-highlight">Digital Solutions</span> <br />
+                  that Scale Your <span className="text-violet-highlight">Business</span>
+                </>
+              ) : (
+                <span>{heroTitle}</span>
+              )}
             </h1>
             
             <p className="new-hero-description-paragraph reveal reveal-slide-right" data-delay="0.15s">
-              Empowering forward-thinking brands with premium web ecosystems, conversion-focused design systems, and high-impact digital strategies designed to drive real growth.
+              {heroSubtitle}
             </p>
             
             <div className="new-hero-button-actions reveal reveal-slide-right" data-delay="0.3s">

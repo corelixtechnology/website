@@ -1,6 +1,28 @@
-// LocalStorage Database helper for Corelix Technology CRM & CMS (Synced with Strapi)
+const getApiUrl = () => {
+  const envUrl = import.meta.env.VITE_STRAPI_API_URL;
+  if (envUrl && !envUrl.includes('localhost')) {
+    return envUrl;
+  }
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return 'https://corelix-cms.onrender.com';
+  }
+  return envUrl || 'https://corelix-cms.onrender.com';
+};
 
-const API_URL = import.meta.env.VITE_STRAPI_API_URL || 'http://localhost:1337';
+const API_URL = getApiUrl();
+
+const fetchWithRetry = async (url, options = {}, retries = 3, backoff = 3000) => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const res = await fetch(url, options);
+      if (res.ok) return res;
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      await new Promise(r => setTimeout(r, backoff));
+    }
+  }
+  throw new Error(`Fetch failed: ${url}`);
+};
 
 const CACHE_KEYS = {
   SERVICES: 'wm_services',
@@ -282,8 +304,7 @@ let cache = {
 // Async background fetchers
 const fetchServices = async () => {
   try {
-    const res = await fetch(`${API_URL}/api/services`);
-    if (!res.ok) throw new Error('Failed to fetch services');
+    const res = await fetchWithRetry(`${API_URL}/api/services`);
     const { data } = await res.json();
     if (data) {
       cache.services = data.map(item => ({
@@ -307,8 +328,7 @@ const fetchServices = async () => {
 
 const fetchBlogs = async () => {
   try {
-    const res = await fetch(`${API_URL}/api/blogs`);
-    if (!res.ok) throw new Error('Failed to fetch blogs');
+    const res = await fetchWithRetry(`${API_URL}/api/blogs`);
     const { data } = await res.json();
     if (data) {
       cache.blogs = data.map(item => ({
@@ -333,8 +353,7 @@ const fetchBlogs = async () => {
 
 const fetchWorks = async () => {
   try {
-    const res = await fetch(`${API_URL}/api/works`);
-    if (!res.ok) throw new Error('Failed to fetch works');
+    const res = await fetchWithRetry(`${API_URL}/api/works`);
     const { data } = await res.json();
     if (data) {
       cache.works = data.map(item => ({
@@ -360,8 +379,7 @@ const fetchWorks = async () => {
 
 const fetchSettings = async () => {
   try {
-    const res = await fetch(`${API_URL}/api/setting`);
-    if (!res.ok) throw new Error('Failed to fetch settings');
+    const res = await fetchWithRetry(`${API_URL}/api/setting`);
     const { data } = await res.json();
     if (data) {
       cache.settings = {
@@ -388,8 +406,7 @@ const fetchSettings = async () => {
 
 const fetchInquiries = async () => {
   try {
-    const res = await fetch(`${API_URL}/api/inquiries?sort=date:desc`);
-    if (!res.ok) throw new Error('Failed to fetch inquiries');
+    const res = await fetchWithRetry(`${API_URL}/api/inquiries?sort=date:desc`);
     const { data } = await res.json();
     if (data) {
       cache.inquiries = data.map(item => ({

@@ -4,8 +4,10 @@ const homeSections = [
   { id: 'home', label: 'Hero' },
   { id: 'brands', label: 'Clients' },
   { id: 'services', label: 'Services' },
+  { id: 'works', label: 'Our Works' },
   { id: 'process', label: 'Process' },
   { id: 'techstack', label: 'Technologies' },
+  { id: 'blog', label: 'Blog' },
   { id: 'contact', label: 'Contact' },
 ];
 
