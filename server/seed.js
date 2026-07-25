@@ -1,12 +1,27 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import dns from 'dns';
 import Service from './models/Service.js';
 import Blog from './models/Blog.js';
 import Work from './models/Work.js';
 import Inquiry from './models/Inquiry.js';
 import Settings from './models/Settings.js';
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 dotenv.config();
+
+// Fix DNS SRV lookup on Windows
+try {
+  dns.setServers(['8.8.8.8', '8.8.4.4']);
+} catch (e) {
+  // ignore
+}
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/corelix';
 
@@ -258,8 +273,9 @@ const DEFAULT_SETTINGS = {
 
 async function seed() {
   try {
-    console.log('Connecting to MongoDB:', MONGODB_URI);
-    await mongoose.connect(MONGODB_URI);
+    const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/corelix';
+    console.log('Connecting to MongoDB:', mongoUri.replace(/:([^@]+)@/, ':****@'));
+    await mongoose.connect(mongoUri);
     console.log('Connected to MongoDB');
 
     await Service.deleteMany({});
