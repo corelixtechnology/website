@@ -1,41 +1,23 @@
 services:
+  # Node.js + Express + MongoDB Backend Service
   - type: web
-    name: corelix-cms
+    name: corelix-backend
     runtime: node
     plan: free
-    rootDir: Corelix CMS
-    buildCommand: npm install --production=false && npm run build
-    startCommand: npm run start
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node seed.js && node index.js
     envVars:
       - key: NODE_VERSION
         value: 20
       - key: NODE_ENV
         value: production
-      - key: HOST
-        value: 0.0.0.0
-      - key: DATABASE_CLIENT
-        value: postgres
-      - key: DATABASE_URL
-        fromDatabase:
-          name: corelix-db
-          property: connectionString
-      - key: DATABASE_SSL
-        value: true
-      - key: DATABASE_SSL_REJECT_UNAUTHORIZED
-        value: false
-      - key: APP_KEYS
-        generateValue: true
-      - key: API_TOKEN_SALT
-        generateValue: true
-      - key: ADMIN_JWT_SECRET
-        generateValue: true
-      - key: JWT_SECRET
-        generateValue: true
-      - key: TRANSFER_TOKEN_SALT
-        generateValue: true
-      - key: ENCRYPTION_KEY
-        generateValue: true
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false
 
+  # React + Vite Static Frontend Application
   - type: static
     name: corelix-frontend
     buildCommand: npm install && npm run build
@@ -45,9 +27,5 @@ services:
         source: /*
         destination: /index.html
     envVars:
-      - key: VITE_STRAPI_API_URL
-        value: https://corelix-cms.onrender.com
-
-databases:
-  - name: corelix-db
-    plan: free
+      - key: VITE_API_URL
+        value: https://corelix-backend.onrender.com/api

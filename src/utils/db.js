@@ -1,4 +1,6 @@
-// LocalStorage Database helper for Corelix Technology Admin Control Dashboard
+// Node.js + MongoDB API & LocalStorage Database helper for Corelix Technology
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const CACHE_KEYS = {
   SERVICES: 'wm_services',
@@ -277,13 +279,84 @@ let cache = {
   inquiries: getCached(CACHE_KEYS.INQUIRIES, DEFAULT_INQUIRIES)
 };
 
+// Sync with Node.js + MongoDB API
+const syncWithBackend = async () => {
+  try {
+    const [servicesRes, blogsRes, worksRes, inquiriesRes, settingsRes] = await Promise.allSettled([
+      fetch(`${API_BASE_URL}/services`),
+      fetch(`${API_BASE_URL}/blogs`),
+      fetch(`${API_BASE_URL}/works`),
+      fetch(`${API_BASE_URL}/inquiries`),
+      fetch(`${API_BASE_URL}/settings`)
+    ]);
+
+    if (servicesRes.status === 'fulfilled' && servicesRes.value.ok) {
+      const data = await servicesRes.value.json();
+      if (data && data.length) {
+        cache.services = data;
+        saveCached(CACHE_KEYS.SERVICES, data);
+        window.dispatchEvent(new Event('wm_services_updated'));
+      }
+    }
+
+    if (blogsRes.status === 'fulfilled' && blogsRes.value.ok) {
+      const data = await blogsRes.value.json();
+      if (data && data.length) {
+        cache.blogs = data;
+        saveCached(CACHE_KEYS.BLOGS, data);
+        window.dispatchEvent(new Event('wm_blogs_updated'));
+      }
+    }
+
+    if (worksRes.status === 'fulfilled' && worksRes.value.ok) {
+      const data = await worksRes.value.json();
+      if (data && data.length) {
+        cache.works = data;
+        saveCached(CACHE_KEYS.WORKS, data);
+        window.dispatchEvent(new Event('wm_works_updated'));
+      }
+    }
+
+    if (inquiriesRes.status === 'fulfilled' && inquiriesRes.value.ok) {
+      const data = await inquiriesRes.value.json();
+      if (data) {
+        cache.inquiries = data;
+        saveCached(CACHE_KEYS.INQUIRIES, data);
+        window.dispatchEvent(new Event('wm_inquiries_updated'));
+      }
+    }
+
+    if (settingsRes.status === 'fulfilled' && settingsRes.value.ok) {
+      const data = await settingsRes.value.json();
+      if (data) {
+        cache.settings = { ...cache.settings, ...data };
+        saveCached(CACHE_KEYS.SETTINGS, cache.settings);
+        window.dispatchEvent(new Event('wm_settings_updated'));
+      }
+    }
+  } catch (err) {
+    console.warn('Backend sync warning (offline mode active):', err);
+  }
+};
+
+// Trigger initial async sync
+syncWithBackend();
+
 export const db = {
+  // Sync Helper
+  sync: syncWithBackend,
+
   // Services
   getServices: () => cache.services,
   saveServices: (services) => {
     cache.services = services;
     saveCached(CACHE_KEYS.SERVICES, services);
     window.dispatchEvent(new Event('wm_services_updated'));
+    fetch(`${API_BASE_URL}/services`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(services)
+    }).catch(err => console.warn('Failed to sync services to backend:', err));
   },
 
   // Blogs
@@ -292,6 +365,11 @@ export const db = {
     cache.blogs = blogs;
     saveCached(CACHE_KEYS.BLOGS, blogs);
     window.dispatchEvent(new Event('wm_blogs_updated'));
+    fetch(`${API_BASE_URL}/blogs`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(blogs)
+    }).catch(err => console.warn('Failed to sync blogs to backend:', err));
   },
 
   // Works/Projects
@@ -300,6 +378,11 @@ export const db = {
     cache.works = works;
     saveCached(CACHE_KEYS.WORKS, works);
     window.dispatchEvent(new Event('wm_works_updated'));
+    fetch(`${API_BASE_URL}/works`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(works)
+    }).catch(err => console.warn('Failed to sync works to backend:', err));
   },
 
   // Inquiries
@@ -308,6 +391,11 @@ export const db = {
     cache.inquiries = inquiries;
     saveCached(CACHE_KEYS.INQUIRIES, inquiries);
     window.dispatchEvent(new Event('wm_inquiries_updated'));
+    fetch(`${API_BASE_URL}/inquiries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(inquiries)
+    }).catch(err => console.warn('Failed to sync inquiries to backend:', err));
   },
   addInquiry: (inquiry) => {
     const newInq = {
@@ -324,6 +412,11 @@ export const db = {
     cache.inquiries.unshift(newInq);
     saveCached(CACHE_KEYS.INQUIRIES, cache.inquiries);
     window.dispatchEvent(new Event('wm_inquiries_updated'));
+    fetch(`${API_BASE_URL}/inquiries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newInq)
+    }).catch(err => console.warn('Failed to send inquiry to backend:', err));
     return newInq;
   },
 
@@ -333,6 +426,33 @@ export const db = {
     cache.settings = settings;
     saveCached(CACHE_KEYS.SETTINGS, settings);
     window.dispatchEvent(new Event('wm_settings_updated'));
+    fetch(`${API_BASE_URL}/settings`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(settings)
+    }).catch(err => console.warn('Failed to save settings to backend:', err));
+  },
+
+  // Auth helper with Node backend API
+  loginAdmin: async (username, password) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      console.warn('Backend login fallback to local credentials:', err);
+      const activeSettings = cache.settings;
+      const targetUser = activeSettings.adminUsername || 'corelix';
+      const targetPass = activeSettings.adminPassword || 'corelix@2026';
+      if (username === targetUser && password === targetPass) {
+        return { success: true };
+      }
+      return { success: false, error: 'Invalid username or password' };
+    }
   },
 
   // Safety & Data Backup Methods
@@ -359,6 +479,7 @@ export const db = {
     window.dispatchEvent(new Event('wm_works_updated'));
     window.dispatchEvent(new Event('wm_settings_updated'));
     window.dispatchEvent(new Event('wm_inquiries_updated'));
+    syncWithBackend();
   },
   resetToDefaults: () => {
     cache.services = DEFAULT_SERVICES;
@@ -376,5 +497,9 @@ export const db = {
     window.dispatchEvent(new Event('wm_works_updated'));
     window.dispatchEvent(new Event('wm_settings_updated'));
     window.dispatchEvent(new Event('wm_inquiries_updated'));
+    fetch(`${API_BASE_URL}/services`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(DEFAULT_SERVICES) });
+    fetch(`${API_BASE_URL}/blogs`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(DEFAULT_BLOGS) });
+    fetch(`${API_BASE_URL}/works`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(DEFAULT_WORKS) });
+    fetch(`${API_BASE_URL}/settings`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(DEFAULT_SETTINGS) });
   }
 };

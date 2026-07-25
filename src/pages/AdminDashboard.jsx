@@ -64,18 +64,16 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    const activeSettings = db.getSettings();
-    const targetUser = activeSettings.adminUsername || 'corelix';
-    const targetPass = activeSettings.adminPassword || 'corelix@2026';
+    const result = await db.loginAdmin(usernameInput, passwordInput);
 
-    if (usernameInput === targetUser && passwordInput === targetPass) {
+    if (result.success) {
       sessionStorage.setItem('wm_admin_authenticated', 'true');
       setIsAuthenticated(true);
       setLoginError('');
     } else {
-      setLoginError('Invalid username or password.');
+      setLoginError(result.error || 'Invalid username or password.');
     }
   };
 
