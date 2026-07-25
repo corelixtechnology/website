@@ -89,6 +89,21 @@ export default function AdminDashboard() {
     if (isAuthenticated) {
       loadData();
     }
+    const handleUpdate = () => {
+      loadData();
+    };
+    window.addEventListener('wm_services_updated', handleUpdate);
+    window.addEventListener('wm_blogs_updated', handleUpdate);
+    window.addEventListener('wm_works_updated', handleUpdate);
+    window.addEventListener('wm_inquiries_updated', handleUpdate);
+    window.addEventListener('wm_settings_updated', handleUpdate);
+    return () => {
+      window.removeEventListener('wm_services_updated', handleUpdate);
+      window.removeEventListener('wm_blogs_updated', handleUpdate);
+      window.removeEventListener('wm_works_updated', handleUpdate);
+      window.removeEventListener('wm_inquiries_updated', handleUpdate);
+      window.removeEventListener('wm_settings_updated', handleUpdate);
+    };
   }, [isAuthenticated]);
 
   const loadData = () => {
