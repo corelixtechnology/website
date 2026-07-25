@@ -27,6 +27,42 @@ export default function AdminDashboard() {
   const [formData, setFormData] = useState({}); // forms content
   const [formBullets, setFormBullets] = useState(['']); // bullet lists builder
   const [formTags, setFormTags] = useState(''); // comma-separated tags
+  const [customCategoryName, setCustomCategoryName] = useState('');
+  const [customSvgTypeName, setCustomSvgTypeName] = useState('');
+
+  const categoryMockupMap = {
+    'web-works': {
+      label: 'Web Design & Dev',
+      mockups: [
+        { id: 'website', label: 'Website Showcase' },
+        { id: 'web-portal', label: 'Web Portal' },
+        { id: 'web-dashboard', label: 'Web Dashboard' },
+        { id: 'saas-app', label: 'SaaS Platform / App' },
+        { id: 'ecommerce', label: 'E-Commerce Storefront' },
+        { id: 'custom', label: '+ Add Custom Mockup Type...' }
+      ]
+    },
+    'brochures': {
+      label: 'Brochures & Packages',
+      mockups: [
+        { id: 'brochure', label: 'Print Brochure (3-Fold)' },
+        { id: 'package', label: 'Skincare/Box Package' },
+        { id: 'flyer', label: 'Product Flyer / Catalog' },
+        { id: 'folder', label: 'Corporate Presentation Folder' },
+        { id: 'custom', label: '+ Add Custom Mockup Type...' }
+      ]
+    },
+    'branding-ads': {
+      label: 'Branding & Ads',
+      mockups: [
+        { id: 'branding', label: 'Vector Badge Logo' },
+        { id: 'ad', label: 'Marketing/Ad Banner' },
+        { id: 'social-creative', label: 'Social Media Graphic' },
+        { id: 'billboard', label: 'Billboard / Poster Mockup' },
+        { id: 'custom', label: '+ Add Custom Mockup Type...' }
+      ]
+    }
+  };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -251,16 +287,35 @@ export default function AdminDashboard() {
   const handleEditWork = (work) => {
     setEditingItem(work);
     setIsAdding(false);
+    const knownCategories = ['web-works', 'brochures', 'branding-ads'];
+    const isCustomCat = !knownCategories.includes(work.category);
+
+    const activeCategoryMockups = categoryMockupMap[work.category]?.mockups || categoryMockupMap['web-works'].mockups;
+    const isCustomSvg = !activeCategoryMockups.some(m => m.id === work.svgType);
+
     setFormData({
       id: work.id,
       title: work.title,
       client: work.client,
       desc: work.desc,
-      category: work.category,
-      svgType: work.svgType,
+      category: isCustomCat ? 'custom-cat' : work.category,
+      svgType: isCustomSvg ? 'custom' : work.svgType,
       rating: work.rating,
       image: work.image || ''
     });
+
+    if (isCustomCat) {
+      setCustomCategoryName(work.category);
+    } else {
+      setCustomCategoryName('');
+    }
+
+    if (isCustomSvg) {
+      setCustomSvgTypeName(work.svgType);
+    } else {
+      setCustomSvgTypeName('');
+    }
+
     setFormTags(work.tags ? work.tags.join(', ') : '');
   };
 
@@ -273,17 +328,30 @@ export default function AdminDashboard() {
       client: '',
       desc: '',
       category: 'web-works',
-      svgType: 'web-dashboard',
+      svgType: 'website',
       rating: '⭐⭐⭐⭐⭐',
       image: ''
     });
     setFormTags('');
+    setCustomCategoryName('');
+    setCustomSvgTypeName('');
   };
 
   const handleSaveWork = (e) => {
     e.preventDefault();
+
+    const finalCategory = formData.category === 'custom-cat' 
+      ? (customCategoryName.trim() || 'Custom Portfolio')
+      : formData.category;
+
+    const finalSvgType = formData.svgType === 'custom'
+      ? (customSvgTypeName.trim() || 'Custom Render')
+      : formData.svgType;
+
     const workPayload = {
       ...formData,
+      category: finalCategory,
+      svgType: finalSvgType,
       tags: formTags.split(',').map(t => t.trim()).filter(t => t !== ''),
       isActive: editingItem ? editingItem.isActive : true
     };
@@ -330,6 +398,8 @@ export default function AdminDashboard() {
     setFormData({});
     setFormBullets(['']);
     setFormTags('');
+    setCustomCategoryName('');
+    setCustomSvgTypeName('');
   };
 
   // Form List Builders
@@ -1165,33 +1235,68 @@ export default function AdminDashboard() {
                       <label>Category Filter</label>
                       <select
                         name="category"
-                        value={formData.category}
-                        onChange={handleInputChange}
+                        value={formData.category || 'web-works'}
+                        onChange={(e) => {
+                          const catVal = e.target.value;
+                          const availableMockups = categoryMockupMap[catVal]?.mockups || categoryMockupMap['web-works'].mockups;
+                          setFormData(prev => ({
+                            ...prev,
+                            category: catVal,
+                            svgType: availableMockups[0].id
+                          }));
+                        }}
                         className="input-field"
                         style={{ color: 'white', background: 'var(--bg-darker)' }}
                       >
-                        <option value="brochures">Brochures & Packages</option>
                         <option value="web-works">Web Design & Dev</option>
+                        <option value="brochures">Brochures & Packages</option>
                         <option value="branding-ads">Branding & Ads</option>
+                        <option value="custom-cat">+ Add Custom Category...</option>
                       </select>
+                      {formData.category === 'custom-cat' && (
+                        <input
+                          type="text"
+                          placeholder="Enter custom category name (e.g. Mobile App Dev)"
+                          value={customCategoryName}
+                          onChange={(e) => setCustomCategoryName(e.target.value)}
+                          required
+                          className="input-field"
+                          style={{ marginTop: '0.5rem' }}
+                        />
+                      )}
                     </div>
 
                     <div className="input-group">
-                      <label>Mockup Render Type</label>
+                      <label>Mockup Render Type (Relative to Category)</label>
                       <select
                         name="svgType"
-                        value={formData.svgType}
+                        value={formData.svgType || 'website'}
                         onChange={handleInputChange}
                         className="input-field"
                         style={{ color: 'white', background: 'var(--bg-darker)' }}
                       >
-                        <option value="web-dashboard">Web Dashboard</option>
-                        <option value="web-portal">Web Portal</option>
-                        <option value="brochure">Print Brochure (3-Fold)</option>
-                        <option value="package">Skincare/Box Package</option>
-                        <option value="branding">Vector Badge Logo</option>
-                        <option value="ad">Marketing/Ad Banner</option>
+                        {(categoryMockupMap[formData.category]?.mockups || [
+                          { id: 'website', label: 'Website Showcase' },
+                          { id: 'web-portal', label: 'Web Portal' },
+                          { id: 'web-dashboard', label: 'Web Dashboard' },
+                          { id: 'saas-app', label: 'SaaS Platform / App' },
+                          { id: 'ecommerce', label: 'E-Commerce Storefront' },
+                          { id: 'custom', label: '+ Add Custom Mockup Type...' }
+                        ]).map((m) => (
+                          <option key={m.id} value={m.id}>{m.label}</option>
+                        ))}
                       </select>
+                      {formData.svgType === 'custom' && (
+                        <input
+                          type="text"
+                          placeholder="Enter custom mockup type (e.g. 3D AR Model)"
+                          value={customSvgTypeName}
+                          onChange={(e) => setCustomSvgTypeName(e.target.value)}
+                          required
+                          className="input-field"
+                          style={{ marginTop: '0.5rem' }}
+                        />
+                      )}
                     </div>
                   </div>
 

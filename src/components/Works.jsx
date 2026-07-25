@@ -22,12 +22,25 @@ export default function Works({ defaultFilter }) {
     return () => window.removeEventListener('wm_works_updated', handleUpdate);
   }, []);
 
-  const categories = [
+  const knownCategoryMap = {
+    'web-works': 'Web Design & Dev',
+    'brochures': 'Brochures & Packages',
+    'branding-ads': 'Branding & Ads',
+  };
+
+  const defaultCategories = [
     { id: 'all', label: 'All Works' },
-    { id: 'brochures', label: 'Brochures & Packages' },
     { id: 'web-works', label: 'Web Design & Dev' },
-    { id: 'branding-ads', label: 'Branding & Ads' },
+    { id: 'brochures', label: 'Brochures & Packages' },
+    { id: 'branding-ads', label: 'Branding & Ads' }
   ];
+
+  // Dynamically include any custom categories created in CMS
+  const extraCategories = Array.from(new Set(projects.map(p => p.category)))
+    .filter(cat => !defaultCategories.some(d => d.id === cat))
+    .map(cat => ({ id: cat, label: cat }));
+
+  const categories = [...defaultCategories, ...extraCategories];
 
   const filteredProjects = filter === 'all' 
     ? projects 
@@ -36,6 +49,51 @@ export default function Works({ defaultFilter }) {
   // SVG Mockup Renderers based on type
   const renderMockup = (type) => {
     switch (type) {
+      case 'website':
+        return (
+          <div className="portfolio-svg-placeholder">
+            <Monitor size={40} style={{ marginBottom: '1rem', color: 'var(--primary)' }} />
+            <svg width="80" height="50" viewBox="0 0 80 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="5" width="70" height="40" rx="3" fill="rgba(8, 10, 22, 0.8)" stroke="var(--primary)" strokeWidth="2"/>
+              <line x1="5" y1="15" x2="75" y2="15" stroke="var(--primary)" strokeWidth="1"/>
+              <circle cx="12" cy="10" r="1.5" fill="#ef4444"/>
+              <circle cx="17" cy="10" r="1.5" fill="#eab308"/>
+              <circle cx="22" cy="10" r="1.5" fill="#22c55e"/>
+              <rect x="10" y="20" width="30" height="18" rx="2" fill="rgba(139, 92, 246, 0.2)" stroke="var(--primary)"/>
+              <rect x="45" y="20" width="25" height="6" rx="1" fill="rgba(6, 182, 212, 0.3)"/>
+              <rect x="45" y="30" width="20" height="4" rx="1" fill="var(--text-muted)"/>
+            </svg>
+            <span style={{ fontSize: '0.75rem', marginTop: '1rem', display: 'block' }}>Website Showcase</span>
+          </div>
+        );
+      case 'saas-app':
+        return (
+          <div className="portfolio-svg-placeholder">
+            <Monitor size={40} style={{ marginBottom: '1rem', color: 'var(--secondary)' }} />
+            <svg width="80" height="50" viewBox="0 0 80 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="5" width="70" height="40" rx="3" fill="rgba(8, 10, 22, 0.8)" stroke="var(--secondary)" strokeWidth="2"/>
+              <line x1="20" y1="5" x2="20" y2="45" stroke="var(--secondary)" strokeWidth="1"/>
+              <circle cx="12" cy="12" r="3" fill="var(--secondary)"/>
+              <rect x="25" y="10" width="45" height="10" rx="2" fill="rgba(6, 182, 212, 0.2)"/>
+              <rect x="25" y="24" width="20" height="15" rx="2" fill="rgba(139, 92, 246, 0.2)"/>
+              <rect x="50" y="24" width="20" height="15" rx="2" fill="rgba(244, 63, 94, 0.2)"/>
+            </svg>
+            <span style={{ fontSize: '0.75rem', marginTop: '1rem', display: 'block' }}>SaaS Platform / App</span>
+          </div>
+        );
+      case 'ecommerce':
+        return (
+          <div className="portfolio-svg-placeholder">
+            <Monitor size={40} style={{ marginBottom: '1rem', color: 'var(--accent)' }} />
+            <svg width="80" height="50" viewBox="0 0 80 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="5" width="70" height="40" rx="3" fill="rgba(8, 10, 22, 0.8)" stroke="var(--accent)" strokeWidth="2"/>
+              <path d="M15 20L20 35H60L65 20H15Z" fill="rgba(244, 63, 94, 0.15)" stroke="var(--accent)" strokeWidth="1.5"/>
+              <circle cx="28" cy="39" r="2.5" fill="var(--accent)"/>
+              <circle cx="52" cy="39" r="2.5" fill="var(--accent)"/>
+            </svg>
+            <span style={{ fontSize: '0.75rem', marginTop: '1rem', display: 'block' }}>E-Commerce Storefront</span>
+          </div>
+        );
       case 'brochure':
         return (
           <div className="portfolio-svg-placeholder">
@@ -65,6 +123,20 @@ export default function Works({ defaultFilter }) {
               <circle cx="35" cy="18" r="4" fill="var(--accent)"/>
             </svg>
             <span style={{ fontSize: '0.75rem', marginTop: '1rem', display: 'block' }}>3D Die-Cut Package</span>
+          </div>
+        );
+      case 'flyer':
+      case 'folder':
+        return (
+          <div className="portfolio-svg-placeholder">
+            <Layers size={40} style={{ marginBottom: '1rem', color: 'var(--primary)' }} />
+            <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="15" y="10" width="40" height="50" rx="3" fill="rgba(139, 92, 246, 0.15)" stroke="var(--primary)" strokeWidth="2"/>
+              <line x1="22" y1="20" x2="48" y2="20" stroke="var(--secondary)" strokeWidth="2"/>
+              <line x1="22" y1="28" x2="42" y2="28" stroke="var(--text-muted)" strokeWidth="2"/>
+              <rect x="22" y="35" width="26" height="16" rx="2" fill="rgba(6, 182, 212, 0.2)"/>
+            </svg>
+            <span style={{ fontSize: '0.75rem', marginTop: '1rem', display: 'block' }}>Product Flyer / Catalog</span>
           </div>
         );
       case 'web-dashboard':
@@ -109,7 +181,8 @@ export default function Works({ defaultFilter }) {
           </div>
         );
       case 'ad':
-      default:
+      case 'social-creative':
+      case 'billboard':
         return (
           <div className="portfolio-svg-placeholder">
             <Monitor size={40} style={{ marginBottom: '1rem', color: 'var(--accent)' }} />
@@ -120,6 +193,17 @@ export default function Works({ defaultFilter }) {
               <circle cx="30" cy="15" r="3" fill="var(--primary)"/>
             </svg>
             <span style={{ fontSize: '0.75rem', marginTop: '1rem', display: 'block' }}>Marketing Campaign Banner</span>
+          </div>
+        );
+      default:
+        return (
+          <div className="portfolio-svg-placeholder">
+            <Monitor size={40} style={{ marginBottom: '1rem', color: 'var(--primary)' }} />
+            <svg width="80" height="50" viewBox="0 0 80 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="5" width="70" height="40" rx="3" fill="rgba(8, 10, 22, 0.8)" stroke="var(--primary)" strokeWidth="2"/>
+              <circle cx="40" cy="25" r="10" stroke="var(--secondary)" strokeWidth="2"/>
+            </svg>
+            <span style={{ fontSize: '0.75rem', marginTop: '1rem', display: 'block' }}>{type}</span>
           </div>
         );
     }
