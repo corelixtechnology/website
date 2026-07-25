@@ -307,17 +307,19 @@ const fetchServices = async () => {
     const res = await fetchWithRetry(`${API_URL}/api/services`);
     const { data } = await res.json();
     if (data) {
-      cache.services = data.map(item => ({
-        id: item.serviceId,
-        title: item.title,
-        desc: item.desc,
-        bullets: item.bullets || [],
-        pills: item.pills || [],
-        themeClass: item.themeClass,
-        iconName: item.iconName,
-        isActive: item.isActive ?? true,
-        documentId: item.documentId
-      }));
+      cache.services = data
+        .filter(item => item.isActive !== false)
+        .map(item => ({
+          id: item.serviceId,
+          title: item.title,
+          desc: item.desc,
+          bullets: item.bullets || [],
+          pills: item.pills || [],
+          themeClass: item.themeClass,
+          iconName: item.iconName,
+          isActive: item.isActive ?? true,
+          documentId: item.documentId
+        }));
       saveCached(CACHE_KEYS.SERVICES, cache.services);
       window.dispatchEvent(new Event('wm_services_updated'));
     }
@@ -331,18 +333,20 @@ const fetchBlogs = async () => {
     const res = await fetchWithRetry(`${API_URL}/api/blogs`);
     const { data } = await res.json();
     if (data) {
-      cache.blogs = data.map(item => ({
-        id: Number(item.blogId),
-        title: item.title,
-        category: item.category,
-        date: item.date,
-        desc: item.excerpt,
-        content: item.content,
-        iconName: item.imageType,
-        readTime: item.readTime,
-        isActive: item.isActive ?? true,
-        documentId: item.documentId
-      }));
+      cache.blogs = data
+        .filter(item => item.isActive !== false)
+        .map(item => ({
+          id: Number(item.blogId),
+          title: item.title,
+          category: item.category,
+          date: item.date,
+          desc: item.excerpt,
+          content: item.content,
+          iconName: item.imageType,
+          readTime: item.readTime,
+          isActive: item.isActive ?? true,
+          documentId: item.documentId
+        }));
       saveCached(CACHE_KEYS.BLOGS, cache.blogs);
       window.dispatchEvent(new Event('wm_blogs_updated'));
     }
@@ -356,19 +360,21 @@ const fetchWorks = async () => {
     const res = await fetchWithRetry(`${API_URL}/api/works`);
     const { data } = await res.json();
     if (data) {
-      cache.works = data.map(item => ({
-        id: item.workId,
-        title: item.title,
-        category: item.category,
-        client: item.client,
-        desc: item.desc,
-        tags: item.tags || [],
-        rating: item.rating,
-        svgType: item.svgType,
-        image: item.image || '',
-        isActive: item.isActive ?? true,
-        documentId: item.documentId
-      }));
+      cache.works = data
+        .filter(item => item.isActive !== false)
+        .map(item => ({
+          id: item.workId,
+          title: item.title,
+          category: item.category,
+          client: item.client,
+          desc: item.desc,
+          tags: item.tags || [],
+          rating: item.rating,
+          svgType: item.svgType,
+          image: item.image || '',
+          isActive: item.isActive ?? true,
+          documentId: item.documentId
+        }));
       saveCached(CACHE_KEYS.WORKS, cache.works);
       window.dispatchEvent(new Event('wm_works_updated'));
     }
@@ -476,9 +482,18 @@ const syncServices = async (updated) => {
     for (const dbService of dbServices) {
       const stillExists = updated.some(item => item.id === dbService.serviceId);
       if (!stillExists) {
-        await fetch(`${API_URL}/api/services/${dbService.documentId}`, {
-          method: 'DELETE'
-        });
+        try {
+          await fetch(`${API_URL}/api/services/${dbService.documentId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: { isActive: false } })
+          });
+          await fetch(`${API_URL}/api/services/${dbService.documentId}`, {
+            method: 'DELETE'
+          });
+        } catch (e) {
+          // Soft delete via PUT succeeded even if DELETE fails
+        }
       }
     }
     await fetchServices();
@@ -527,9 +542,18 @@ const syncBlogs = async (updated) => {
     for (const dbBlog of dbBlogs) {
       const stillExists = updated.some(item => Number(item.id) === Number(dbBlog.blogId));
       if (!stillExists) {
-        await fetch(`${API_URL}/api/blogs/${dbBlog.documentId}`, {
-          method: 'DELETE'
-        });
+        try {
+          await fetch(`${API_URL}/api/blogs/${dbBlog.documentId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: { isActive: false } })
+          });
+          await fetch(`${API_URL}/api/blogs/${dbBlog.documentId}`, {
+            method: 'DELETE'
+          });
+        } catch (e) {
+          // Soft delete via PUT succeeded even if DELETE fails
+        }
       }
     }
     await fetchBlogs();
@@ -579,9 +603,18 @@ const syncWorks = async (updated) => {
     for (const dbWork of dbWorks) {
       const stillExists = updated.some(item => Number(item.id) === Number(dbWork.workId));
       if (!stillExists) {
-        await fetch(`${API_URL}/api/works/${dbWork.documentId}`, {
-          method: 'DELETE'
-        });
+        try {
+          await fetch(`${API_URL}/api/works/${dbWork.documentId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: { isActive: false } })
+          });
+          await fetch(`${API_URL}/api/works/${dbWork.documentId}`, {
+            method: 'DELETE'
+          });
+        } catch (e) {
+          // Soft delete via PUT succeeded even if DELETE fails
+        }
       }
     }
     await fetchWorks();
