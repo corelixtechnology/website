@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Briefcase, Clock, CheckCircle2, ShieldAlert } from 'lucide-react';
 
 export default function Careers() {
-  const [formData, setFormData] = useState({ name: '', email: '', position: 'General Application', essay: '', coffee: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', position: 'General Application', essay: '', coffee: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -26,6 +26,9 @@ export default function Careers() {
       newErrors.email = 'Please enter your email address.';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address.';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Please enter your contact number.';
     }
     if (!formData.essay.trim()) {
       newErrors.essay = 'Please write a brief summary of your experience.';
@@ -137,15 +140,21 @@ export default function Careers() {
 
                 <div className="form-grid">
                   <div className="input-group">
-                    <label>Applying Position</label>
+                    <label>Contact Number</label>
                     <input
-                      type="text"
-                      name="position"
-                      value={formData.position}
-                      readOnly
-                      className="input-field"
-                      style={{ background: 'rgba(10, 12, 26, 0.8)', color: 'white', opacity: 0.85, cursor: 'not-allowed' }}
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="e.g. +1 (555) 000-0000"
+                      className={`input-field ${errors.phone ? 'error' : ''}`}
                     />
+                    {errors.phone && (
+                      <span className="form-validation-feedback error-text">
+                        <ShieldAlert size={12} style={{ display: 'inline', marginRight: '4px' }} />
+                        {errors.phone}
+                      </span>
+                    )}
                   </div>
 
                   <div className="input-group">
@@ -167,6 +176,18 @@ export default function Careers() {
                       <span className="funny-helper-tip">Link your work so we can review your projects and history.</span>
                     )}
                   </div>
+                </div>
+
+                <div className="input-group">
+                  <label>Applying Position</label>
+                  <input
+                    type="text"
+                    name="position"
+                    value={formData.position}
+                    readOnly
+                    className="input-field"
+                    style={{ background: 'rgba(10, 12, 26, 0.8)', color: 'white', opacity: 0.85, cursor: 'not-allowed' }}
+                  />
                 </div>
 
                 <div className="input-group">
@@ -202,12 +223,12 @@ export default function Careers() {
                   Thank you, <strong>{formData.name}</strong>. We have saved your application for future job openings.
                 </p>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                  We have successfully logged your portfolio link: <strong>{formData.coffee}</strong>. We will reach out to you if a matching position becomes available.
+                  We have successfully logged your contact number (<strong>{formData.phone}</strong>) and portfolio link (<strong>{formData.coffee}</strong>). We will reach out to you if a matching position becomes available.
                 </p>
                 <button 
                   onClick={() => {
                     setIsSubmitted(false);
-                    setFormData({ name: '', email: '', position: 'General Application', essay: '', coffee: '' });
+                    setFormData({ name: '', email: '', phone: '', position: 'General Application', essay: '', coffee: '' });
                   }} 
                   className="btn btn-secondary"
                   style={{ marginTop: '1.5rem' }}
@@ -222,4 +243,3 @@ export default function Careers() {
     </section>
   );
 }
-

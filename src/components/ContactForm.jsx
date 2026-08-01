@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, Mail, MessageSquare, Send, CheckCircle2, IndianRupee, Cpu } from 'lucide-react';
+import { User, Mail, Phone, MessageSquare, Send, CheckCircle2, IndianRupee, Cpu } from 'lucide-react';
 import { db } from '../utils/db';
 import BackgroundParticles from './BackgroundParticles';
 
@@ -8,6 +8,7 @@ export default function ContactForm({ preselectedServiceId }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     projectType: preselectedServiceId || 'web-dev',
     budget: '',
     message: ''
@@ -68,6 +69,9 @@ export default function ContactForm({ preselectedServiceId }) {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email.';
     }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Please enter your contact number.';
+    }
     if (!formData.message.trim()) newErrors.message = 'Please write a brief description of your project.';
     return newErrors;
   };
@@ -84,6 +88,7 @@ export default function ContactForm({ preselectedServiceId }) {
     db.addInquiry({
       name: formData.name,
       email: formData.email,
+      phone: formData.phone,
       projectType: formData.projectType,
       budget: formData.budget ? parseInt(formData.budget) : 0,
       message: formData.message
@@ -147,6 +152,23 @@ export default function ContactForm({ preselectedServiceId }) {
 
                 <div className="form-grid">
                   <div className="input-group">
+                    <label className="form-label">Contact Number</label>
+                    <div className="input-with-icon">
+                      <Phone size={16} className="input-icon" />
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="e.g. +91 98765 43210"
+                        className={`input-field ${errors.phone ? 'error' : ''}`}
+                        style={{ paddingLeft: '2.8rem' }}
+                      />
+                    </div>
+                    {errors.phone && <span className="validation-error">{errors.phone}</span>}
+                  </div>
+
+                  <div className="input-group">
                     <label className="form-label">Interested Service</label>
                     <div className="input-with-icon">
                       <Cpu size={16} className="input-icon" />
@@ -165,21 +187,21 @@ export default function ContactForm({ preselectedServiceId }) {
                       </select>
                     </div>
                   </div>
+                </div>
 
-                  <div className="input-group">
-                    <label className="form-label">Project Budget (INR)</label>
-                    <div className="input-with-icon">
-                      <IndianRupee size={16} className="input-icon" />
-                      <input
-                        type="number"
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleInputChange}
-                        placeholder="e.g. 5000 (Optional)"
-                        className="input-field"
-                        style={{ paddingLeft: '2.8rem' }}
-                      />
-                    </div>
+                <div className="input-group" style={{ marginBottom: '1.5rem' }}>
+                  <label className="form-label">Project Budget (INR)</label>
+                  <div className="input-with-icon">
+                    <IndianRupee size={16} className="input-icon" />
+                    <input
+                      type="number"
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleInputChange}
+                      placeholder="e.g. 50000 (Optional)"
+                      className="input-field"
+                      style={{ paddingLeft: '2.8rem' }}
+                    />
                   </div>
                 </div>
 
@@ -218,12 +240,12 @@ export default function ContactForm({ preselectedServiceId }) {
                 Thank you for contacting Corelix Technology, <strong>{formData.name}</strong>. We have logged your request under the <strong>{services.find(s => s.id === formData.projectType)?.title || 'Custom Project'}</strong> category.
               </p>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', maxWidth: '400px', margin: '0 auto 2rem auto' }}>
-                Our engineering and design partners have been notified, and we will follow up with a formal proposal draft at <strong>{formData.email}</strong>.
+                Our engineering and design partners have been notified. We logged your contact number (<strong>{formData.phone}</strong>) and will follow up with a formal proposal draft at <strong>{formData.email}</strong>.
               </p>
               <button
                 onClick={() => {
                   setIsSubmitted(false);
-                  setFormData({ name: '', email: '', projectType: services[0]?.id || 'web-dev', budget: '', message: '' });
+                  setFormData({ name: '', email: '', phone: '', projectType: services[0]?.id || 'web-dev', budget: '', message: '' });
                 }}
                 className="btn btn-secondary"
               >
@@ -236,3 +258,4 @@ export default function ContactForm({ preselectedServiceId }) {
     </section>
   );
 }
+
