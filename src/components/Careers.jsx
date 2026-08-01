@@ -1,61 +1,10 @@
 import React, { useState } from 'react';
-import { ChevronDown, Briefcase, MapPin, Clock, CheckCircle2, User, Mail, ShieldAlert } from 'lucide-react';
+import { Briefcase, Clock, CheckCircle2, ShieldAlert } from 'lucide-react';
 
 export default function Careers() {
-  const [openJob, setOpenJob] = useState(null);
-  const [formData, setFormData] = useState({ name: '', email: '', position: 'designer', essay: '', coffee: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', position: 'General Application', essay: '', coffee: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const toggleJob = (index) => {
-    if (openJob === index) {
-      setOpenJob(null);
-    } else {
-      setOpenJob(index);
-    }
-  };
-
-  const jobOpenings = [
-    {
-      title: 'Senior UI/UX Designer',
-      shortKey: 'pixel',
-      dept: 'Design Team',
-      type: 'Full-time / Remote',
-      desc: 'We are seeking a creative UI/UX Designer who is passionate about crafting user-centric, high-converting digital products. You will lead our visual designs from concept to developer hand-off, creating cohesive design systems.',
-      requirements: [
-        '3+ years of professional interface design experience (Web/Mobile)',
-        'Mastery of Figma, Adobe Creative Suite, and high-fidelity wireframing',
-        'Strong communication skills to articulate design decisions to stakeholders',
-        'Deep understanding of color theory, typography, and responsive layouts'
-      ]
-    },
-    {
-      title: 'Frontend React Developer',
-      shortKey: 'code',
-      dept: 'Engineering',
-      type: 'Full-time / Hybrid',
-      desc: 'We are looking for a Frontend React Developer to build high-performance, responsive web interfaces. You will translate static Figma mockups into interactive, optimized, and scalable React systems.',
-      requirements: [
-        'Deep knowledge of React, JavaScript, TypeScript, and modern responsive CSS layouts',
-        'Proven debugging, code optimization, and web performance profiling skills',
-        'Familiarity with Git version control, CI/CD pipelines, and modern build tools',
-        'Experience with state management tools (Redux, Context API) and RESTful API integration'
-      ]
-    },
-    {
-      title: 'Backend Node.js Developer',
-      shortKey: 'firefighter',
-      dept: 'Database & API',
-      type: 'Full-time / Office',
-      desc: 'We are looking for a Backend Node.js Developer to build robust, scalable server architectures, manage database integrity, and ensure smooth data communication pipelines.',
-      requirements: [
-        'Strong backend experience with Node.js, Express, and RESTful API architecture',
-        'Proficiency in relational (SQL) and non-relational (MongoDB) databases',
-        'Understanding of containerization (Docker), cloud deployment, and system security practices',
-        'Experience in database schema design, indexing, and query optimization'
-      ]
-    }
-  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -98,66 +47,55 @@ export default function Careers() {
       <div className="container">
         <h2 className="section-title reveal reveal-slide-up">Join The Team</h2>
         <p className="section-subtitle reveal reveal-slide-up" data-delay="0.1s">
-          We are always looking for smart minds to join us. Check out our job openings and apply below to start your journey.
+          There are currently no open positions available at our company. However, we are always eager to connect with extraordinary talent.
         </p>
 
         <div className="careers-pane">
-          {/* Accordion Jobs */}
-          <div className="job-accordion reveal-stagger">
-            {jobOpenings.map((job, idx) => (
-              <div 
-                key={idx} 
-                className={`job-item glass-panel reveal-item reveal-slide-up ${openJob === idx ? 'open' : ''}`}
-              >
-                <div className="job-header" onClick={() => toggleJob(idx)}>
-                  <div className="job-header-info">
-                    <h4>{job.title}</h4>
-                    <div className="job-subtitle-row">
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                        <Briefcase size={12} /> {job.dept}
-                      </span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-                        <MapPin size={12} /> {job.type}
-                      </span>
-                    </div>
-                  </div>
-                  <ChevronDown className="job-arrow" />
-                </div>
-
-                {openJob === idx && (
-                  <div className="job-details">
-                    <p>{job.desc}</p>
-                    <h5 className="job-specs-title">Qualifications:</h5>
-                    <ul className="job-specs-list">
-                      {job.requirements.map((req, rIdx) => (
-                        <li key={rIdx}>
-                          <span className="job-bullet-dot"></span>
-                          <span>{req}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <button 
-                      onClick={() => {
-                        setFormData({ ...formData, position: job.shortKey });
-                        document.querySelector('#apply-form-box').scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="btn btn-outline-cyan"
-                      style={{ padding: '0.5rem 1rem', fontSize: '0.8rem' }}
-                    >
-                      Apply for this Role
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))}
+          {/* No Openings Banner */}
+          <div 
+            className="glass-panel reveal reveal-slide-up" 
+            style={{ 
+              padding: '2.5rem 2rem', 
+              textAlign: 'center', 
+              borderRadius: '1.25rem', 
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              background: 'rgba(15, 20, 35, 0.6)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <div style={{ 
+              width: '64px', 
+              height: '64px', 
+              borderRadius: '50%', 
+              background: 'rgba(239, 68, 68, 0.1)', 
+              border: '1px solid rgba(239, 68, 68, 0.25)', 
+              display: 'inline-flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              marginBottom: '1.25rem' 
+            }}>
+              <Briefcase size={30} style={{ color: '#f87171' }} />
+            </div>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 600, color: '#fff', marginBottom: '0.75rem' }}>
+              No Openings Available
+            </h3>
+            <p style={{ color: 'var(--text-muted)', maxWidth: '520px', margin: '0 auto 1.5rem', lineHeight: '1.6', fontSize: '0.95rem' }}>
+              We currently do not have any open positions at our company. If you'd like to be considered for future job openings, you can leave your details and portfolio below.
+            </p>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '0.5rem 1.2rem', borderRadius: '50px', fontSize: '0.85rem', color: '#94a3b8' }}>
+              <Clock size={15} style={{ color: '#60a5fa' }} /> Submissions will be kept on file for future opportunities
+            </div>
           </div>
 
-          {/* Form Box */}
+          {/* General Application Form */}
           <div id="apply-form-box" className="careers-apply-form glass-panel reveal reveal-scale-up" data-delay="0.2s">
             {!isSubmitted ? (
               <form onSubmit={handleFormSubmit}>
-                <h3 className="form-title text-gradient-purple-cyan">Join Our Creative Team</h3>
-                <p className="form-subtitle">Fill in the form below. Our recruiting team will review your application within 2-3 business days.</p>
+                <h3 className="form-title text-gradient-purple-cyan">Future Opportunities Application</h3>
+                <p className="form-subtitle">Submit your portfolio and profile. Our recruitment team will get in touch when a matching role opens up.</p>
 
                 <div className="form-grid">
                   <div className="input-group">
@@ -200,17 +138,14 @@ export default function Careers() {
                 <div className="form-grid">
                   <div className="input-group">
                     <label>Applying Position</label>
-                    <select
+                    <input
+                      type="text"
                       name="position"
                       value={formData.position}
-                      onChange={handleInputChange}
+                      readOnly
                       className="input-field"
-                      style={{ background: 'rgba(10, 12, 26, 0.8)', color: 'white' }}
-                    >
-                      <option value="pixel">Senior UI/UX Designer</option>
-                      <option value="code">Frontend React Developer</option>
-                      <option value="firefighter">Backend Node.js Developer</option>
-                    </select>
+                      style={{ background: 'rgba(10, 12, 26, 0.8)', color: 'white', opacity: 0.85, cursor: 'not-allowed' }}
+                    />
                   </div>
 
                   <div className="input-group">
@@ -235,13 +170,13 @@ export default function Careers() {
                 </div>
 
                 <div className="input-group">
-                  <label>Tell us about your experience and why you are a fit for this role</label>
+                  <label>Tell us about your experience and domain of interest</label>
                   <textarea
                     name="essay"
                     rows="4"
                     value={formData.essay}
                     onChange={handleInputChange}
-                    placeholder="Describe your background, key achievements, and relevant project experience..."
+                    placeholder="Describe your background, key achievements, and what kind of roles you are interested in..."
                     className={`input-field ${errors.essay ? 'error' : ''}`}
                     style={{ resize: 'vertical' }}
                   ></textarea>
@@ -255,7 +190,7 @@ export default function Careers() {
 
                 <div className="submit-btn-container">
                   <button type="submit" className="btn btn-primary">
-                    Submit Job Application
+                    Submit General Application
                   </button>
                 </div>
               </form>
@@ -264,15 +199,15 @@ export default function Careers() {
                 <CheckCircle2 className="success-icon-bounce" size={64} />
                 <h3>Application Received!</h3>
                 <p>
-                  Thank you, <strong>{formData.name}</strong>. Our recruiting team will review your application and portfolio shortly.
+                  Thank you, <strong>{formData.name}</strong>. We have saved your application for future job openings.
                 </p>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                  We have successfully logged your portfolio link: <strong>{formData.coffee}</strong>. We will reach out to you via email.
+                  We have successfully logged your portfolio link: <strong>{formData.coffee}</strong>. We will reach out to you if a matching position becomes available.
                 </p>
                 <button 
                   onClick={() => {
                     setIsSubmitted(false);
-                    setFormData({ name: '', email: '', position: 'pixel', essay: '', coffee: '' });
+                    setFormData({ name: '', email: '', position: 'General Application', essay: '', coffee: '' });
                   }} 
                   className="btn btn-secondary"
                   style={{ marginTop: '1.5rem' }}
@@ -287,3 +222,4 @@ export default function Careers() {
     </section>
   );
 }
+
