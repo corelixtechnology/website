@@ -904,7 +904,16 @@
 
 @media (max-width: 992px) {
   .navbar-inner {
-    padding: 0.75rem 2rem;
+    position: relative;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .navbar-logo {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .navbar-menu-desktop,
@@ -914,6 +923,10 @@
 
   .navbar-burger {
     display: block;
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
@@ -2729,6 +2742,57 @@
 }
 
 @media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-logo-img {
+    margin: 0 auto 1rem auto;
+  }
+
+  .footer-brand p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .footer-socials {
+    justify-content: center;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-col h4::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-links {
+    align-items: center;
+  }
+
+  .footer-links li a {
+    justify-content: center;
+  }
+
+  .footer-links a:hover {
+    padding-left: 0;
+  }
+
   .footer-bottom {
     flex-direction: column;
     text-align: center;
