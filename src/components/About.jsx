@@ -85,7 +85,7 @@ export default function About({ defaultTab }) {
             </div>
 
             {/* Stats Grid */}
-            <div className="about-stats-grid reveal-stagger" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginTop: '3rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '2.5rem' }}>
+            <div className="about-stats-grid reveal-stagger">
               <div className="about-stat-card reveal-item reveal-slide-right" style={{ textAlign: 'center' }}>
                 <span className="text-gradient-purple-cyan" style={{ fontSize: '2.5rem', fontWeight: '800', display: 'block' }}>1</span>
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: '600' }}>Visionary Founder</span>
