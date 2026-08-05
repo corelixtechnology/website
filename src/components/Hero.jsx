@@ -38,22 +38,27 @@ export default function Hero({ onStartCalculator }) {
           
           {/* Left Column: Proper Business Content */}
           <div className="new-hero-text-content">
-            <h1 className="new-hero-main-title reveal reveal-slide-right">
+            <h1 className="new-hero-main-title">
               {heroTitle.includes('Engineering') ? (
                 <>
-                  Engineering <span className="text-violet-highlight">Digital Solutions</span> <br />
+                  Engineering <span className="text-violet-highlight">Digital Solutions</span> <br className="hero-title-br" />
                   that Scale Your <span className="text-violet-highlight">Business</span>
+                </>
+              ) : heroTitle.includes('IT Solutions') ? (
+                <>
+                  Creative <span className="text-violet-highlight">IT Solutions</span> &amp; <br className="hero-title-br" />
+                  Digital <span className="text-violet-highlight">Agency</span>
                 </>
               ) : (
                 <span>{heroTitle}</span>
               )}
             </h1>
             
-            <p className="new-hero-description-paragraph reveal reveal-slide-right" data-delay="0.15s">
+            <p className="new-hero-description-paragraph">
               {heroSubtitle}
             </p>
             
-            <div className="new-hero-button-actions reveal reveal-slide-right" data-delay="0.3s">
+            <div className="new-hero-button-actions">
               <button 
                 id="btn-hero-explore"
                 onClick={handleExploreServices} 
