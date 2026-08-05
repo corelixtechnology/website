@@ -558,6 +558,22 @@ p {
   }
 }
 
+/* Mobile Performance & Instant Above-the-Fold Render Overrides */
+@media (max-width: 768px) {
+  .new-hero-section .reveal,
+  .new-hero-section .reveal-stagger > .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .circle-cursor-ring,
+  .circle-cursor-dot,
+  .cursor-trail {
+    display: none !important;
+  }
+}
+
 /* Localized Floating Background Particles */
 .global-particles-container {
   position: absolute;

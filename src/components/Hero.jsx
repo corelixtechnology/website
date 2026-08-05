@@ -112,8 +112,8 @@ export default function Hero({ onStartCalculator }) {
                     src={heroWoman} 
                     alt="Corelix Technology Developer at Desk" 
                     className="collage-photo woman-photo" 
-                    fetchpriority="high"
-                    loading="eager"
+                    fetchpriority="low"
+                    loading="lazy"
                     decoding="async"
                     width="400"
                     height="460"

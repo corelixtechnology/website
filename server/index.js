@@ -23,7 +23,7 @@ try {
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://corelixtechnology_db_user:QKaf7Ow1tIXkC9wD@corelixtechnology.0mtmpsm.mongodb.net/corelix?retryWrites=true&w=majority&appName=corelixtechnology';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://corelixtechnology_db_user:Corelix2026@corelixtechnology.0mtmpsm.mongodb.net/corelix?retryWrites=true&w=majority&appName=corelixtechnology';
 
 // Middleware
 app.use(cors());

@@ -7,7 +7,13 @@ export default function PagePreloader() {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Fast progress — completes in ~360ms, doesn't block LCP
+    // On mobile screens, finish preloader immediately to allow instant LCP render
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    if (isMobile) {
+      setLoading(false);
+      return;
+    }
+
     let ticks = 0;
     const maxTicks = 8;
     const interval = setInterval(() => {

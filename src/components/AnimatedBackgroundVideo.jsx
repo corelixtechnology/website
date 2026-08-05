@@ -97,7 +97,9 @@ export default function AnimatedBackgroundVideo() {
       }
 
       ctx.globalAlpha = 1;
-      animationFrameId = requestAnimationFrame(render);
+      if (!isMobile) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     // Defer animation start until browser is idle — don't compete with LCP

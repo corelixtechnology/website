@@ -70,8 +70,11 @@ export default function App() {
 
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100, isHovered: false });
 
-  // Mouse cursor & trail handler
+  // Mouse cursor & trail handler (disabled on mobile/touch to spare main thread CPU)
   useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768;
+    if (isTouchDevice) return;
+
     const handleMouseMove = (e) => {
       setCursorPos(prev => ({ ...prev, x: e.clientX, y: e.clientY }));
 

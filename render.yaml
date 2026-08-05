@@ -15,7 +15,7 @@ services:
       - key: PORT
         value: 5000
       - key: MONGODB_URI
-        value: mongodb+srv://corelixtechnology_db_user:QKaf7Ow1tIXkC9wD@corelixtechnology.0mtmpsm.mongodb.net/corelix?retryWrites=true&w=majority&appName=corelixtechnology
+        value: mongodb+srv://corelixtechnology_db_user:Corelix2026@corelixtechnology.0mtmpsm.mongodb.net/corelix?retryWrites=true&w=majority&appName=corelixtechnology
 
   # React + Vite Static Frontend Application
   - type: static

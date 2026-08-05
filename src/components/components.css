@@ -1139,10 +1139,14 @@
 
 .man-portrait-card {
   height: 440px;
+  aspect-ratio: 400 / 500;
+  contain: layout;
 }
 
 .woman-portrait-card {
   height: 310px;
+  aspect-ratio: 400 / 460;
+  contain: layout;
 }
 
 .collage-photo {
@@ -1467,10 +1471,14 @@
 
   .man-portrait-card {
     height: 330px;
+    aspect-ratio: 400 / 500;
+    contain: layout;
   }
 
   .woman-portrait-card {
     height: 250px;
+    aspect-ratio: 400 / 460;
+    contain: layout;
   }
 
   .badge-experience-violet-card {

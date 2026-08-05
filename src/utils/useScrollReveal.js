@@ -68,11 +68,13 @@ export default function useScrollReveal() {
     }, 1200);
 
     // Initialize reveal elements on route/page load
+    revealVisibleOnLoad();
     setupStaggers();
     setupSingleReveals();
     revealVisibleOnLoad();
 
-    const loadTimer = setTimeout(revealVisibleOnLoad, 60);
+    // Secondary frame check for fast-rendering DOM elements
+    requestAnimationFrame(revealVisibleOnLoad);
 
     // Setup MutationObserver to watch for dynamically loaded components / sections
     const mutationObserver = new MutationObserver(() => {
