@@ -53,6 +53,8 @@ export default function SEO({ title, description, keywords, canonical, robots })
     linkCanonical.setAttribute('href', finalCanonical);
 
     // 4. Open Graph Metadata
+    updateMetaTag('property', 'og:site_name', 'Corelix Technology');
+    updateMetaTag('name', 'application-name', 'Corelix Technology');
     updateMetaTag('property', 'og:title', formattedTitle);
     updateMetaTag('property', 'og:description', description || 'Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
     updateMetaTag('property', 'og:url', `https://corelixtechnology.in.net${location.pathname}`);
@@ -63,7 +65,39 @@ export default function SEO({ title, description, keywords, canonical, robots })
     updateMetaTag('name', 'twitter:description', description || 'Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
     updateMetaTag('name', 'twitter:image', 'https://corelixtechnology.in.net/og-image.png');
 
-    // 6. Schema.org JSON-LD Structured Data
+    // 6. Dynamic Breadcrumbs based on route
+    const getBreadcrumbs = (pathname) => {
+      const items = [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://corelixtechnology.in.net/"
+        }
+      ];
+
+      if (pathname === '/services') {
+        items.push({ "@type": "ListItem", "position": 2, "name": "Services", "item": "https://corelixtechnology.in.net/services" });
+      } else if (pathname.startsWith('/services/')) {
+        items.push({ "@type": "ListItem", "position": 2, "name": "Services", "item": "https://corelixtechnology.in.net/services" });
+        items.push({ "@type": "ListItem", "position": 3, "name": title || "Service Detail", "item": `https://corelixtechnology.in.net${pathname}` });
+      } else if (pathname === '/works') {
+        items.push({ "@type": "ListItem", "position": 2, "name": "Works", "item": "https://corelixtechnology.in.net/works" });
+      } else if (pathname === '/about') {
+        items.push({ "@type": "ListItem", "position": 2, "name": "About Us", "item": "https://corelixtechnology.in.net/about" });
+      } else if (pathname === '/blog') {
+        items.push({ "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://corelixtechnology.in.net/blog" });
+      } else if (pathname === '/careers') {
+        items.push({ "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://corelixtechnology.in.net/careers" });
+      } else if (pathname === '/contact') {
+        items.push({ "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://corelixtechnology.in.net/contact" });
+      } else if (pathname === '/sitemap') {
+        items.push({ "@type": "ListItem", "position": 2, "name": "Sitemap", "item": "https://corelixtechnology.in.net/sitemap" });
+      }
+      return items;
+    };
+
+    // 7. Schema.org JSON-LD Structured Data
     let schemaScript = document.querySelector('script[type="application/ld+json"]');
     if (!schemaScript) {
       schemaScript = document.createElement('script');
@@ -76,17 +110,17 @@ export default function SEO({ title, description, keywords, canonical, robots })
         {
           "@type": ["SoftwareCompany", "LocalBusiness", "ProfessionalService"],
           "name": "Corelix Technology",
-          "alternateName": ["Corelix Technology Coimbatore", "Corelix Technology Karur", "Corelix", "Corelix Tech", "Corelix Technology - Software Development Company in Coimbatore"],
+          "alternateName": ["Corelix Technology Karur", "Corelix Technology Coimbatore", "Corelix", "Corelix Tech", "Corelix Technology - Software Development Company"],
           "brand": {
             "@type": "Brand",
             "name": "Corelix Technology",
-            "alternateName": "Corelix Technology Coimbatore",
+            "alternateName": "Corelix Technology",
             "logo": "https://corelixtechnology.in.net/logo.png"
           },
           "description": "Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.",
           "image": "https://corelixtechnology.in.net/logo.png",
           "@id": "https://corelixtechnology.in.net/#organization",
-          "url": "https://corelixtechnology.in.net",
+          "url": "https://corelixtechnology.in.net/",
           "telephone": "+919360410038",
           "hasMap": "https://maps.google.com/?q=10.979349,78.066858",
           "priceRange": "$$",
@@ -137,8 +171,8 @@ export default function SEO({ title, description, keywords, canonical, robots })
             },
             {
               "@type": "City",
-              "name": "Chennai",
-              "sameAs": "https://en.wikipedia.org/wiki/Chennai"
+              "name": "Karur",
+              "sameAs": "https://en.wikipedia.org/wiki/Karur"
             },
             {
               "@type": "City",
@@ -147,8 +181,8 @@ export default function SEO({ title, description, keywords, canonical, robots })
             },
             {
               "@type": "City",
-              "name": "Karur",
-              "sameAs": "https://en.wikipedia.org/wiki/Karur"
+              "name": "Chennai",
+              "sameAs": "https://en.wikipedia.org/wiki/Chennai"
             },
             {
               "@type": "City",
@@ -294,8 +328,9 @@ export default function SEO({ title, description, keywords, canonical, robots })
         {
           "@type": "WebSite",
           "@id": "https://corelixtechnology.in.net/#website",
-          "url": "https://corelixtechnology.in.net",
+          "url": "https://corelixtechnology.in.net/",
           "name": "Corelix Technology",
+          "alternateName": ["Corelix", "Corelix Tech", "Corelix Technology Karur", "Corelix Technology Coimbatore"],
           "description": "Best Software Company in Tamil Nadu and Best Branding Agency",
           "publisher": {
             "@id": "https://corelixtechnology.in.net/#organization"
@@ -309,32 +344,7 @@ export default function SEO({ title, description, keywords, canonical, robots })
         {
           "@type": "BreadcrumbList",
           "@id": "https://corelixtechnology.in.net/#breadcrumb",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://corelixtechnology.in.net/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Services",
-              "item": "https://corelixtechnology.in.net/services"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Works",
-              "item": "https://corelixtechnology.in.net/works"
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "Contact",
-              "item": "https://corelixtechnology.in.net/contact"
-            }
-          ]
+          "itemListElement": getBreadcrumbs(location.pathname)
         }
       ]
     };
