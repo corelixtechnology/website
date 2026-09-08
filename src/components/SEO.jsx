@@ -7,10 +7,11 @@ export default function SEO({ title, description, keywords, canonical, robots })
 
   useEffect(() => {
     // 1. Update Title
-    // 1. Update Title
-    const formattedTitle = title
-      ? `${title} | Corelix Technology`
-      : 'Corelix Technology | Software Development Company in Coimbatore';
+    const formattedTitle = !title
+      ? 'Corelix Technology – Best Software Company in Karur'
+      : (title.includes('Corelix')
+          ? title
+          : `${title} | Corelix Technology`);
     document.title = formattedTitle;
 
     // Helper to query and update/create meta tags
@@ -30,8 +31,8 @@ export default function SEO({ title, description, keywords, canonical, robots })
     };
 
     // 2. Meta description, keywords, geo-location & robots
-    updateMetaTag('name', 'description', description || 'Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
-    updateMetaTag('name', 'keywords', keywords || 'software development company in coimbatore, best software company in coimbatore, web development coimbatore, mobile app development coimbatore, AI solutions, Corelix Technology, custom software development');
+    updateMetaTag('name', 'description', description || 'Corelix Technology is a premium software development company in Tamil Nadu specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
+    updateMetaTag('name', 'keywords', keywords || 'Corelix Technology, best software company in Karur, software development company Tamil Nadu, best IT company Coimbatore, web development Karur, mobile app development Tamil Nadu, AI solutions India, branding startup Tamil Nadu, custom software development');
     updateMetaTag('name', 'robots', robots || 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
     updateMetaTag('name', 'geo.region', 'IN-TN');
     updateMetaTag('name', 'geo.placename', 'Karur, Tamil Nadu, India');
@@ -55,15 +56,16 @@ export default function SEO({ title, description, keywords, canonical, robots })
     // 4. Open Graph Metadata
     updateMetaTag('property', 'og:site_name', 'Corelix Technology');
     updateMetaTag('name', 'application-name', 'Corelix Technology');
+    updateMetaTag('name', 'apple-mobile-web-app-title', 'Corelix Technology');
     updateMetaTag('property', 'og:title', formattedTitle);
-    updateMetaTag('property', 'og:description', description || 'Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
+    updateMetaTag('property', 'og:description', description || 'Corelix Technology is a premium software development company in Tamil Nadu specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
     updateMetaTag('property', 'og:url', `https://corelixtechnology.in.net${location.pathname}`);
-    updateMetaTag('property', 'og:image', 'https://corelixtechnology.in.net/og-image.png');
+    updateMetaTag('property', 'og:image', 'https://corelixtechnology.in.net/logo.png');
 
     // 5. Twitter Card Metadata
     updateMetaTag('name', 'twitter:title', formattedTitle);
-    updateMetaTag('name', 'twitter:description', description || 'Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
-    updateMetaTag('name', 'twitter:image', 'https://corelixtechnology.in.net/og-image.png');
+    updateMetaTag('name', 'twitter:description', description || 'Corelix Technology is a premium software development company in Tamil Nadu specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
+    updateMetaTag('name', 'twitter:image', 'https://corelixtechnology.in.net/logo.png');
 
     // 6. Dynamic Breadcrumbs based on route
     const getBreadcrumbs = (pathname) => {
@@ -98,10 +100,11 @@ export default function SEO({ title, description, keywords, canonical, robots })
     };
 
     // 7. Schema.org JSON-LD Structured Data
-    let schemaScript = document.querySelector('script[type="application/ld+json"]');
+    let schemaScript = document.getElementById('dynamic-page-schema');
     if (!schemaScript) {
       schemaScript = document.createElement('script');
       schemaScript.setAttribute('type', 'application/ld+json');
+      schemaScript.setAttribute('id', 'dynamic-page-schema');
       document.head.appendChild(schemaScript);
     }
     const schemaData = {
@@ -330,14 +333,17 @@ export default function SEO({ title, description, keywords, canonical, robots })
           "@id": "https://corelixtechnology.in.net/#website",
           "url": "https://corelixtechnology.in.net/",
           "name": "Corelix Technology",
-          "alternateName": ["Corelix", "Corelix Tech", "Corelix Technology Karur", "Corelix Technology Coimbatore"],
+          "alternateName": "Corelix",
           "description": "Best Software Company in Tamil Nadu and Best Branding Agency",
           "publisher": {
             "@id": "https://corelixtechnology.in.net/#organization"
           },
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://corelixtechnology.in.net/services?q={search_term_string}",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://corelixtechnology.in.net/services?q={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
           }
         },

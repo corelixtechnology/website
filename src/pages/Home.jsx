@@ -21,8 +21,9 @@ export default function Home() {
   return (
     <div style={{ position: 'relative' }}>
       <SEO 
-        description="Corelix Technology is a premium software development company in Coimbatore specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting."
-        keywords="software development company in coimbatore, best software company in coimbatore, web development coimbatore, mobile app development coimbatore, AI solutions, Corelix Technology, custom software development"
+        title="Corelix Technology – Best Software Company in Karur"
+        description="Corelix Technology — #1 IT company &amp; branding startup in Tamil Nadu. We specialize in custom websites, mobile apps, AI solutions, ERP, CRM &amp; IT consulting. Get a free quote today!"
+        keywords="Corelix Technology, software development company Tamil Nadu, best IT company Coimbatore, web development Karur, mobile app development Tamil Nadu, AI solutions India, branding startup Tamil Nadu, custom software development, ERP CRM solutions"
       />
 
       {/* Side Section Scroll Navigation Dots */}

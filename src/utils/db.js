@@ -1,6 +1,6 @@
 // Node.js + MongoDB API & LocalStorage Database helper for Corelix Technology
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL ;
 
 const CACHE_KEYS = {
   SERVICES: 'wm_services',
@@ -281,6 +281,7 @@ let cache = {
 
 // Sync with Node.js + MongoDB API
 const syncWithBackend = async () => {
+  if (!API_BASE_URL) return;
   try {
     const [servicesRes, blogsRes, worksRes, inquiriesRes, settingsRes] = await Promise.allSettled([
       fetch(`${API_BASE_URL}/services`),
