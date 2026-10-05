@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 const homeSections = [
   { id: 'home', label: 'Hero' },
   { id: 'brands', label: 'Clients' },
+  { id: 'showcase', label: 'Luxury Showcase' },
   { id: 'services', label: 'Services' },
   { id: 'works', label: 'Our Works' },
   { id: 'process', label: 'Process' },
   { id: 'techstack', label: 'Technologies' },
+  { id: 'testimonials', label: 'Testimonials' },
   { id: 'blog', label: 'Blog' },
   { id: 'contact', label: 'Contact' },
 ];

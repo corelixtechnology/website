@@ -837,7 +837,7 @@ export default function AdminDashboard() {
                         )}
                         {inq.budget > 0 && (
                           <span className="inquiry-tag budget-tag">
-                            Budget: ${inq.budget.toLocaleString()}
+                            Budget: ₹{inq.budget.toLocaleString()}
                           </span>
                         )}
                       </div>

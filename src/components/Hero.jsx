@@ -38,6 +38,11 @@ export default function Hero({ onStartCalculator }) {
           
           {/* Left Column: Proper Business Content */}
           <div className="new-hero-text-content">
+            <div className="hero-luxury-badge reveal reveal-slide-down">
+              <span className="hero-luxury-sparkle">✦</span>
+              <span>BESPOKE SOFTWARE ENGINEERING &amp; DIGITAL EXCELLENCE</span>
+            </div>
+
             <h1 className="new-hero-main-title">
               {heroTitle.includes('Engineering') ? (
                 <>
@@ -74,6 +79,20 @@ export default function Hero({ onStartCalculator }) {
                 GET QUOTE
               </button>
             </div>
+
+            {/* Executive Client Proof Bar */}
+            <div className="hero-executive-proof reveal reveal-fade-in" data-delay="0.3s">
+              <div className="hero-avatar-stack">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Client" className="hero-avatar-img" />
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Client" className="hero-avatar-img" />
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80" alt="Client" className="hero-avatar-img" />
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80" alt="Client" className="hero-avatar-img" />
+              </div>
+              <div className="hero-proof-text">
+                <div className="hero-stars-row">★★★★★</div>
+                <span><strong>4.9/5 Rating</strong> • Trusted by 50+ Founders &amp; Enterprise Teams</span>
+              </div>
+            </div>
           </div>
 
           {/* Right Column: Premium Business Graphics & Badges */}
@@ -94,6 +113,10 @@ export default function Hero({ onStartCalculator }) {
                     width="400"
                     height="500"
                   />
+                  <div className="hero-floating-chip chip-left">
+                    <span className="chip-dot"></span>
+                    <span>99.8% Cloud SLA</span>
+                  </div>
                 </div>
               </div>
 
@@ -123,6 +146,9 @@ export default function Hero({ onStartCalculator }) {
                     width="400"
                     height="460"
                   />
+                  <div className="hero-floating-chip chip-right">
+                    <span>⚡ Sub-Second Speed</span>
+                  </div>
                 </div>
 
               </div>

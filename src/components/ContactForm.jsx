@@ -37,7 +37,7 @@ export default function ContactForm({ preselectedServiceId }) {
             ...prev,
             projectType: pending.serviceType || 'web-dev',
             budget: pending.cost || '',
-            message: `Hi Corelix Technology team! I just ran your Project Scope Estimator for a "${pending.scopeName}" (${pending.packageName}). The estimation calculated around ${pending.hours} hours across ${pending.phases} development phases with a budget of $${pending.cost.toLocaleString()}.\n\nI would love to get a formal quote and discuss this project further!`
+            message: `Hi Corelix Technology team! I just ran your Project Scope Estimator for a "${pending.scopeName}" (${pending.packageName}). The estimation calculated around ${pending.hours} hours across ${pending.phases} development phases with a budget of ₹${pending.cost.toLocaleString()}.\n\nI would love to get a formal quote and discuss this project further!`
           }));
           // Clean up to prevent re-populating on refresh if they click away
           localStorage.removeItem('wm_pending_estimate');

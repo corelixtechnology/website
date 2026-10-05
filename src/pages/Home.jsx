@@ -2,10 +2,12 @@ import React from 'react';
 import SEO from '../components/SEO';
 import Hero from '../components/Hero';
 import TrustBrands from '../components/TrustBrands';
+import AgencyShowcase from '../components/AgencyShowcase';
 import ServicesIntro from '../components/ServicesIntro';
 import Works from '../components/Works';
 import HowWeWork from '../components/HowWeWork';
 import TechStack from '../components/TechStack';
+import LuxuryTestimonials from '../components/LuxuryTestimonials';
 import Blog from '../components/Blog';
 import ContactForm from '../components/ContactForm';
 import FloatingSectionDots from '../components/FloatingSectionDots';
@@ -39,32 +41,42 @@ export default function Home() {
         <TrustBrands />
       </div>
 
-      {/* 3. Services Showcase Section */}
+      {/* 3. Luxury Agency & Engineering Showcase */}
+      <div id="showcase" className="home-scroll-section reveal">
+        <AgencyShowcase />
+      </div>
+
+      {/* 4. Services Showcase Section */}
       <div id="services" className="home-scroll-section reveal">
         <ServicesIntro />
       </div>
 
-      {/* 4. Works / Portfolio Showcase Section */}
+      {/* 5. Works / Portfolio Showcase Section */}
       <div id="works" className="home-scroll-section reveal">
         <Works />
       </div>
 
-      {/* 5. How We Work Section */}
+      {/* 6. How We Work Section */}
       <div id="process" className="home-scroll-section reveal">
         <HowWeWork />
       </div>
 
-      {/* 6. Technologies Section */}
+      {/* 7. Technologies Section */}
       <div id="techstack" className="home-scroll-section reveal">
         <TechStack />
       </div>
 
-      {/* 7. Insights & Blog CMS Section */}
+      {/* 8. Executive Client Testimonials */}
+      <div id="testimonials" className="home-scroll-section reveal">
+        <LuxuryTestimonials />
+      </div>
+
+      {/* 9. Insights & Blog CMS Section */}
       <div id="blog" className="home-scroll-section reveal">
         <Blog />
       </div>
 
-      {/* 8. Contact Form Section */}
+      {/* 10. Contact Form Section */}
       <div id="contact" className="home-scroll-section reveal">
         <ContactForm />
       </div>

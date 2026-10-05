@@ -35,6 +35,23 @@ export default function Works({ defaultFilter }) {
     { id: 'branding-ads', label: 'Branding & Ads' }
   ];
 
+  const projectImageFallbackMap = {
+    'college-portal': 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&auto=format&fit=crop&q=80',
+    'nova-nest': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80',
+    'lucknow-heritage-hospital': 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&auto=format&fit=crop&q=80',
+    'zenith-brochure': 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=1200&auto=format&fit=crop&q=80',
+    'aura-cosmetics': 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&auto=format&fit=crop&q=80',
+    'nebula-branding': 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&auto=format&fit=crop&q=80',
+  };
+
+  const getProjectImage = (project) => {
+    if (project && project.image) return project.image;
+    if (project && project.id && projectImageFallbackMap[project.id]) return projectImageFallbackMap[project.id];
+    if (project && project.category === 'web-works') return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80';
+    if (project && project.category === 'brochures') return 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=1200&auto=format&fit=crop&q=80';
+    return 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&auto=format&fit=crop&q=80';
+  };
+
   // Dynamically include any custom categories created in CMS
   const extraCategories = Array.from(new Set(projects.map(p => p.category)))
     .filter(cat => !defaultCategories.some(d => d.id === cat))
@@ -239,31 +256,49 @@ export default function Works({ defaultFilter }) {
         </div>
 
         <div className="portfolio-grid reveal-stagger">
-          {filteredProjects.map((project, index) => (
-            <div 
-              key={project.id} 
-              className={`portfolio-card glass-panel reveal-item ${index % 2 === 0 ? 'reveal-slide-right' : 'reveal-slide-left'}`}
-              onClick={() => setActiveModal(project)}
-            >
-              <div className="portfolio-img-container">
-                {project.image ? (
-                  <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                ) : (
-                  renderMockup(project.svgType)
-                )}
-              </div>
+          {filteredProjects.map((project, index) => {
+            const imgSrc = getProjectImage(project);
+            return (
+              <div 
+                key={project.id} 
+                className={`portfolio-card glass-panel reveal-item luxury-work-card ${index % 2 === 0 ? 'reveal-slide-right' : 'reveal-slide-left'}`}
+                onClick={() => setActiveModal(project)}
+              >
+                <div className="portfolio-img-container luxury-img-wrap">
+                  {imgSrc ? (
+                    <>
+                      <img 
+                        src={imgSrc} 
+                        alt={project.title} 
+                        loading="lazy" 
+                        decoding="async"
+                        className="luxury-portfolio-img"
+                      />
+                      <div className="luxury-img-overlay-glow"></div>
+                    </>
+                  ) : (
+                    renderMockup(project.svgType)
+                  )}
+                  <div className="luxury-work-badge">
+                    <span>✦ Case Study</span>
+                  </div>
+                </div>
 
-              <div className="portfolio-card-overlay">
-                <h4>{project.title}</h4>
-                <p>{project.client}</p>
-                <div className="portfolio-tags">
-                  {project.tags.map((tag, idx) => (
-                    <span key={idx} className="tag">{tag}</span>
-                  ))}
+                <div className="portfolio-card-overlay">
+                  <span className="luxury-category-pill">
+                    {knownCategoryMap[project.category] || project.category}
+                  </span>
+                  <h4>{project.title}</h4>
+                  <p className="luxury-client-name">{project.client}</p>
+                  <div className="portfolio-tags">
+                    {project.tags.slice(0, 3).map((tag, idx) => (
+                      <span key={idx} className="tag">{tag}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -276,9 +311,13 @@ export default function Works({ defaultFilter }) {
             </button>
 
             <div className="modal-grid grid-2">
-              <div className="modal-mockup">
-                {activeModal.image ? (
-                  <img src={activeModal.image} alt={activeModal.title} style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '12px' }} />
+              <div className="modal-mockup luxury-modal-mockup">
+                {getProjectImage(activeModal) ? (
+                  <img 
+                    src={getProjectImage(activeModal)} 
+                    alt={activeModal.title} 
+                    className="luxury-modal-img"
+                  />
                 ) : (
                   renderMockup(activeModal.svgType)
                 )}
@@ -286,7 +325,7 @@ export default function Works({ defaultFilter }) {
 
               <div className="modal-details">
                 <span className="tag" style={{ marginBottom: '1rem', display: 'inline-block' }}>
-                  {categories.find(c => c.id === activeModal.category)?.label}
+                  {categories.find(c => c.id === activeModal.category)?.label || activeModal.category}
                 </span>
                 
                 <h3>{activeModal.title}</h3>

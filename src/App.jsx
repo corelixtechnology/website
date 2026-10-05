@@ -5,8 +5,11 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AnimatedBackgroundVideo from './components/AnimatedBackgroundVideo';
+import Floating3DScene from './components/Floating3DScene';
 import PagePreloader from './components/PagePreloader';
+import AIChatBot from './components/AIChatBot';
 import useScrollReveal from './utils/useScrollReveal';
+import use3DScrollEffect from './utils/use3DScrollEffect';
 
 // ── Lazily loaded pages (only downloaded when the user visits them) ─────────
 const Home           = lazy(() => import('./pages/Home'));
@@ -45,6 +48,9 @@ export default function App() {
 
   // Initialize Scroll-driven entrance animations
   useScrollReveal();
+
+  // Initialize 3D Scroll Parallax & Interactive 3D Card Tilt
+  use3DScrollEffect();
 
   // Scroll to top on page navigation
   useEffect(() => {
@@ -123,6 +129,9 @@ export default function App() {
       {/* Global Animated High-Tech Canvas Motion Background (video removed for performance) */}
       <AnimatedBackgroundVideo />
 
+      {/* Global Floating 3D Geometric Depth & Isometric Parallax Scene */}
+      <Floating3DScene />
+
       {/* Scroll Progress Indicator */}
       <div className="scroll-progress-container">
         <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }} />
@@ -178,6 +187,9 @@ export default function App() {
           </Routes>
         </PageSuspense>
       </main>
+
+      {/* Global AI Chat Bot Lead Generator */}
+      <AIChatBot />
 
       {/* Global Footer */}
       <Footer />
