@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Target, Eye, ShieldAlert, Award, Coffee, UserCheck, Terminal, Compass } from 'lucide-react';
-import founderImg from '../assets/founder.png';
+// import founderImg from '../assets/founder.png';
 
 export default function About({ defaultTab }) {
   const [activeTab, setActiveTab] = useState(defaultTab || 'profile');
@@ -17,7 +17,7 @@ export default function About({ defaultTab }) {
       name: 'Keerthivasan V',
       role: 'Founder & Chief Executive Officer',
       bio: 'Keerthivasan V leads Corelix Technology with a vision to build robust, high-performance, and scalable digital ecosystems. By combining cutting-edge engineering with user-centric product strategy, he is committed to driving client success and technical excellence.',
-      avatar: founderImg,
+      // avatar: founderImg,
       stats: [
         { name: 'Strategic Vision & Growth', value: 98 },
         { name: 'Product Engineering', value: 95 },
