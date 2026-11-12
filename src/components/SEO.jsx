@@ -60,12 +60,12 @@ export default function SEO({ title, description, keywords, canonical, robots })
     updateMetaTag('property', 'og:title', formattedTitle);
     updateMetaTag('property', 'og:description', description || 'Corelix Technology is a premium software development company in Tamil Nadu specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
     updateMetaTag('property', 'og:url', `https://corelixtechnology.in.net${location.pathname}`);
-    updateMetaTag('property', 'og:image', 'https://corelixtechnology.in.net/logo.png');
+    updateMetaTag('property', 'og:image', 'https://corelixtechnology.in.net/logo.png?v=2');
 
     // 5. Twitter Card Metadata
     updateMetaTag('name', 'twitter:title', formattedTitle);
     updateMetaTag('name', 'twitter:description', description || 'Corelix Technology is a premium software development company in Tamil Nadu specializing in custom websites, mobile apps, AI solutions, ERP, CRM, branding, and IT consulting.');
-    updateMetaTag('name', 'twitter:image', 'https://corelixtechnology.in.net/logo.png');
+    updateMetaTag('name', 'twitter:image', 'https://corelixtechnology.in.net/logo.png?v=2');
 
     // 6. Dynamic Breadcrumbs based on route
     const getBreadcrumbs = (pathname) => {
