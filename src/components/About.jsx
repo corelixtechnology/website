@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Target, Eye, ShieldAlert, Award, Coffee, UserCheck, Terminal, Compass } from 'lucide-react';
-import founderImg from '../assets/user.png';
+
 
 export default function About({ defaultTab }) {
   const [activeTab, setActiveTab] = useState(defaultTab || 'profile');
@@ -17,7 +17,7 @@ export default function About({ defaultTab }) {
       name: 'Keerthivasan V',
       role: 'Founder & Chief Executive Officer',
       bio: 'Keerthivasan V leads Corelix Technology with a vision to build robust, high-performance, and scalable digital ecosystems. By combining cutting-edge engineering with user-centric product strategy, he is committed to driving client success and technical excellence.',
-      avatar: founderImg,
+      
       stats: [
         { name: 'Strategic Vision & Growth', value: 98 },
         { name: 'Product Engineering', value: 95 },
@@ -108,16 +108,6 @@ export default function About({ defaultTab }) {
             <div className="founders-grid" style={{ gridTemplateColumns: '1fr', justifyItems: 'center' }}>
               {founders.map((founder, idx) => (
                 <div key={idx} className="founder-card glass-panel reveal reveal-scale-up" style={{ maxWidth: '600px', width: '100%' }}>
-                  <div className="founder-avatar-container">
-                    <div className="founder-avatar-inner" style={{ padding: 0, overflow: 'hidden' }}>
-                      <img 
-                        src={founder.avatar} 
-                        alt={founder.name} 
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                      />
-                    </div>
-                  </div>
-
                   <h3>{founder.name}</h3>
                   <div className="founder-role">{founder.role}</div>
                   <p className="founder-bio">{founder.bio}</p>
